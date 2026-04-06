@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CalendarDays, Home, Phone, Mail, MapPin, User, Users, MessageSquare, Clock, Check, Gift, DollarSign } from 'lucide-react';
+import { CalendarDays, Home, Phone, Mail, MapPin, User, Users, MessageSquare, CheckCircle2, Gift, DollarSign, ArrowRight, Sparkles, Shield } from 'lucide-react';
 
 type FormData = {
   name: string;
@@ -38,139 +38,109 @@ export default function AssessmentBooking() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-6">
-        <div className="max-w-lg w-full text-center bg-white border border-slate-200 rounded-2xl p-12 shadow-lg">
-          <div className="w-20 h-20 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Check className="w-10 h-10 text-secondary-600" />
+      <div className="min-h-screen bg-surface-50 flex items-center justify-center px-6">
+        <div className="max-w-md w-full text-center animate-scale-in">
+          <div className="bg-white rounded-3xl p-12 shadow-soft border border-surface-100">
+            <div className="w-20 h-20 bg-secondary-50 rounded-3xl flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-10 h-10 text-secondary-500" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-surface-900 mb-3 tracking-tight">Assessment Scheduled!</h2>
+            <p className="text-surface-500 mb-8 leading-relaxed">
+              We will contact you within 2 hours to confirm your appointment. Get ready for a comprehensive 75-point inspection!
+            </p>
+            <button
+              onClick={() => { setSubmitted(false); setFormData(initialFormData); }}
+              className="text-primary-700 hover:text-primary-800 font-semibold cursor-pointer transition-colors inline-flex items-center gap-1"
+            >
+              Schedule Another Assessment
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-          <h2 className="text-2xl font-bold text-primary-800 mb-3">Assessment Requested!</h2>
-          <p className="text-slate-600 mb-6">We'll contact you within 2 hours to confirm your appointment. Get ready for a 75-point inspection!</p>
-          <button
-            onClick={() => { setSubmitted(false); setFormData(initialFormData); }}
-            className="text-primary-600 hover:text-primary-700 font-semibold cursor-pointer"
-          >
-            ← Schedule Another Assessment
-          </button>
         </div>
       </div>
     );
   }
 
-  const fields: { label: string; name: keyof FormData; type: string; placeholder: string; icon: React.ComponentType<{ className?: string }>; required?: boolean; options?: { value: string; label: string }[] }[] = [
-    { label: 'Full Name', name: 'name', type: 'text', placeholder: 'John Smith', icon: User, required: true },
-    { label: 'Email Address', name: 'email', type: 'email', placeholder: 'john@example.com', icon: Mail, required: true },
-    { label: 'Phone Number', name: 'phone', type: 'tel', placeholder: '(859) 555-0123', icon: Phone, required: true },
-    { label: 'Property Address', name: 'address', type: 'text', placeholder: '123 Main St, Covington, KY', icon: MapPin, required: true },
-  ];
-
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <section className="relative bg-gradient-to-br from-primary-600 to-slate-900 text-white py-16 px-6 overflow-hidden">
-        <div className="absolute top-10 right-10 w-64 h-64 bg-accent-500/10 rounded-full blur-3xl" />
+    <div className="min-h-screen bg-surface-50">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-primary-800 to-surface-900 text-white py-24 px-6 overflow-hidden">
+        <div className="absolute top-10 right-10 w-96 h-96 bg-accent-500/[0.04] rounded-full blur-[120px]" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-secondary-500/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Gift className="w-4 h-4" />
-            100% Free • No Obligation
+          <div className="inline-flex items-center gap-2 bg-accent-500/20 px-5 py-2.5 rounded-full text-sm font-semibold mb-6 text-accent-400">
+            <Sparkles className="w-4 h-4" />
+            Free · No Obligation · 24 Hours
           </div>
-          <h1 className="heading-xl text-white mb-4 text-balance">
-            Free Property Health Assessment
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+            Free Property<br />Health Assessment
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto ml-auto leading-relaxed text-balance">
-            Get a comprehensive 75-point inspection with a photo report. We'll identify every maintenance issue that could cost you money or hurt your reviews.
+          <p className="text-lg md:text-xl text-surface-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+            A comprehensive 75-point inspection with a detailed photo report. We identify every issue that could cost you money.
           </p>
-          <div className="mt-6 inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-xl">
-            <DollarSign className="w-6 h-6 text-slate-400" />
-            <span className="text-sm">
-              Value: <span className="line-through text-slate-400">$399</span>
-              {' '}→ <span className="text-accent-400 font-bold text-lg">Your Price: $0</span>
+          <div className="inline-flex items-center gap-4 bg-white/5 backdrop-blur-sm px-8 py-4 rounded-2xl border border-white/10">
+            <DollarSign className="w-6 h-6 text-surface-400" />
+            <span className="text-lg">
+              <span className="text-surface-400 line-through">$399 Value</span>
+              <span className="mx-2 text-surface-500">→</span>
+              <span className="text-accent-400 font-extrabold text-2xl">$0</span>
             </span>
           </div>
         </div>
       </section>
 
       {/* Form */}
-      <section className="py-16 px-6 -mt-8">
+      <section className="py-20 px-6 -mt-8">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8 md:p-10">
-            <p className="text-center text-slate-500 text-sm mb-8">
-              After the assessment, we'll present your customized Mursen Property Guardian plan if it makes sense for you.
-            </p>
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-soft border border-surface-100">
+            <h2 className="text-2xl font-extrabold text-surface-900 mb-8 tracking-tight">Tell Us About Your Property</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                {fields.slice(0, 2).map((field) => (
-                  <FormField key={field.name} field={field} value={formData[field.name]} onChange={handleChange} />
-                ))}
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                {fields.slice(2, 4).map((field) => (
-                  <FormField key={field.name} field={field} value={formData[field.name]} onChange={handleChange} />
-                ))}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-5">
+                <FormField label="Full Name" name="name" type="text" placeholder="John Smith" icon={User} value={formData.name} onChange={handleChange} required />
+                <FormField label="Email" name="email" type="email" placeholder="john@example.com" icon={Mail} value={formData.email} onChange={handleChange} required />
               </div>
 
-              {/* Property Type */}
+              <div className="grid md:grid-cols-2 gap-5">
+                <FormField label="Phone" name="phone" type="tel" placeholder="(859) 555-0123" icon={Phone} value={formData.phone} onChange={handleChange} required />
+                <FormField label="Property Address" name="address" type="text" placeholder="123 Main St, Covington, KY" icon={MapPin} value={formData.address} onChange={handleChange} required />
+              </div>
+
               <div>
-                <label htmlFor="propertyType" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Property Type <span className="text-red-500">*</span>
-                </label>
+                <label className="block text-sm font-semibold text-surface-700 mb-2">Property Type <span className="text-red-500">*</span></label>
                 <div className="relative">
-                  <Home className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
+                  <Home className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-300 pointer-events-none" />
                   <select
-                    id="propertyType"
                     name="propertyType"
                     required
                     value={formData.propertyType}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-slate-700 cursor-pointer transition"
+                    className="select-field"
                   >
                     <option value="">Select property type</option>
-                    <option value="single-family">Single-family Home</option>
+                    <option value="single-family">Single-Family Home</option>
                     <option value="duplex">Duplex</option>
-                    <option value="multi-family">Multi-family (3+ units)</option>
+                    <option value="multi-family">Multi-Family (3+ units)</option>
                     <option value="condo">Condo</option>
-                    <option value="str">Short-term Rental (Airbnb/VRBO)</option>
+                    <option value="str">Short-Term Rental (Airbnb/VRBO)</option>
                   </select>
                 </div>
               </div>
 
-              {/* Units */}
               {formData.propertyType === 'multi-family' && (
                 <div>
-                  <label htmlFor="units" className="block text-sm font-semibold text-slate-700 mb-2">
-                    Number of Units <span className="text-red-500">*</span>
-                  </label>
+                  <label className="block text-sm font-semibold text-surface-700 mb-2">Number of Units <span className="text-red-500">*</span></label>
                   <div className="relative">
-                    <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
-                    <input
-                      type="number"
-                      id="units"
-                      name="units"
-                      required
-                      min="3"
-                      value={formData.units}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-slate-700"
-                      placeholder="3"
-                    />
+                    <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-300 pointer-events-none" />
+                    <input type="number" name="units" required min="3" value={formData.units} onChange={handleChange} className="input-field" placeholder="3" />
                   </div>
                 </div>
               )}
 
-              {/* How Heard */}
               <div>
-                <label htmlFor="howHeard" className="block text-sm font-semibold text-slate-700 mb-2">
-                  How did you hear about us?
-                </label>
+                <label className="block text-sm font-semibold text-surface-700 mb-2">How did you hear about us?</label>
                 <div className="relative">
-                  <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
-                  <select
-                    id="howHeard"
-                    name="howHeard"
-                    value={formData.howHeard}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-slate-700 cursor-pointer transition"
-                  >
+                  <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-300 pointer-events-none" />
+                  <select name="howHeard" value={formData.howHeard} onChange={handleChange} className="select-field">
                     <option value="">Select an option</option>
                     <option value="google">Google Search</option>
                     <option value="facebook">Facebook</option>
@@ -182,61 +152,42 @@ export default function AssessmentBooking() {
                 </div>
               </div>
 
-              {/* DateTime */}
               <div>
-                <label htmlFor="dateTime" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Preferred Assessment Date & Time <span className="text-red-500">*</span>
-                </label>
+                <label className="block text-sm font-semibold text-surface-700 mb-2">Preferred Date & Time <span className="text-red-500">*</span></label>
                 <div className="relative">
-                  <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
-                  <input
-                    type="datetime-local"
-                    id="dateTime"
-                    name="dateTime"
-                    required
-                    value={formData.dateTime}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-slate-700 cursor-pointer"
-                  />
+                  <CalendarDays className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-300 pointer-events-none" />
+                  <input type="datetime-local" name="dateTime" required value={formData.dateTime} onChange={handleChange} className="input-field" />
                 </div>
               </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                className="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-accent-400 focus:ring-offset-2"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <CalendarDays className="w-5 h-5" />
-                  Schedule Free Assessment
-                </span>
+              <button type="submit" className="w-full btn-primary-lg mt-4">
+                <CalendarDays className="w-5 h-5" />
+                Schedule Free Assessment
               </button>
-              <p className="text-xs text-slate-400 text-center">
+              <p className="text-xs text-surface-400 text-center">
                 By submitting, you agree to our terms and privacy policy. We respond within 2 hours.
               </p>
             </form>
           </div>
 
-          {/* What to Expect */}
-          <div className="mt-8 grid md:grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { icon: Clock, title: '2-3 Hours On-Site', desc: 'Thorough 75-point inspection of your entire property' },
-              { icon: MapPin, title: 'Photo Report', desc: 'Detailed digital report with photo evidence of every item' },
-              { icon: Gift, title: '$399 Value Free', desc: 'Zero cost, zero obligation. No pressure sales pitch' },
+              { icon: Shield, title: '75-Point Check', desc: 'Thorough on-site inspection' },
+              { icon: CalendarDays, title: 'Photo Report', desc: 'Digital report in 24hr' },
+              { icon: Gift, title: '$399 Value', desc: '100% free, zero obligation' },
             ].map((item) => (
-              <div key={item.title} className="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-                <item.icon className="w-8 h-8 text-primary-600 mx-auto mb-3" />
-                <h3 className="font-semibold text-slate-700 mb-1">{item.title}</h3>
-                <p className="text-xs text-slate-500">{item.desc}</p>
+              <div key={item.title} className="bg-white rounded-2xl p-5 text-center border border-surface-100 shadow-soft hover:shadow-medium transition-all duration-300">
+                <item.icon className="w-6 h-6 text-primary-700 mx-auto mb-3" />
+                <h3 className="font-bold text-sm text-surface-900 mb-1">{item.title}</h3>
+                <p className="text-xs text-surface-400">{item.desc}</p>
               </div>
             ))}
           </div>
 
-          {/* Calendly Placeholder */}
-          <div className="mt-12 bg-white p-8 rounded-xl border-2 border-dashed border-slate-300 text-center">
-            <p className="text-slate-400 text-sm">Or book directly via Calendly</p>
-            <div className="mt-4 h-48 flex items-center justify-center text-slate-300 text-sm">
-              [Calendly inline widget — add your event URL here]
+          <div className="mt-8 bg-white rounded-3xl p-8 text-center border border-surface-100 shadow-soft">
+            <p className="text-sm text-surface-400 mb-2">Or book directly via Calendly</p>
+            <div className="h-32 flex items-center justify-center text-surface-200 text-sm border-2 border-dashed border-surface-200 rounded-2xl">
+              Calendly widget — add your event URL here
             </div>
           </div>
         </div>
@@ -246,31 +197,33 @@ export default function AssessmentBooking() {
 }
 
 function FormField({
-  field,
-  value,
-  onChange,
+  label, name, type, placeholder, icon: Icon, value, onChange, required,
 }: {
-  field: { label: string; name: keyof FormData; type: string; placeholder: string; icon: React.ComponentType<{ className?: string }>; required?: boolean };
+  label: string;
+  name: string;
+  type: string;
+  placeholder: string;
+  icon: React.ComponentType<{ className?: string }>;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  required?: boolean;
 }) {
-  const Icon = field.icon;
   return (
     <div>
-      <label htmlFor={field.name} className="block text-sm font-semibold text-slate-700 mb-2">
-        {field.label} {field.required && <span className="text-red-500">*</span>}
+      <label htmlFor={name} className="block text-sm font-semibold text-surface-700 mb-2">
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="relative">
-        <Icon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
+        <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-surface-300 pointer-events-none" />
         <input
-          type={field.type}
-          id={field.name}
-          name={field.name}
-          required={field.required}
+          type={type}
+          id={name}
+          name={name}
+          required={required}
           value={value}
           onChange={onChange}
-          placeholder={field.placeholder}
-          className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-slate-700 placeholder:text-slate-400"
+          placeholder={placeholder}
+          className="input-field"
         />
       </div>
     </div>
