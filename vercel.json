@@ -1,14 +1,9 @@
 {
-  "framework": "vite",
+  "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm ci",
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Content-Type", "value": "application/javascript" }
-      ]
-    }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

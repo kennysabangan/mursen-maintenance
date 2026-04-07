@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Shield, Star, Building2, Home, ShieldCheck, Users, Award, TrendingUp, MapPin, ChevronRight, Wrench, FileText, PhoneCall, Clock, Gift } from 'lucide-react';
 
 const featuredProperties = [
@@ -9,15 +10,72 @@ const featuredProperties = [
 ] as const;
 
 export default function Homepage() {
+  const siteUrl = 'https://mursenmaintenance.com';
+  const seoTitle = 'Covington Property Maintenance | Mursen Maintenance';
+  const seoDescription = 'Professional property maintenance for rental owners in Covington, KY. 24/7 support, satisfaction guarantee. Plans from $299/mo. Get a free assessment today.';
+
   return (
-    <div className="min-h-screen">
+    <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content="Covington property maintenance, rental maintenance Kentucky, home maintenance subscription, property care, Covington KY" />
+        <link rel="canonical" href={`${siteUrl}/`} />
+        {/* Open Graph */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${siteUrl}/`} />
+        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+        <meta property="og:site_name" content="Mursen Maintenance" />
+        <meta property="og:locale" content="en_US" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+        {/* Structured Data - LocalBusiness JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            'name': 'Mursen Maintenance',
+            'description': seoDescription,
+            'url': siteUrl,
+            'telephone': '+18595550123',
+            'address': {
+              '@type': 'PostalAddress',
+              'streetAddress': '123 Main Street',
+              'addressLocality': 'Covington',
+              'addressRegion': 'KY',
+              'postalCode': '41011',
+              'addressCountry': 'US'
+            },
+            'priceRange': '$$',
+            'openingHoursSpecification': {
+              '@type': 'OpeningHoursSpecification',
+              'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+              'opens': '08:00',
+              'closes': '18:00'
+            },
+            'geo': {
+              '@type': 'GeoCoordinates',
+              'latitude': 39.0837,
+              'longitude': -84.5083
+            },
+            'image': `${siteUrl}/favicon.svg`,
+            'sameAs': []
+          })}
+        </script>
+      </Helmet>
+      <div className="min-h-screen">
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative min-h-[92vh] flex items-center bg-surface-900 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600596885409-e4a43e1e7a76?w=1920&q=80&auto=format&fit=crop"
-            alt="Luxury property exterior"
+            alt="Well-maintained property in Covington KY"
             className="w-full h-full object-cover opacity-[0.12]"
             loading="eager"
           />
@@ -32,15 +90,12 @@ export default function Homepage() {
             <div className="opacity-0 animate-fade-up">
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-medium mb-8 border border-white/10">
                 <ShieldCheck className="w-4 h-4 text-accent-400" />
-                Trusted by <strong className="text-white">24+ rental properties</strong> in Covington, KY
+                Covington's Trusted Property Care Partner
               </div>
             </div>
 
             <h1 className="opacity-0 animate-fade-up text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight" style={{ animationDelay: '0.1s' }}>
-              Your Rentals Stay<br />
-              <span className="bg-gradient-to-r from-accent-400 via-accent-400 to-accent-500 bg-clip-text text-transparent">
-                Guest-Ready. Guaranteed.
-              </span>
+              We care for your property, so you don't have to.
             </h1>
 
             <p className="opacity-0 animate-fade-up text-lg md:text-xl text-surface-400 leading-relaxed mb-10 max-w-2xl" style={{ animationDelay: '0.2s' }}>
@@ -207,7 +262,7 @@ export default function Homepage() {
                 <div className="h-48 bg-surface-100 relative overflow-hidden">
                   <img
                     src={p.img}
-                    alt={`${p.neighborhood} property`}
+                    alt={`${p.neighborhood} property in Covington KY managed by Mursen Maintenance`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
@@ -308,7 +363,7 @@ export default function Homepage() {
                 desc: 'Best for active rental owners',
                 features: ['Everything in Essential', 'Quarterly deep-clean coordination', 'Priority scheduling (48hr SLA)', 'Vendor Concierge network', '24/7 hotline for urgent issues', 'Home Systems Passport', 'Quarterly guest-ready certificate'],
                 highlight: true,
-                gradient: 'from-primary-800 to-surface-900',
+                gradient: 'from-primary-50 via-white to-primary-50/80',
               },
               {
                 name: 'Premium',
@@ -330,21 +385,21 @@ export default function Homepage() {
                   <div className="pricing-popular-badge">Most Popular</div>
                 )}
 
-                <h3 className={`text-xl font-bold mb-1 tracking-tight ${tier.highlight ? 'text-white' : 'text-surface-900'}`}>
+                <h3 className={`text-xl font-bold mb-1 tracking-tight ${tier.highlight ? 'text-surface-900' : 'text-surface-900'}`}>
                   {tier.name}
                 </h3>
-                <p className={`text-sm mb-6 ${tier.highlight ? 'text-surface-400' : 'text-surface-400'}`}>{tier.desc}</p>
+                <p className={`text-sm mb-6 ${tier.highlight ? 'text-surface-500' : 'text-surface-400'}`}>{tier.desc}</p>
 
                 <div className="mb-8">
-                  <span className={`text-5xl font-extrabold tracking-tight ${tier.highlight ? 'text-white' : 'text-surface-900'}`}>${tier.price}</span>
-                  <span className={`text-lg ml-1 ${tier.highlight ? 'text-surface-400' : 'text-surface-400'}`}>/mo</span>
+                  <span className={`text-5xl font-extrabold tracking-tight ${tier.highlight ? 'text-primary-700' : 'text-surface-900'}`}>${tier.price}</span>
+                  <span className={`text-lg ml-1 ${tier.highlight ? 'text-primary-600' : 'text-surface-400'}`}>/mo</span>
                 </div>
 
                 <ul className="space-y-3.5 mb-8">
                   {tier.features.map(f => (
                     <li key={f} className="flex items-start gap-3">
-                      <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${tier.highlight ? 'text-accent-400' : 'text-secondary-500'}`} />
-                      <span className={`text-sm ${tier.highlight ? 'text-surface-300' : 'text-surface-600'}`}>{f}</span>
+                      <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${tier.highlight ? 'text-primary-600' : 'text-secondary-500'}`} />
+                      <span className={`text-sm ${tier.highlight ? 'text-surface-700' : 'text-surface-600'}`}>{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -353,7 +408,7 @@ export default function Homepage() {
                   to="/assessment"
                   className={`block text-center py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer ${
                     tier.highlight
-                      ? 'bg-accent-500 hover:bg-accent-600 text-white shadow-button hover:shadow-button-hover hover:-translate-y-0.5'
+                      ? 'bg-primary-700 hover:bg-primary-800 text-white shadow-glow-brand hover:shadow-glow-brand-hover hover:-translate-y-0.5'
                       : 'bg-surface-900 hover:bg-primary-800 text-white hover:shadow-medium hover:-translate-y-0.5'
                   }`}
                 >
@@ -511,5 +566,6 @@ export default function Homepage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

@@ -1,181 +1,146 @@
-import { Link, useState } from 'react-router-dom';
-import { MapPin, Star, Shield, ArrowRight, Award, TrendingUp, Building2, CalendarCheck, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { Shield, ArrowRight, Star, Check, Home, Wrench, Calendar, Plug, Droplets, Zap, Paintbrush, Trees, Bug, Waves, Sparkles } from 'lucide-react';
 
-const allProperties = [
-  { neighborhood: 'Highland Ave', type: 'Single-Family', units: 1, since: 'Jan 2024', img: 'https://images.unsplash.com/photo-1600596885409-e4a43e1e7a76?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Riverfront', type: 'Duplex', units: 2, since: 'Mar 2024', img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Main Street', type: 'Triplex', units: 3, since: 'Jun 2024', img: 'https://images.unsplash.com/photo-1560448204-603b3fc33dbc?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Lewisburg', type: 'Condo', units: 1, since: 'Sep 2024', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Madison', type: 'Townhome', units: 1, since: 'Nov 2024', img: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Pike Street', type: 'Single-Family', units: 1, since: 'Feb 2024', img: 'https://images.unsplash.com/photo-1558036117-18d8b694e309?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Highland Ave', type: 'Duplex', units: 2, since: 'Apr 2024', img: 'https://images.unsplash.com/photo-1576941089067-2de3c901e526?w=800&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Riverfront', type: 'Condo', units: 1, since: 'Jul 2024', img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80&auto=format&fit=crop' },
-  // ... keep full array for reference but show subset initially
+const services = [
+  { icon: Home, title: 'Property Inspections', desc: 'Comprehensive 75-point inspections with photo reports. Catches issues before they cost you.', category: 'Inspection' },
+  { icon: Calendar, title: 'Seasonal Maintenance', desc: 'Gutter cleaning, HVAC prep, winterization. Stay ahead of every season.', category: 'Preventive' },
+  { icon: Wrench, title: 'Emergency Repairs', desc: 'Fast response when things break. Average 4-hour emergency response time.', category: 'Repair' },
+  { icon: Plug, title: 'Smart Home Setup', desc: 'Thermostats, locks, cameras. Make your property smarter and more efficient.', category: 'Upgrade' },
+  { icon: Droplets, title: 'Plumbing', desc: 'Leak detection, pipe repair, fixture replacement. Licensed plumbers only.', category: 'Specialty' },
+  { icon: Zap, title: 'Electrical Work', desc: 'Panel upgrades, outlet repair, rewiring. Certified electricians.', category: 'Specialty' },
+  { icon: Paintbrush, title: 'Interior & Exterior Painting', desc: 'Full coordination from prep to final coat. Professional results, every time.', category: 'Improvement' },
+  { icon: Trees, title: 'Landscaping & Tree Care', desc: 'Mowing, trimming, removal. Keep your property looking its best.', category: 'Exterior' },
+  { icon: Sparkles, title: 'Deep Cleaning', desc: 'Turnover cleaning, move-in/move-out prep. Guest-ready guarantee.', category: 'Cleaning' },
+  { icon: Bug, title: 'Pest Control', desc: 'Inspection, treatment, prevention. Protect your property from unwanted guests.', category: 'Exterior' },
+  { icon: Waves, title: 'Pool Maintenance', desc: 'Opening, closing, weekly care. Crystal clear water all season.', category: 'Specialty' },
+  { icon: Shield, title: 'Vendor Concierge', desc: 'Pre-vetted contractors. Full project management. Zero markup surprise.', category: 'Management' },
 ];
 
 const testimonials = [
   {
-    quote: 'Since hiring Mursen, my STR has had zero maintenance complaints. Guests love the quick responses. I sleep better knowing they are on it.',
+    quote: "Since Mursen started managing our rental, we've had zero maintenance complaints. They fix things before we even know there's a problem.",
     name: 'Sarah K.',
-    location: 'Highland Ave · STR Owner',
-    rating: 5,
-    avatar: 'S',
+    role: 'STR Owner, Highland Ave',
   },
   {
-    quote: 'The seasonal prep alone saves me 10 hours per month. Worth every single penny. They proactively found issues before they became expensive emergencies.',
+    quote: "They found a failing water heater during an inspection that would have flooded our unit. One catch saved us thousands.",
     name: 'Mike R.',
-    location: 'Riverfront Duplex · 2 units',
-    rating: 5,
-    avatar: 'M',
+    role: 'Duplex Owner, Riverside',
   },
   {
-    quote: 'They found a failing water heater during an inspection that would have flooded the unit. Preventative maintenance paid for 5 years of service right there.',
+    quote: "The seasonal prep alone saves me 10 hours per month. Worth every penny. They proactively found issues before they became emergencies.",
     name: 'Jennifer T.',
-    location: 'Main Street Triplex · 3 units',
-    rating: 5,
-    avatar: 'J',
+    role: 'Triplex Owner, Main St',
   },
-];
-
-const stats = [
-  { label: 'Properties Managed', value: '24+', icon: Building2, color: 'text-primary-700' },
-  { label: 'Guest Satisfaction', value: '5.0', icon: Star, color: 'text-accent-500', suffix: '★' },
-  { label: 'Emergencies in 2025', value: '0', icon: Shield, color: 'text-secondary-500' },
-  { label: 'On-Time Service', value: '98%', icon: CalendarCheck, color: 'text-primary-700' },
 ];
 
 export default function Portfolio() {
-  const [visibleCount, setVisibleCount] = useState(8);
-  const visibleProperties = allProperties.slice(0, visibleCount);
-  const loadMore = () => setVisibleCount(prev => Math.min(prev + 4, allProperties.length));
+  // Group services by category
+  const categories = ['Inspection', 'Preventive', 'Repair', 'Management', 'Specialty', 'Upgrade', 'Exterior', 'Improvement', 'Cleaning'];
+  const grouped: Record<string, typeof services> = {};
+  services.forEach(s => {
+    if (!grouped[s.category]) grouped[s.category] = [];
+    grouped[s.category].push(s);
+  });
+
+  const siteUrl = 'https://mursenmaintenance.com';
+  const seoTitle = 'Our Services | Mursen Maintenance - Property Care';
+  const seoDescription = 'Comprehensive property maintenance services in Covington KY. Inspections, repairs, seasonal care, vendor concierge, and more. View all services we offer.';
 
   return (
-    <div className="min-h-screen">
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative bg-gradient-to-br from-primary-800 to-surface-900 text-white py-28 px-6 overflow-hidden">
-        <div className="absolute top-10 right-10 w-96 h-96 bg-accent-500/[0.04] rounded-full blur-[120px]" />
+    <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content="property maintenance services, Covington property care, rental maintenance services, home maintenance subscription" />
+        <link rel="canonical" href={`${siteUrl}/portfolio`} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${siteUrl}/portfolio`} />
+        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+        <meta property="og:site_name" content="Mursen Maintenance" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+      </Helmet>
+      <div className="min-h-screen bg-white">
+      {/* Header */}
+      <section className="relative bg-brand-600 text-white py-24 md:py-28 px-6 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-secondary-500/20 px-5 py-2.5 rounded-full text-sm font-semibold mb-6 text-secondary-400">
+          <div className="inline-flex items-center gap-2 bg-white/10 px-5 py-2.5 rounded-full text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
-            Proven Track Record
+            Full-Service Property Care
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-            Properties We Maintain
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Our Services
           </h1>
-          <p className="text-lg md:text-xl text-surface-400 max-w-2xl mx-auto leading-relaxed">
-            24 rental properties across Covington. Kept guest-ready 365 days a year with zero maintenance emergencies.
+          <p className="text-xl text-brand-100 max-w-2xl mx-auto">
+            From routine inspections to emergency repairs — everything your property needs, handled by people who care.
           </p>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 px-6 -mt-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 shadow-soft border border-surface-100">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((s) => (
-                <div key={s.label} className="text-center">
-                  <s.icon className={`w-6 h-6 ${s.color} mx-auto mb-2`} />
-                  <div className="text-3xl font-extrabold text-surface-900 tracking-tight">{s.value}{s.suffix || ''}</div>
-                  <div className="text-sm text-surface-400 mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ PORTFOLIO GRID ═══════════════ */}
-      <section className="py-20 px-6 bg-surface-50/60">
-        <div className="max-w-[1200px] mx-auto">
+      {/* Services Grid */}
+      <section className="py-20 md:py-28 px-6 bg-stone-50">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-2.5rem md:text-3.5rem font-bold tracking-tight text-surface-900 mb-3">Our Portfolio</h2>
-            <p className="text-lg text-surface-500 leading-relaxed max-w-2xl mx-auto">
-              Every property we manage stays guest-ready year-round. Here's a look at our growing portfolio.
-            </p>
+            <h2 className="text-3xl font-bold text-stone-900 mb-3">What we handle</h2>
+            <p className="text-lg text-stone-500">One call. Every service. No more chasing multiple contractors.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {visibleProperties.map((p, i) => (
-              <div key={i} className="group bg-white rounded-2xl border border-surface-100 shadow-soft overflow-hidden hover:shadow-medium hover:-translate-y-1 transition-all duration-300">
-                <div className="h-44 bg-surface-100 relative overflow-hidden">
-                  <img
-                    src={p.img}
-                    alt={`${p.neighborhood} ${p.type}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center gap-1 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-semibold text-surface-900 shadow-sm">
-                      <Star className="w-3 h-3 text-accent-400 fill-accent-400" />
-                      5.0
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <span className="inline-flex items-center gap-1 bg-secondary-500/90 text-white px-2 py-1 rounded-lg text-[10px] font-semibold shadow-sm">
-                      <Shield className="w-3 h-3" />
-                      Guardian
-                    </span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, i) => {
+              const ServiceIcon = service.icon;
+              return (
+                <div
+                  key={i}
+                  className="bg-white rounded-2xl p-7 border border-stone-100 shadow-soft hover:shadow-card-hover transition-all duration-400 group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-brand-100 transition-colors">
+                      <ServiceIcon className="w-5 h-5 text-brand-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-stone-900 mb-1">{service.title}</h3>
+                      <p className="text-sm text-stone-500 leading-relaxed">{service.desc}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-1.5 text-surface-900 font-semibold mb-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-surface-300" />
-                    {p.neighborhood}
-                  </div>
-                  <div className="text-xs text-surface-400 mb-2">{p.type} · {p.units} unit{p.units > 1 ? 's' : ''}</div>
-                  <div className="text-xs text-secondary-600 font-medium flex items-center gap-1">
-                    <Check className="w-3 h-3" />
-                    On plan since {p.since}
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-
-          {visibleCount < allProperties.length && (
-            <div className="text-center mt-12">
-              <button
-                onClick={loadMore}
-                className="px-8 py-3 bg-surface-900 text-white rounded-xl font-semibold hover:bg-primary-800 transition-colors shadow-md hover:shadow-lg"
-              >
-                Load More Properties
-              </button>
-              <p className="text-sm text-surface-400 mt-3">Showing {visibleCount} of {allProperties.length} properties</p>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* ═══════════════ TESTIMONIALS ═══════════════ */}
-      <section className="py-24 px-6 bg-white">
+      {/* Testimonials */}
+      <section className="py-20 md:py-28 px-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-flex items-center gap-1.5 bg-accent-50 text-accent-700 px-4 py-1.5 rounded-full text-xs font-semibold border border-accent-100 mb-6">
-              Client Stories
-            </span>
-            <h2 className="text-2.5rem md:text-3.5rem font-bold tracking-tight text-surface-900 mb-3">What Owners Say</h2>
+            <h2 className="text-3xl font-bold text-stone-900 mb-3">Trusted by property owners</h2>
+            <p className="text-lg text-stone-500">Don't take our word for it.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-white rounded-2xl p-8 border border-surface-100 shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="flex gap-1 mb-5">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 text-accent-400 fill-accent-400" />
+              <div key={i} className="bg-stone-50 rounded-2xl p-8 border border-stone-100">
+                <div className="flex gap-1 mb-4">
+                  {[1,2,3,4,5].map(s => (
+                    <Star key={s} className="w-4 h-4 text-orange-400 fill-orange-400" />
                   ))}
                 </div>
-                <blockquote className="text-surface-600 leading-relaxed mb-6 text-sm">
-                  &ldquo;{t.quote}&rdquo;
+                <blockquote className="text-stone-700 text-sm leading-relaxed mb-6">
+                  "{t.quote}"
                 </blockquote>
-                <div className="flex items-center gap-3 pt-4 border-t border-surface-100">
-                  <div className="w-10 h-10 bg-primary-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {t.avatar}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 font-bold text-xs">
+                    {t.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <div className="font-semibold text-surface-900 text-sm">{t.name}</div>
-                    <div className="text-xs text-surface-400">{t.location}</div>
+                    <div className="font-semibold text-stone-900 text-sm">{t.name}</div>
+                    <div className="text-xs text-stone-500">{t.role}</div>
                   </div>
                 </div>
               </div>
@@ -184,36 +149,42 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ═══════════════ IMPACT METRICS ═══════════════ */}
-      <section className="py-24 px-6 bg-surface-900 text-white">
+      {/* Vendor Concierge highlight */}
+      <section className="py-20 md:py-28 px-6 bg-teal-50">
         <div className="max-w-4xl mx-auto text-center">
-          <TrendingUp className="w-12 h-12 text-accent-400 mx-auto mb-6" />
-          <h2 className="text-2.5rem md:text-3.5rem font-bold tracking-tight text-white mb-3">The Numbers Speak</h2>
-          <p className="text-lg text-surface-400 mb-10 max-w-lg mx-auto leading-relaxed">
-            Real results from real properties. Not projections.
-          </p>
-
-          <div className="grid grid-cols-3 gap-8 mb-10">
-            <div>
-              <div className="text-4xl md:text-5xl font-extrabold text-accent-400 mb-1 tracking-tight">24+</div>
-              <div className="text-sm text-surface-400">Properties Managed</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-extrabold text-accent-400 mb-1 tracking-tight">0</div>
-              <div className="text-sm text-surface-400">Emergencies 2025</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-extrabold text-accent-400 mb-1 tracking-tight">98%</div>
-              <div className="text-sm text-surface-400">On-Time Service</div>
-            </div>
+          <div className="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Shield className="w-7 h-7 text-teal-700" />
           </div>
+          <h2 className="text-3xl font-bold text-stone-900 mb-4">Vendor Concierge Network</h2>
+          <p className="text-lg text-stone-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Pre-vetted contractors. Full project management. Industry-leading 0–10% markup vs. the typical 25–40%. We manage the mess so you don't have to.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {'Roofing,HVAC,Plumbing,Electrical,Painting,Carpentry,Appliances,Landscaping,Pools,Cleaning,Smart Home,Pest Control'.split(',').map((s, i) => (
+              <span key={i} className="bg-white text-teal-700 px-4 py-2 rounded-full text-sm font-medium shadow-soft border border-teal-100">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Link to="/assessment" className="btn-primary-lg px-12">
-            Be Our Next Success Story
+      {/* CTA */}
+      <section className="py-20 md:py-28 px-6 bg-stone-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-stone-900 mb-4">
+            Ready for worry-free property care?
+          </h2>
+          <p className="text-lg text-stone-500 mb-8">
+            Start with a free 75-point assessment. See exactly where your property stands.
+          </p>
+          <Link to="/assessment" className="btn-primary-lg inline-flex">
+            Schedule Free Assessment
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>
     </div>
+    </>
   );
 }
