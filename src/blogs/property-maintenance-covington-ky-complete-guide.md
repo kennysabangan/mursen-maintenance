@@ -1,7 +1,7 @@
 ---
 title: "Complete Guide to Property Maintenance in Covington, KY"
 excerpt: "Expert property maintenance services for Covington rental owners. Learn how proactive care can save you thousands and keep tenants happy."
-date: "2024-04-08"
+date: "2026-04-08"
 author: "Mursen Maintenance Team"
 category: "Local Guide"
 readTime: "10 min read"
