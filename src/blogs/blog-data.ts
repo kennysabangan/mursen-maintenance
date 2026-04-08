@@ -3,7 +3,7 @@ import { marked } from 'marked';
 import type { BlogPost } from './types';
 
 // Dynamically import all markdown files in the blogs directory
-const modules = import.meta.glob('./*.md?raw', { eager: true });
+const modules = import.meta.glob('./*.md', { eager: true, as: 'raw' });
 
 function parseBlogPost(path: string, content: string): BlogPost {
   const { data, content: markdown } = matter(content);
