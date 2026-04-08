@@ -6,6 +6,9 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
+}
+
+interface ImportMeta {
   glob: <T>(pattern: string, options?: {
     eager?: boolean;
     import?: string;
