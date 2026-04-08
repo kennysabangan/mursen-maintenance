@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 import { marked } from 'marked';
-import type { BlogPost } from './types';
+import type { BlogPost } from './types.ts';
 
 // Dynamically import all markdown files in the blogs directory
 const modules = import.meta.glob('./**/*.md', { 
