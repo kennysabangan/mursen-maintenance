@@ -39,11 +39,11 @@ export default function AssessmentBooking() {
 
   const siteUrl = 'https://mursenmaintenance.com';
   const seoTitle = 'Free Property Assessment | Mursen Maintenance';
-  const seoDescription = 'Book a free 75-point property health assessment. Get a detailed photo report within 24 hours. No obligation. Servicing Covington KY and surrounding areas.';
+  const seoDescription = 'Book a free 75-point property health assessment. Get a detailed photo report within 24 hours. No obligation. Servicing the entire Cincinnati metro: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods.';
 
   if (submitted) {
     return (
-      <>
+      <div>
         <Helmet>
           <title>{seoTitle}</title>
           <meta name="description" content={seoDescription} />
@@ -80,7 +80,7 @@ export default function AssessmentBooking() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
   }
 
@@ -140,7 +140,7 @@ export default function AssessmentBooking() {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <FormField label="Phone" name="phone" type="tel" placeholder="(859) 555-0123" icon={Phone} value={formData.phone} onChange={handleChange} required />
-                <FormField label="Property Address" name="address" type="text" placeholder="123 Main St, Covington, KY" icon={MapPin} value={formData.address} onChange={handleChange} required />
+                <FormField label="Property Address" name="address" type="text" placeholder="123 Main St, City, KY" icon={MapPin} value={formData.address} onChange={handleChange} required />
               </div>
 
               <div>

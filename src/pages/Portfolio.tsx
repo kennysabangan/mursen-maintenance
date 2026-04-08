@@ -46,14 +46,14 @@ export default function Portfolio() {
 
   const siteUrl = 'https://mursenmaintenance.com';
   const seoTitle = 'Our Services | Mursen Maintenance - Property Care';
-  const seoDescription = 'Comprehensive property maintenance services in Covington KY. Inspections, repairs, seasonal care, vendor concierge, and more. View all services we offer.';
+  const seoDescription = 'Comprehensive property maintenance services across the Cincinnati metro area. Inspections, repairs, seasonal care, vendor concierge, and more. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="property maintenance services, Covington property care, rental maintenance services, home maintenance subscription" />
+        <meta name="keywords" content="property maintenance services, Cincinnati property care, rental maintenance services, home maintenance subscription, Covington KY, Newport KY, Florence KY" />
         <link rel="canonical" href={`${siteUrl}/portfolio`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />

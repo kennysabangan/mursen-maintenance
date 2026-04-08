@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { Calendar, Clock, ArrowLeft, Share2, Tag, ChevronRight } from 'lucide-react';
 import posts from '../blogs/blog-data';
 
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik01MCAyNUwyNSA0NXYzNWg1MHYtMzVINTB6bTI1IDEwaC0xMHYxNWgxMHYtMTV6IiBmaWxsPSIjOWNhM2FmIi8+PC9zdmc+';
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = posts.find(p => p.slug === slug);
@@ -86,7 +88,7 @@ export default function BlogPost() {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-[400px] object-cover"
+                className="w-full h-[400px] object-cover" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }}
               />
             </div>
           </div>
@@ -155,7 +157,7 @@ export default function BlogPost() {
                 {relatedPosts.map(rp => (
                   <article key={rp.slug} className="bg-white rounded-xl border border-stone-100 overflow-hidden hover:shadow-md transition-shadow group">
                     <div className="h-32 overflow-hidden">
-                      <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }} />
                     </div>
                     <div className="p-5">
                       <div className="text-xs text-stone-400 mb-2">{rp.category}</div>

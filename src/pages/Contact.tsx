@@ -6,8 +6,8 @@ import { useState } from 'react';
 export default function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'Contact Us | Mursen Maintenance - Covington KY';
-  const seoDescription = 'Get in touch with Mursen Maintenance in Covington KY. Call (859) 555-0123 or email hello@mursenmaintenance.com. Fully insured, bonded, and trusted by 24+ property owners.';
+  const seoTitle = 'Contact Us | Mursen Maintenance - Cincinnati & Northern KY';
+  const seoDescription = 'Get in touch with Mursen Maintenance. Call (859) 555-0123 or email hello@mursenmaintenance.com. Fully insured, bonded property care across Cincinnati metro: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods.';
 
   return (
     <>
@@ -43,13 +43,13 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-6">
             <p className="text-lg text-stone-600 leading-relaxed">
-              We started managing our own rental properties in Covington and got frustrated with the same maintenance nightmares you face — no-shows, inflated quotes, emergency repairs at 2 AM, and contractors who don't communicate.
+              We started managing our own rental properties across Northern Kentucky and got frustrated with the same maintenance nightmares you face — no-shows, inflated quotes, emergency repairs at 2 AM, and contractors who don't communicate.
             </p>
             <p className="text-lg text-stone-600 leading-relaxed">
               So we built the solution we wish existed — a maintenance service that treats every property like a business operation. We developed the 75-point inspection system, the same-technician guarantee, and the vendor concierge network to make property maintenance predictable, professional, and hands-off.
             </p>
             <p className="text-lg text-stone-600 leading-relaxed">
-              We're Covington locals. We care about this community. Your property matters to us because we live here too — and because we've been in your shoes.
+              We're local. We care about this community. Your property matters to us because we live here too — and because we've been in your shoes.
             </p>
           </div>
 

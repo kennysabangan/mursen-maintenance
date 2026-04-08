@@ -7,6 +7,9 @@ import AssessmentBooking from './pages/AssessmentBooking';
 import Portfolio from './pages/Portfolio';
 import HowItWorks from './pages/HowItWorks';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import AdminPosts from './pages/AdminPosts';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,6 +17,7 @@ function Header() {
 
   const navLinks = [
     { to: '/how-it-works', label: 'How It Works' },
+    { to: '/blog', label: 'Blog' },
     { to: '/portfolio', label: 'Services' },
     { to: '/contact', label: 'About & Contact' },
   ];
@@ -114,7 +118,7 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-stone-500">
-              Your trusted local property maintenance partner in Covington, KY. Fully insured, bonded, and committed to quality.
+              Your trusted property maintenance partner serving the Cincinnati metro area: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods. Fully insured, bonded, and committed to quality.
             </p>
           </div>
 
@@ -204,6 +208,9 @@ function App() {
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/admin/posts" element={<AdminPosts />} />
             </Routes>
           </main>
           <Footer />

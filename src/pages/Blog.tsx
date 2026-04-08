@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, Clock, Tag, ChevronRight } from 'lucide-react';
 import posts from '../blogs/blog-data';
 
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik01MCAyNUwyNSA0NXYzNWg1MHYtMzVINTB6bTI1IDEwaC0xMHYxNWgxMHYtMTV6IiBmaWxsPSIjOWNhM2FmIi8+PC9zdmc+';
+
 const categories = ['All', 'Seasonal Maintenance', 'Rental Tips', 'Smart Home', 'DIY Tips', 'Property Care'];
 
 export default function Blog() {
@@ -74,7 +76,7 @@ export default function Blog() {
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="eager"
+                      loading="eager" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
                     <div className="absolute top-4 left-4">
@@ -127,7 +129,7 @@ export default function Blog() {
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                        loading="lazy" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
                       <div className="absolute top-3 left-3">

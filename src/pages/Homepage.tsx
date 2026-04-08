@@ -2,24 +2,26 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Shield, Star, Building2, Home, ShieldCheck, Users, Award, TrendingUp, MapPin, ChevronRight, Wrench, FileText, PhoneCall, Clock, Gift } from 'lucide-react';
 
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U1ZTdlYiIvPjxwYXRoIGQ9Ik01MCAyNUwyNSA0NXYzNWg1MHYtMzVINTB6bTI1IDEwaC0xMHYxNWgxMHYtMTV6IiBmaWxsPSIjOWNhM2FmIi8+PC9zdmc+';
+
 const featuredProperties = [
-  { neighborhood: 'Highland Ave', type: 'Single-Family', units: '1 unit', since: 'Jan 2024', img: 'https://images.unsplash.com/photo-1600596885409-e4a43e1e7a76?w=600&q=80&auto=format&fit=crop' },
+  { neighborhood: 'Highland Ave', type: 'Single-Family', units: '1 unit', since: 'Jan 2024', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&auto=format&fit=crop' },
   { neighborhood: 'Riverfront', type: 'Duplex', units: '2 units', since: 'Mar 2024', img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80&auto=format&fit=crop' },
-  { neighborhood: 'Main Street', type: 'Triplex', units: '3 units', since: 'Jun 2024', img: 'https://images.unsplash.com/photo-1560448204-603b3fc33dbc?w=600&q=80&auto=format&fit=crop' },
+  { neighborhood: 'Main Street', type: 'Triplex', units: '3 units', since: 'Jun 2024', img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80&auto=format&fit=crop' },
   { neighborhood: 'Lewisburg', type: 'Condo', units: '1 unit', since: 'Sep 2024', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&auto=format&fit=crop' },
 ] as const;
 
 export default function Homepage() {
   const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'Covington Property Maintenance | Mursen Maintenance';
-  const seoDescription = 'Professional property maintenance for rental owners in Covington, KY. 24/7 support, satisfaction guarantee. Plans from $299/mo. Get a free assessment today.';
+  const seoTitle = 'Covington & Cincinnati Property Maintenance | Mursen Maintenance';
+  const seoDescription = 'Professional property maintenance for rental owners in Covington, KY and the Cincinnati metro area — covering a 30+ mile radius including Florence, Newport, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods. Plans from $299/mo.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="Covington property maintenance, rental maintenance Kentucky, home maintenance subscription, property care, Covington KY" />
+        <meta name="keywords" content="Covington property maintenance, Cincinnati property maintenance, rental maintenance Kentucky, Florence KY, Newport KY, Fort Mitchell, Erlanger property care, home maintenance subscription" />
         <link rel="canonical" href={`${siteUrl}/`} />
         {/* Open Graph */}
         <meta property="og:title" content={seoTitle} />
@@ -74,10 +76,10 @@ export default function Homepage() {
         {/* Background layers */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1600596885409-e4a43e1e7a76?w=1920&q=80&auto=format&fit=crop"
-            alt="Well-maintained property in Covington KY"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&auto=format&fit=crop"
+            alt="Well-maintained rental property in the Cincinnati metro area"
             className="w-full h-full object-cover opacity-[0.12]"
-            loading="eager"
+            loading="eager" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }}
           />
           <div className="absolute inset-0 bg-gradient-to-br from-surface-900/97 via-surface-900/90 to-surface-900/80" />
         </div>
@@ -90,7 +92,7 @@ export default function Homepage() {
             <div className="opacity-0 animate-fade-up">
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-medium mb-8 border border-white/10">
                 <ShieldCheck className="w-4 h-4 text-accent-400" />
-                Covington's Trusted Property Care Partner
+                Cincinnati Metro's Trusted Property Care Partner
               </div>
             </div>
 
@@ -233,7 +235,7 @@ export default function Homepage() {
               <span className="text-surface-400 font-light">perfectly maintained</span>
             </h2>
             <p className="text-lg text-surface-500 max-w-2xl mx-auto">
-              24+ properties across Covington. Zero maintenance emergencies. 5.0 guest satisfaction.
+              24+ properties across Covington, Newport, Florence, and the Cincinnati metro. Zero maintenance emergencies. 5.0 guest satisfaction.
             </p>
           </div>
 
@@ -262,9 +264,9 @@ export default function Homepage() {
                 <div className="h-48 bg-surface-100 relative overflow-hidden">
                   <img
                     src={p.img}
-                    alt={`${p.neighborhood} property in Covington KY managed by Mursen Maintenance`}
+                    alt={`${p.neighborhood} rental property managed by Mursen Maintenance`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
+                    loading="lazy" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60" />
                   <div className="absolute top-3 left-3">
@@ -312,21 +314,77 @@ export default function Homepage() {
             </Link>
           </div>
 
-          {/* Testimonial - more refined */}
-          <div className="mt-20 bg-surface-50/80 rounded-3xl p-8 md:p-12 border border-surface-100 max-w-3xl mx-auto">
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 text-accent-400 fill-accent-400" />
-              ))}
-            </div>
-            <blockquote className="text-xl md:text-2xl text-surface-700 leading-relaxed mb-8 font-light">
-              "Since hiring Mursen, my STR has had zero maintenance complaints. Guests love the quick responses. I sleep better knowing they handle everything proactively."
-            </blockquote>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-12 h-12 bg-primary-700 rounded-full flex items-center justify-center text-white font-bold">SK</div>
-              <div className="text-left">
-                <div className="font-semibold text-surface-800">Sarah K.</div>
-                <div className="text-sm text-surface-400">Highland Ave · STR Owner</div>
+          {/* Testimonials - metro-wide social proof */}
+          <div className="mt-20 max-w-5xl mx-auto">
+            <p className="text-center text-sm text-surface-400 mb-6 tracking-wide uppercase">Trusted by property owners across Greater Cincinnati</p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-surface-50/80 rounded-3xl p-8 border border-surface-100">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-accent-400 fill-accent-400" />
+                  ))}
+                </div>
+                <blockquote className="text-base text-surface-700 leading-relaxed mb-6 font-light">
+                  &ldquo;Since hiring Mursen, my STR has had zero maintenance complaints. Guests love the quick responses. I sleep better knowing they handle everything proactively.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary-700 rounded-full flex items-center justify-center text-white font-bold text-sm">SK</div>
+                  <div>
+                    <div className="font-semibold text-surface-800 text-sm">Sarah K.</div>
+                    <div className="text-xs text-surface-400">Highland Ave, Covington · STR Owner</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-surface-50/80 rounded-3xl p-8 border border-surface-100">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-accent-400 fill-accent-400" />
+                  ))}
+                </div>
+                <blockquote className="text-base text-surface-700 leading-relaxed mb-6 font-light">
+                  &ldquo;We own three properties between Newport and Florence and used to juggle different handymen for each one. Now one team covers it all — same quality everywhere, no surprises.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-accent-600 rounded-full flex items-center justify-center text-white font-bold text-sm">MT</div>
+                  <div>
+                    <div className="font-semibold text-surface-800 text-sm">Mike T.</div>
+                    <div className="text-xs text-surface-400">5th St, Newport &amp; Burlington Pike, Florence · Multi-Unit Owner</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-surface-50/80 rounded-3xl p-8 border border-surface-100">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-accent-400 fill-accent-400" />
+                  ))}
+                </div>
+                <blockquote className="text-base text-surface-700 leading-relaxed mb-6 font-light">
+                  &ldquo;My duplex in Fort Mitchell was a nightmare before Mursen. A burst pipe at midnight on a Sunday got fixed in under two hours. That alone keeps me as a customer for life.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-secondary-600 rounded-full flex items-center justify-center text-white font-bold text-sm">JR</div>
+                  <div>
+                    <div className="font-semibold text-surface-800 text-sm">James R.</div>
+                    <div className="text-xs text-surface-400">Brentview Ave, Fort Mitchell · Duplex Owner</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-surface-50/80 rounded-3xl p-8 border border-surface-100">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-accent-400 fill-accent-400" />
+                  ))}
+                </div>
+                <blockquote className="text-base text-surface-700 leading-relaxed mb-6 font-light">
+                  &ldquo;I live in Oakley and own a rental back in Independence. Mursen bridges the gap perfectly — they handle everything on-site while I just read the monthly report. Zero stress.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center text-white font-bold text-sm">LP</div>
+                  <div>
+                    <div className="font-semibold text-surface-800 text-sm">Lisa P.</div>
+                    <div className="text-xs text-surface-400">Ridge Rd, Independence · Out-of-Area Owner</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -561,7 +619,7 @@ export default function Homepage() {
           <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-surface-500">
             <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-secondary-400" /> Insured</span>
             <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-secondary-400" /> Bonded</span>
-            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-secondary-400" /> Covington, KY</span>
+            <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-secondary-400" /> Covington & Cincinnati Metro</span>
           </div>
         </div>
       </section>

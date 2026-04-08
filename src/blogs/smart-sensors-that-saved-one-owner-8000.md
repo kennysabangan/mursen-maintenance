@@ -2,7 +2,7 @@
 title: "Smart Sensors That Saved One Property Owner $8,000"
 date: "2024-12-05"
 excerpt: "A Covington landlord avoided a major water damage incident thanks to a $120 smart leak detector. Here's how IoT sensors are changing property maintenance."
-image: "https://images.unsplash.com/photo-1558002038-1091a166111c?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80"
 category: "Smart Home"
 readTime: "4 min read"
 slug: "smart-sensors-that-saved-one-owner-8000"

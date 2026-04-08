@@ -2,7 +2,7 @@
 title: "Tenant & Pet Policy: Best Practices for Landlords"
 date: "2024-10-22"
 excerpt: "A well-crafted tenant and pet policy sets clear expectations, protects your property, and reduces disputes. Here's what to include and why it matters."
-image: "https://images.unsplash.com/photo-1560448204-603b3fc33dbc?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80"
 category: "Rental Tips"
 readTime: "6 min read"
 slug: "tenant-pet-policy-best-practices-landlords"

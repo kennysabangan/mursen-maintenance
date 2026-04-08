@@ -93,14 +93,14 @@ const steps = [
 export default function HowItWorks() {
   const siteUrl = 'https://mursenmaintenance.com';
   const seoTitle = 'How It Works | Mursen Maintenance - Simple Process';
-  const seoDescription = 'Learn how Mursen Maintenance works: 1) Free 75-point assessment, 2) Choose your plan, 3) Hands-free maintenance. Simple, transparent property care in Covington KY.';
+  const seoDescription = 'Learn how Mursen Maintenance works: 1) Free 75-point assessment, 2) Choose your plan, 3) Hands-free maintenance. Serving the entire Cincinnati metro area: Covington, Newport, Florence, Fort Mitchell, and more.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="property maintenance process, how maintenance works, Covington property care" />
+        <meta name="keywords" content="property maintenance process, how maintenance works, Cincinnati property care, Covington, Newport, Florence" />
         <link rel="canonical" href={`${siteUrl}/how-it-works`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />

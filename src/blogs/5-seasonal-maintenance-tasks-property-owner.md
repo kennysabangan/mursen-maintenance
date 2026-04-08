@@ -2,7 +2,7 @@
 title: "5 Seasonal Maintenance Tasks Every Property Owner Should Know"
 date: "2025-03-15"
 excerpt: "Stay ahead of costly repairs with this comprehensive seasonal maintenance checklist for rental property owners. From spring gutter cleaning to winter HVAC prep."
-image: "https://images.unsplash.com/photo-1600596885409-e4a43e1e7a76?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80"
 category: "Seasonal Maintenance"
 readTime: "6 min read"
 slug: "5-seasonal-maintenance-tasks-property-owner"
