@@ -29,7 +29,7 @@ function parseBlogPost(path: string, content: string): BlogPost {
 
 const posts: BlogPost[] = Object.entries(modules)
   .filter(([path]) => path.includes('.md'))
-  .map(([path, module]: [string, { default: string }]) => parseBlogPost(path, module.default))
+  .map(([path, module]: [string, any]) => parseBlogPost(path, module.default))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export default posts;
