@@ -120,6 +120,9 @@ function Footer() {
             <p className="text-sm leading-relaxed text-stone-500">
               One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman services serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati. Fully insured, bonded, and committed to quality.
             </p>
+            <p className="text-xs text-stone-400 mt-2">
+              Owner-operated. We maintain 20+ rental units.
+            </p>
           </div>
 
           <div>

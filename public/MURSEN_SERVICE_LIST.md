@@ -4,36 +4,59 @@
 
 ## Brand Positioning
 
-**One sentence:** "Your house. Handled."
+**Tagline:** "Your house. Handled."
+**Supporting:** "One call. One company. One bill."
+**Credibility:** "Owner-operated. We maintain 20+ rental units ourselves — we know what your house actually needs."
+
 **What we do:** One subscription for everything around your house — lawn care, window cleaning, power washing, and handyman services.
 **Market:** Covington, KY & surrounding 20 miles (Cincinnati metro area)
 **Target customers:** Residential homeowners + property investors with multiple rental units
 
+**Positioning note:** We are NOT the cheapest. We're the only call. Don't use "save up to 40%" or "cheaper than contractors" language.
+
 ---
 
-## SUBSCRIPTION PACKAGES
+## SUBSCRIPTION PACKAGES (5 Tiers)
+
+### 🟢 Lawn Plus — $109/mo (Apr–Oct) / $59/mo (Nov–Mar)
+- Apr–Oct: Weekly lawn mow + edge + blow
+- Nov–Dec: 2 fall leaf cleanups
+- Jan–Mar: 1 spring cleanup + gutter check
+- No handyman, no windows, no power wash
+- Best for: customers who just need lawn taken care of
+
+### 🔵 Handyman Plus — $149/mo
+- 1 visit per month, up to 2 hours
+- 5 business day scheduling window
+- Overage rate: $75/hr
+- No lawn, no windows, no power wash
+- Best for: customers who don't need lawn but want a regular fix-it person
 
 ### 🟢 Starter — $199/mo
-- 1 visit per month, up to 2 hours (handyman work)
+- 1 visit per month, up to 2 hours (handyman)
 - Bi-weekly lawn mowing + edging
 - Best for: small homes, minimal maintenance needs
 
-### 🔵 Home Care — $349/mo ⭐ MOST POPULAR
-- 2 visits per month, up to 4 hours each (handyman work)
-- Weekly lawn mowing + edging + blowing
-- Monthly window cleaning (exterior)
-- Bi-annual power wash (driveway, walkways, patio)
+### 🔵 Home Care — $479/mo ⭐ MOST POPULAR
+- 1 visit per month, up to 4 hours (handyman)
+- Weekly lawn mow + edge + blow (April–October)
+- Monthly window cleaning (exterior, April–October)
+- 1 power wash per year (driveway + walkways, scheduled in spring)
+- Seasonal scope shifts in winter (see Seasonal Scope Doc)
 - Best for: average homeowner who wants everything covered
 
 ### 🟡 Property Manager — $279/unit/mo
-- Everything in Home Care
-- Priority scheduling (same-day or next-day)
-- Tenant turnover support
+- Rental-unit optimized scope (not homeowner-equivalent)
+- Lawn maintenance + basic exterior upkeep
+- Tenant turnover punch-list (paint touch-up, drywall patches, fixture tightening, lock rekey)
+- Priority scheduling: 24-hour response window
 - Dedicated point of contact
 - Volume discounts: 3+ units → $249/unit | 5+ units → $229/unit
+- Excludes: homeowner-style project handyman, custom requests, owner-occupied amenity services
 - Best for: landlords, rental property investors, property managers
 
-**Overage rate:** $85/hour beyond included hours
+**Overage rate:** $85/hr beyond included hours
+**Handyman hours:** No rollover past 30 days, hard cap
 
 ---
 
@@ -94,14 +117,15 @@ Customers can book any service individually without a subscription.
 | Each additional hour | $70/hr |
 | Drywall patch (small) | $85 – $125 |
 | Drywall patch (large / full sheet) | $175 – $275 |
-| Faucet replacement | $125 – $150 |
-| Toilet repair / rebuild | $125 – $175 |
+| Faucet replacement | ⚠️ Requires licensed plumber — quote after licensing resolved |
+| Toilet repair / rebuild | ⚠️ Requires licensed plumber — quote after licensing resolved |
+| Light fixture swap | ⚠️ Requires licensed electrician — quote after licensing resolved |
+| Ceiling fan install | ⚠️ Requires licensed electrician — quote after licensing resolved |
 | Interior door installation | $150 – $225 |
-| Door lock / deadbolt install | $85 – $100 |
+| Door lock / deadbolt install (non-wired) | $85 – $100 |
 | TV mount (up to 65") | $125 |
 | TV mount (65"+ or over fireplace) | $175 – $225 |
 | Caulking (tub, shower, windows) | $85 – $125 |
-| Light / fan fixture swap | $85 – $125 |
 | Furniture assembly | $75/hr |
 | Paint touch-up (per room) | $100 – $200 |
 | Full room paint (walls only) | $300 – $450 |
@@ -109,31 +133,63 @@ Customers can book any service individually without a subscription.
 
 ---
 
-## FOUR CORE SERVICES (Summary for Design)
+## SEASONAL SCOPE (What You Get Each Season)
 
-**1. Lawn Care**
-Mowing, edging, trimming, leaf cleanup, aeration, mulch. Your yard, always sharp.
+### April–October (Growing Season)
+- Weekly/monthly recurring services as listed in your tier
+- Power wash scheduled in spring
+- Windows cleaned monthly (Home Care)
 
-**2. Window Cleaning**
-Interior, exterior, screens, tracks, gutters. Crystal clear every time.
+### November–December (Cleanup Season)
+- Leaf cleanup × 2
+- Gutter cleaning
+- Holiday light hanging available
+- Handyman hours redirected to interior projects
 
-**3. Power Washing**
-Driveways, siding, patios, decks, fences, roofs. Like-new surfaces guaranteed.
-
-**4. Handyman & Repairs**
-Drywall, plumbing fixtures, doors, locks, painting, TV mounts, furniture assembly. One call, any fix.
+### January–March (Interior Season)
+- Gutter check
+- Walkway salt/de-ice
+- Handyman hours prioritized for interior (paint, drywall, fixtures, organization, caulking)
+- 1 power wash scheduled for early spring
 
 ---
 
-## TAGLINES / COPY FOR DESIGNER
+## SUBSCRIPTION AGREEMENT TERMS
+
+- Hard cap on handyman hours, no rollover past 30 days
+- Overage rate: $85/hr, billed monthly with subscription
+- Scope exclusions: no permitted work, no multi-day projects, no second-story exterior work, no appliance installation, no flooring, no roofing beyond soft wash
+- Annual pricing review clause: 30-day notice for changes
+- Cancellation: 30-day notice, no refunds on current month
+- All terms reviewed by Northern KY small-business attorney
+
+---
+
+## LICENSING NOTES (PENDING)
+
+⚠️ **Critical:** The following services may require KY licensed plumber/electrician:
+- Faucet replacement
+- Toilet repair/rebuild
+- Light fixture swap
+- Ceiling fan install
+
+**Status:** Emails sent to KY Dept of Housing, Buildings & Construction (dhbc.ky.gov). Written answers pending (14-day deadline).
+
+**Interim:** These services removed from public menu. Refer to licensed 1099 partners, take coordination fee.
+
+**Long-term (60–90 days):** Identify one licensed plumber and one licensed electrician as 1099 retainer partners.
+
+---
+
+## TAGLINES & COPY
 
 - "Your house. Handled."
-- "One subscription. Everything around your house."
-- "Stop calling 5 different guys."
-- "Lawn, windows, power wash, handyman — one call covers it all."
-- "Save up to 40% with a monthly plan."
+- "One call. One company. One bill."
+- "Stop managing five vendors."
+- "We're not the cheapest — we're the only call."
+- "Owner-operated. We maintain 20+ rental units ourselves — we know what your house actually needs."
 - "Serving Covington, KY & the Cincinnati metro area."
-- "Fully insured. Bonded. On time, every time."
+- "Fully insured. Bonded."
 
 ---
 

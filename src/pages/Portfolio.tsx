@@ -38,14 +38,14 @@ const handymanServices = [
   { name: 'Additional hours', price: '$70/hr' },
   { name: 'Drywall patch (small)', price: '$85–125' },
   { name: 'Drywall patch (large / full sheet)', price: '$175–275' },
-  { name: 'Faucet replacement', price: '$125–150' },
-  { name: 'Toilet repair / rebuild', price: '$125–175' },
+  { name: 'Faucet replacement (Licensed Partner Required)', price: '$125–150' },
+  { name: 'Toilet repair / rebuild (Licensed Partner Required)', price: '$125–175' },
   { name: 'Door installation (interior)', price: '$150–225' },
   { name: 'Door lock / deadbolt install', price: '$85–100' },
   { name: 'TV mount (up to 65")', price: '$125' },
   { name: 'TV mount (65"+ or over fireplace)', price: '$175–225' },
   { name: 'Caulking (tub, shower, windows)', price: '$85–125' },
-  { name: 'Fixture swap (light, fan, etc.)', price: '$85–125' },
+  { name: 'Fixture swap — light, fan, etc. (Licensed Partner Required)', price: '$85–125' },
   { name: 'Furniture assembly', price: '$75/hr' },
   { name: 'Paint touch-up (per room)', price: '$100–200' },
   { name: 'Full room paint (walls only)', price: '$300–450' },
@@ -75,9 +75,6 @@ function ServiceSection({ icon: Icon, title, color, bgColor, services }: { icon:
             Book This Service
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <span className="inline-flex items-center justify-center text-xs text-stone-500 bg-stone-50 px-4 py-2 rounded-lg">
-            Save 30–40% with a monthly plan
-          </span>
         </div>
       </div>
     </div>
@@ -134,10 +131,10 @@ export default function Portfolio() {
       <section className="py-20 md:py-28 px-6 bg-stone-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            Save up to 40% with a monthly plan
+            One subscription. One company. One bill.
           </h2>
           <p className="text-lg text-stone-400 mb-10 max-w-xl mx-auto">
-            Instead of booking one service at a time, subscribe and get everything handled — lawn, windows, power wash, handyman — for one flat monthly fee.
+            We handle everything around your house — lawn, windows, power wash, handyman.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link to="/how-it-works" className="btn-primary-lg px-12 inline-flex">

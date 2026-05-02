@@ -70,12 +70,12 @@ const steps = [
   },
   {
     icon: Clock,
-    title: 'Subscribe & Save',
+    title: 'Subscribe',
     subtitle: 'Step 3',
-    description: 'Love the work? Switch to a monthly plan and save 30-40%. Lawn, windows, power wash, handyman - one flat fee.',
+    description: 'Love the work? Switch to a monthly plan. One flat fee, everything handled — lawn, windows, power wash, handyman.',
     details: [
-      'Plans from $199/mo',
-      'Save 30-40% vs. à la carte',
+      'Plans from $109/mo',
+      'One flat monthly fee',
       'Cancel anytime, no contracts',
       '30-day money-back guarantee',
       'Property Manager volume discounts',
@@ -87,7 +87,7 @@ const steps = [
 export default function HowItWorks() {
   const siteUrl = 'https://mursenmaintenance.com';
   const seoTitle = 'How It Works | Mursen Maintenance - Home Maintenance Subscription';
-  const seoDescription = 'How Mursen works: 1) Pick your service, 2) We show up, 3) Subscribe & save 30-40%. Lawn care, window cleaning, power washing, handyman. Serving Covington KY and Cincinnati metro.';
+  const seoDescription = 'How Mursen works: 1) Pick your service, 2) We show up, 3) Subscribe. Lawn care, window cleaning, power washing, handyman. Serving Covington KY and Cincinnati metro.';
 
   return (
     <>
@@ -182,11 +182,11 @@ export default function HowItWorks() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`rounded-2xl p-8 relative transition-all duration-400 ${
+                className={`rounded-2xl p-6 relative transition-all duration-400 ${
                   plan.popular
                     ? 'bg-stone-900 text-white shadow-card-hover ring-2 ring-brand-500'
                     : 'bg-white border border-stone-200 shadow-soft hover:shadow-card'
@@ -198,16 +198,16 @@ export default function HowItWorks() {
                   </div>
                 )}
 
-                <h3 className={`text-xl font-bold mb-1 ${plan.popular ? 'text-white' : 'text-stone-900'}`}>{plan.name}</h3>
-                <div className={`mb-5 text-sm ${plan.popular ? 'text-stone-400' : 'text-stone-500'}`}>
-                  {plan.popular ? 'The full package' : plan.name === 'Property Manager' ? 'For landlords & investors' : 'Essential coverage'}
+                <h3 className={`text-lg font-bold mb-1 ${plan.popular ? 'text-white' : 'text-stone-900'}`}>{plan.name}</h3>
+                <div className={`mb-5 text-xs ${plan.popular ? 'text-stone-400' : 'text-stone-500'}`}>
+                  {plan.popular ? 'The full package' : plan.name === 'Property Manager' ? 'For landlords & investors' : plan.name === 'Lawn Plus' ? 'Weekly lawn maintenance' : plan.name === 'Handyman Plus' ? 'Monthly handyman' : 'Essential coverage'}
                 </div>
 
                 <div className="mb-7">
-                  <span className={`text-4xl font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-stone-900'}`}>
+                  <span className={`text-3xl font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-stone-900'}`}>
                     ${plan.price}
                   </span>
-                  <span className={`text-base ${plan.popular ? 'text-stone-400' : 'text-stone-500'}`}>/mo</span>
+                  <span className={`text-xs ${plan.popular ? 'text-stone-400' : 'text-stone-500'}`}>{plan.note || '/mo'}</span>
                 </div>
 
                 <ul className="space-y-3.5 mb-8">

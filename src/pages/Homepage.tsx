@@ -95,8 +95,11 @@ export default function Homepage() {
               Your house.<br />Handled.
             </h1>
 
-            <p className="opacity-0 animate-fade-up text-lg md:text-xl text-surface-400 leading-relaxed mb-10 max-w-2xl" style={{ animationDelay: '0.2s' }}>
-              One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman — we handle it all so you don't have to.
+            <p className="opacity-0 animate-fade-up text-lg md:text-xl text-surface-400 leading-relaxed mb-4 max-w-2xl" style={{ animationDelay: '0.2s' }}>
+              One call. One company. One bill. Lawn, windows, power wash, handyman — we handle it all.
+            </p>
+            <p className="opacity-0 animate-fade-up text-sm md:text-base text-surface-500 mb-10 max-w-2xl" style={{ animationDelay: '0.25s' }}>
+              Owner-operated. We maintain 20+ rental units ourselves — we know what your house actually needs.
             </p>
 
             <div className="opacity-0 animate-fade-up flex flex-col sm:flex-row gap-4 mb-14" style={{ animationDelay: '0.3s' }}>
@@ -172,7 +175,7 @@ export default function Homepage() {
             {[
               { step: 1, title: 'Pick Your Service', desc: 'Browse lawn, windows, power wash, handyman. Book online or call us.', color: 'text-brand-600', bg: 'bg-brand-50' },
               { step: 2, title: 'We Show Up', desc: 'Professional, on-time, fully insured. Same quality every time.', color: 'text-accent-600', bg: 'bg-accent-50' },
-              { step: 3, title: 'Subscribe & Save', desc: 'Love the work? Switch to a monthly plan and save 30–40%.', color: 'text-secondary-600', bg: 'bg-secondary-50' },
+              { step: 3, title: 'Subscribe', desc: 'Love the work? Switch to a monthly plan. One flat fee, everything handled.', color: 'text-secondary-600', bg: 'bg-secondary-50' },
             ].map((s) => (
               <div key={s.step} className="text-center group">
                 <div className={`w-16 h-16 ${s.bg} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:shadow-medium transition-all duration-300 group-hover:scale-105`}>
@@ -200,26 +203,40 @@ export default function Homepage() {
             <p className="text-lg text-surface-500 max-w-xl mx-auto">Month-to-month. Cancel anytime. No lock-in contracts.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mb-10">
             {[
               {
+                name: 'Lawn Plus',
+                price: '109',
+                note: '/mo (Apr–Oct) · $59/mo (Nov–Mar)',
+                desc: 'Weekly lawn maintenance',
+                features: ['Weekly mow + edge + blow', 'Seasonal cleanups included', 'Gutter check each visit'],
+              },
+              {
+                name: 'Handyman Plus',
+                price: '149',
+                desc: 'Monthly handyman visits',
+                features: ['1 visit/month (2 hrs)', '5-day scheduling window', 'Same technician every visit'],
+              },
+              {
                 name: 'Starter',
-                price: 199,
-                desc: 'Essential coverage for your home',
-                features: ['1 handyman visit/mo (2 hrs)', 'Bi-weekly lawn mowing + edging', 'Same technician every visit', 'Monthly property summary'],
+                price: '199',
+                desc: 'Essential coverage',
+                features: ['1 handyman visit/mo (2 hrs)', 'Biweekly lawn mowing', 'Same technician every visit', 'Monthly property summary'],
               },
               {
                 name: 'Home Care',
-                price: 349,
-                desc: 'The full package — house, yard, exterior',
-                features: ['2 handyman visits/mo (4 hrs each)', 'Weekly lawn mowing + edging + blowing', 'Monthly window cleaning (exterior)', 'Bi-annual power wash (driveway, walkways)', 'Priority scheduling (48hr SLA)', '24/7 hotline for urgent issues'],
+                price: '479',
+                desc: 'The full package',
+                features: ['1 visit (4 hrs handyman)', 'Weekly lawn mowing + edging + blowing', 'Monthly window cleaning (exterior)', 'Annual power wash (driveway, walkways)', 'Priority scheduling (48hr SLA)', '24/7 hotline for urgent issues'],
                 highlight: true,
               },
               {
                 name: 'Property Manager',
-                price: 279,
-                desc: 'For landlords & multi-unit owners',
-                features: ['Everything in Home Care', 'Priority same/next-day scheduling', 'Tenant turnover support', 'Dedicated point of contact', '3+ units: $249/unit · 5+: $229/unit'],
+                price: '279',
+                note: '/unit/mo',
+                desc: 'For landlords & investors',
+                features: ['Rental-unit optimized', 'Priority scheduling', 'Tenant turnover support', '3+ units: $249 · 5+: $229'],
               },
             ].map((tier) => (
               <div
@@ -230,12 +247,12 @@ export default function Homepage() {
                   <div className="pricing-popular-badge">Most Popular</div>
                 )}
 
-                <h3 className="text-xl font-bold mb-1 tracking-tight text-surface-900">{tier.name}</h3>
+                <h3 className="text-lg font-bold mb-1 tracking-tight text-surface-900">{tier.name}</h3>
                 <p className="text-sm mb-6 text-surface-500">{tier.desc}</p>
 
                 <div className="mb-8">
-                  <span className={`text-5xl font-extrabold tracking-tight ${tier.highlight ? 'text-primary-700' : 'text-surface-900'}`}>${tier.price}</span>
-                  <span className={`text-lg ml-1 ${tier.highlight ? 'text-primary-600' : 'text-surface-400'}`}>/mo</span>
+                  <span className={`text-4xl font-extrabold tracking-tight ${tier.highlight ? 'text-primary-700' : 'text-surface-900'}`}>${tier.price}</span>
+                  <span className={`text-sm ml-1 ${tier.highlight ? 'text-primary-600' : 'text-surface-400'}`}>{tier.note || '/mo'}</span>
                 </div>
 
                 <ul className="space-y-3.5 mb-8">
@@ -288,7 +305,7 @@ export default function Homepage() {
                 Tired of juggling a lawn guy, a window guy, and a handyman? One subscription covers it all — lawn, windows, power wash, and repairs. Your weekends are yours again.
               </p>
               <ul className="space-y-3">
-                {['Never search for a contractor again', 'Consistent quality, every visit', 'Save 30–40% vs. à la carte pricing', 'Cancel anytime, no contracts'].map(f => (
+                {['Never search for a contractor again', 'Consistent quality, every visit', 'One flat monthly fee', 'Cancel anytime, no contracts'].map(f => (
                   <li key={f} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-secondary-500 flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-surface-600">{f}</span>
@@ -413,11 +430,11 @@ export default function Homepage() {
         <div className="glow-orb w-[80vw] h-[80vw] bg-accent-500/[0.03] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <div className="relative container-app text-center">
           <h2 className="heading-2 text-white mb-4 tracking-tight">
-            One subscription.<br />
-            <span className="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent">Everything around your house.</span>
+            Stop Managing Five Vendors.<br />
+            <span className="bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent">One subscription. One company. One bill.</span>
           </h2>
           <p className="text-lg text-surface-400 mb-10 max-w-xl mx-auto">
-            Lawn, windows, power wash, handyman — handled. Plans from $199/mo.
+            We handle everything around your house.
           </p>
           <Link to="/assessment" className="btn-primary-lg px-12">
             Book Free Assessment
@@ -428,6 +445,7 @@ export default function Homepage() {
             <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-secondary-400" /> Bonded</span>
             <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-secondary-400" /> Covington & Cincinnati Metro</span>
           </div>
+          <p className="mt-6 text-sm text-surface-500">Join homeowners across the Cincinnati metro area</p>
         </div>
       </section>
     </div>
