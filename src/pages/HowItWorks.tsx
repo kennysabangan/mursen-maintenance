@@ -1,46 +1,40 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Search, Wrench, Clock, Shield, Users, Home } from 'lucide-react';
+import { ArrowRight, Check, Search, Clock, Shield, Users, Home } from 'lucide-react';
 
 const plans = [
   {
-    name: 'Essential',
-    price: 299,
+    name: 'Starter',
+    price: 199,
     features: [
-      'Quarterly 75-point inspections',
-      'Seasonal maintenance (gutters, HVAC prep)',
-      'Small repairs included (up to $150/visit)',
+      '1 handyman visit per month (2 hrs)',
+      'Bi-weekly lawn mowing + edging',
       'Same technician every visit',
-      'Digital photo report',
-      'Email support',
-      'Monthly property health summary',
+      'Monthly property summary',
     ],
   },
   {
-    name: 'Complete',
-    price: 399,
+    name: 'Home Care',
+    price: 349,
     popular: true,
     features: [
-      'Everything in Essential',
-      'Quarterly deep-clean coordination',
+      '2 handyman visits per month (4 hrs each)',
+      'Weekly lawn mowing + edging + blowing',
+      'Monthly window cleaning (exterior)',
+      'Bi-annual power wash (driveway, walkways)',
       'Priority scheduling (48hr SLA)',
-      'Vendor Concierge network',
       '24/7 hotline for urgent issues',
-      'Quarterly guest-ready certificate',
-      'Home Systems Passport',
     ],
   },
   {
-    name: 'Premium',
-    price: 599,
+    name: 'Property Manager',
+    price: 279,
     features: [
-      'Everything in Complete',
-      'Annual exterior paint coordination',
-      'Smart home setup & maintenance',
-      '4hr emergency response SLA',
-      'Full Vendor Concierge (big jobs managed)',
-      'Quarterly owner strategy call',
-      'Property performance analytics',
+      'Everything in Home Care',
+      'Priority same/next-day scheduling',
+      'Tenant turnover support',
+      'Dedicated point of contact',
+      '3+ units: $249/unit · 5+: $229/unit',
     ],
   },
 ];
@@ -48,43 +42,43 @@ const plans = [
 const steps = [
   {
     icon: Search,
-    title: 'Free Assessment',
+    title: 'Pick Your Service',
     subtitle: 'Step 1',
-    description: 'Our certified technicians conduct a comprehensive 75-point inspection. Within 24 hours, you receive a detailed photo report — no obligation, no pressure.',
+    description: 'Browse lawn, windows, power wash, handyman. Book online or call us - single service or monthly plan.',
     details: [
-      'Takes 2-3 hours on-site',
-      'Photo documentation of every issue',
-      'Prioritized by urgency and cost',
-      'Digital PDF within 24 hours',
-      'Zero obligation, no pressure sales',
+      'View transparent pricing online',
+      'Book à la carte or subscribe',
+      'Free assessment available',
+      'Same-day or next-day scheduling',
+      'No obligation, no pressure',
     ],
     color: 'brand',
   },
   {
     icon: Users,
-    title: 'Choose Your Plan',
+    title: 'We Show Up',
     subtitle: 'Step 2',
-    description: 'All plans are month-to-month. Cancel anytime. No lock-in contracts. Founding pricing locked for your first 12 months.',
+    description: 'Professional, on-time, fully insured. Same quality every time - whether it\'s a one-time job or a monthly plan.',
     details: [
-      'Essential: $299/mo',
-      'Complete: $399/mo (most popular)',
-      'Premium: $599/mo',
-      'Founding pricing locked for 12 months',
-      '30-day money-back guarantee',
+      'Same technician every visit',
+      'Fully insured & bonded team',
+      'On-time, every time',
+      'Photo documentation of completed work',
+      'Satisfaction guaranteed',
     ],
     color: 'teal',
   },
   {
     icon: Clock,
-    title: 'Hands-Free Service',
+    title: 'Subscribe & Save',
     subtitle: 'Step 3',
-    description: 'We schedule, repair, coordinate vendors, and provide monthly reports. You get peace of mind without lifting a finger.',
+    description: 'Love the work? Switch to a monthly plan and save 30-40%. Lawn, windows, power wash, handyman - one flat fee.',
     details: [
-      'Dedicated technician who knows your property',
-      '24/7 hotline for urgent issues',
-      'You pick how often you hear from us',
-      'Monthly reports with photos',
-      'Vendor Concierge handles all projects',
+      'Plans from $199/mo',
+      'Save 30-40% vs. à la carte',
+      'Cancel anytime, no contracts',
+      '30-day money-back guarantee',
+      'Property Manager volume discounts',
     ],
     color: 'orange',
   },
@@ -92,15 +86,15 @@ const steps = [
 
 export default function HowItWorks() {
   const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'How It Works | Mursen Maintenance - Simple Process';
-  const seoDescription = 'Learn how Mursen Maintenance works: 1) Free 75-point assessment, 2) Choose your plan, 3) Hands-free maintenance. Serving the entire Cincinnati metro area: Covington, Newport, Florence, Fort Mitchell, and more.';
+  const seoTitle = 'How It Works | Mursen Maintenance - Home Maintenance Subscription';
+  const seoDescription = 'How Mursen works: 1) Pick your service, 2) We show up, 3) Subscribe & save 30-40%. Lawn care, window cleaning, power washing, handyman. Serving Covington KY and Cincinnati metro.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="property maintenance process, how maintenance works, Cincinnati property care, Covington, Newport, Florence" />
+        <meta name="keywords" content="home maintenance process, how it works, lawn care subscription, handyman plan, Cincinnati property care, Covington" />
         <link rel="canonical" href={`${siteUrl}/how-it-works`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
@@ -140,7 +134,7 @@ export default function HowItWorks() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">How It Works</h1>
           <p className="text-lg text-brand-100 max-w-2xl mx-auto leading-relaxed">
-            Three clear steps. No hidden processes. Complete transparency from start to finish.
+            Three steps. No hidden processes. Your house, handled.
           </p>
         </div>
       </section>
@@ -182,7 +176,7 @@ export default function HowItWorks() {
       <section className="py-20 md:py-28 px-6 bg-stone-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-stone-900 mb-3">Choose Your Level of Coverage</h2>
+            <h2 className="text-3xl font-bold text-stone-900 mb-3">Choose Your Plan</h2>
             <p className="text-lg text-stone-500 max-w-xl mx-auto">
               All plans are month-to-month. Cancel anytime. No lock-in contracts.
             </p>
@@ -200,13 +194,13 @@ export default function HowItWorks() {
               >
                 {plan.popular && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-5 py-1.5 rounded-full uppercase tracking-wider">
-                    Best Value
+                    Most Popular
                   </div>
                 )}
 
                 <h3 className={`text-xl font-bold mb-1 ${plan.popular ? 'text-white' : 'text-stone-900'}`}>{plan.name}</h3>
                 <div className={`mb-5 text-sm ${plan.popular ? 'text-stone-400' : 'text-stone-500'}`}>
-                  {plan.popular ? 'For active rental owners' : 'Foundation coverage'}
+                  {plan.popular ? 'The full package' : plan.name === 'Property Manager' ? 'For landlords & investors' : 'Essential coverage'}
                 </div>
 
                 <div className="mb-7">
@@ -252,12 +246,12 @@ export default function HowItWorks() {
               <div>
                 <h3 className="text-2xl font-bold text-stone-900 mb-3">Our 30-Day Satisfaction Promise</h3>
                 <p className="text-stone-600 leading-relaxed mb-6">
-                  Try any plan for 30 days. If you're not completely satisfied, we'll refund every penny. No questions asked, no hard feelings. We're confident in our work — and we prove it by putting your money back if we fall short.
+                  Try any plan for 30 days. If you're not completely satisfied, we'll refund every penny. No questions asked, no hard feelings. We're confident in our work - and we prove it by putting your money back if we fall short.
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <span className="flex items-center gap-1.5 text-brand-700 font-medium"><Check className="w-4 h-4" /> Cancel any time</span>
                   <span className="flex items-center gap-1.5 text-brand-700 font-medium"><Check className="w-4 h-4" /> No lock-in contracts</span>
-                  <span className="flex items-center gap-1.5 text-brand-700 font-medium"><Check className="w-4 h-4" /> Founding pricing protected</span>
+                  <span className="flex items-center gap-1.5 text-brand-700 font-medium"><Check className="w-4 h-4" /> 30-day money-back guarantee</span>
                 </div>
               </div>
             </div>
@@ -268,14 +262,19 @@ export default function HowItWorks() {
       {/* CTA */}
       <section className="py-20 md:py-28 px-6 bg-stone-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to stop managing maintenance?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to stop juggling contractors?</h2>
           <p className="text-xl text-stone-400 mb-10 max-w-2xl mx-auto">
-            Start with a free 75-point assessment and see exactly where your property stands.
+            Start with a free assessment or book a single service today.
           </p>
-          <Link to="/assessment" className="btn-primary-lg px-12 inline-flex">
-            Schedule Free Assessment
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link to="/assessment" className="btn-primary-lg px-12 inline-flex">
+              Book Free Assessment
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link to="/portfolio" className="btn-outline border-white/30 text-white hover:text-white hover:border-white inline-flex">
+              View Services & Pricing
+            </Link>
+          </div>
         </div>
       </section>
     </div>

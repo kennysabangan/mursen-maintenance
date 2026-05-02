@@ -16,10 +16,10 @@ function Header() {
   const location = useLocation();
 
   const navLinks = [
+    { to: '/portfolio', label: 'Services' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/blog', label: 'Blog' },
-    { to: '/portfolio', label: 'Services' },
-    { to: '/contact', label: 'About & Contact' },
+    { to: '/contact', label: 'Contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -118,7 +118,7 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-stone-500">
-              Your trusted property maintenance partner serving the Cincinnati metro area: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods. Fully insured, bonded, and committed to quality.
+              One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman services serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati. Fully insured, bonded, and committed to quality.
             </p>
           </div>
 
@@ -144,11 +144,10 @@ function Footer() {
           <div>
             <h4 className="font-semibold text-xs uppercase tracking-widest text-stone-400 mb-4">Services</h4>
             <ul className="space-y-3 text-sm text-stone-600">
-              <li>Property Inspections</li>
-              <li>Seasonal Maintenance</li>
-              <li>Emergency Repairs</li>
-              <li>Vendor Concierge</li>
-              <li>Smart Home Setup</li>
+              <li>Lawn Mowing &amp; Care</li>
+              <li>Window Cleaning</li>
+              <li>Power Washing</li>
+              <li>Handyman &amp; Repairs</li>
             </ul>
           </div>
 
