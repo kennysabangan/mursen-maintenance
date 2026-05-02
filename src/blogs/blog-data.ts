@@ -1,6 +1,38 @@
-import matter from 'gray-matter';
 import { marked } from 'marked';
 import type { BlogPost } from './types.ts';
+
+// Minimal browser-compatible frontmatter parser (replaces gray-matter which requires Node Buffer)
+function parseFrontmatter(raw: string): { data: Record<string, any>; content: string } {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (!match) return { data: {}, content: raw };
+
+  const fm: Record<string, any> = {};
+  let currentKey: string | null = null;
+  let currentArray: string[] | null = null;
+
+  for (const line of match[1].split('\n')) {
+    const arrItem = line.match(/^\s+-\s+(.+)$/);
+    if (arrItem && currentKey && currentArray) {
+      currentArray.push(arrItem[1].replace(/^['"]|['"]$/g, ''));
+      continue;
+    }
+    const kv = line.match(/^([\w-]+):\s*(.*)$/);
+    if (kv) {
+      if (currentKey && currentArray) fm[currentKey] = currentArray;
+      currentKey = kv[1];
+      const val = kv[2].trim();
+      if (val === '') {
+        currentArray = [];
+      } else {
+        fm[currentKey] = val.replace(/^['"]|['"]$/g, '');
+        currentArray = null;
+      }
+    }
+  }
+  if (currentKey && currentArray) fm[currentKey] = currentArray;
+
+  return { data: fm, content: match[2] };
+}
 
 // Dynamically import all markdown files in the blogs directory
 const modules = import.meta.glob('./**/*.md', { 
@@ -9,7 +41,7 @@ const modules = import.meta.glob('./**/*.md', {
 });
 
 function parseBlogPost(path: string, content: string): BlogPost {
-  const { data, content: markdown } = matter(content);
+  const { data, content: markdown } = parseFrontmatter(content);
   const html = marked.parse(markdown, { async: false }) as string;
 
   return {
