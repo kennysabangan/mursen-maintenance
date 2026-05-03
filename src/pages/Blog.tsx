@@ -168,19 +168,19 @@ export default function Blog() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="section bg-stone-900 text-white">
+        <section className="section bg-gray-50">
           <div className="container-app text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Stay Informed</h2>
-            <p className="text-stone-300 mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-surface-900 mb-4 tracking-tight">Stay Informed</h2>
+            <p className="text-surface-500 mb-8">
               Get the latest property maintenance tips and Mursen updates delivered to your inbox.
             </p>
             <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={e => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-stone-300 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                className="flex-1 px-4 py-3 rounded-xl bg-white border border-surface-200 text-surface-900 placeholder:text-surface-400 focus:ring-2 focus:ring-brand-500 focus:outline-none"
               />
-              <button type="submit" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors whitespace-nowrap">
+              <button type="submit" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors whitespace-nowrap min-h-[44px]">
                 Subscribe
               </button>
             </form>

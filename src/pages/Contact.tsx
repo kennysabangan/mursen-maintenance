@@ -28,11 +28,11 @@ export default function Contact() {
         <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
       </Helmet>
       <div className="min-h-screen bg-white">
-      {/* Header — clean, light */}
-      <section className="relative bg-brand-600 text-white py-24 md:py-28 px-6">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">About Us &amp; Contact</h1>
-          <p className="text-lg text-brand-100 max-w-2xl mx-auto leading-relaxed">
+      {/* Header — light */}
+      <section className="py-20 md:py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-surface-900 mb-4">About Us &amp; Contact</h1>
+          <p className="text-lg text-surface-500 max-w-xl mx-auto">
             We built the maintenance solution we wish we had for our own rental properties.
           </p>
         </div>

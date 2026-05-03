@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Shield, ArrowRight, Star, Check, Leaf, Droplets, SprayCan, Wrench } from 'lucide-react';
+import { ArrowRight, Leaf, Droplets, SprayCan, Wrench } from 'lucide-react';
 
 const lawnServices = [
   { name: 'Mow + edge (up to 1/4 acre)', price: '$45' },
@@ -38,40 +38,47 @@ const handymanServices = [
   { name: 'Additional hours', price: '$70/hr' },
   { name: 'Drywall patch (small)', price: '$85–125' },
   { name: 'Drywall patch (large / full sheet)', price: '$175–275' },
-  { name: 'Faucet replacement (Licensed Partner Required)', price: '$125–150' },
-  { name: 'Toilet repair / rebuild (Licensed Partner Required)', price: '$125–175' },
+  { name: 'Faucet replacement', price: '$125–150', flagged: true },
+  { name: 'Toilet repair / rebuild', price: '$125–175', flagged: true },
   { name: 'Door installation (interior)', price: '$150–225' },
   { name: 'Door lock / deadbolt install', price: '$85–100' },
   { name: 'TV mount (up to 65")', price: '$125' },
   { name: 'TV mount (65"+ or over fireplace)', price: '$175–225' },
   { name: 'Caulking (tub, shower, windows)', price: '$85–125' },
-  { name: 'Fixture swap — light, fan, etc. (Licensed Partner Required)', price: '$85–125' },
+  { name: 'Fixture swap — light, fan, etc.', price: '$85–125', flagged: true },
   { name: 'Furniture assembly', price: '$75/hr' },
   { name: 'Paint touch-up (per room)', price: '$100–200' },
   { name: 'Full room paint (walls only)', price: '$300–450' },
   { name: 'Full room paint (walls + trim + ceiling)', price: '$450–700' },
 ];
 
-function ServiceSection({ icon: Icon, title, color, bgColor, services }: { icon: any, title: string, color: string, bgColor: string, services: { name: string, price: string }[] }) {
+function ServiceSection({ icon: Icon, title, services }: { icon: any, title: string, services: { name: string, price: string, flagged?: boolean }[] }) {
   return (
-    <div className="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden">
-      <div className={`${bgColor} px-8 py-6 flex items-center gap-4`}>
-        <div className="w-12 h-12 bg-white/80 rounded-xl flex items-center justify-center">
-          <Icon className={`w-6 h-6 ${color}`} />
+    <div className="bg-white rounded-2xl border border-surface-100 overflow-hidden" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <div className="px-8 py-5 flex items-center gap-4 border-b border-surface-50">
+        <div className="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center">
+          <Icon className="w-5 h-5 text-brand-600" />
         </div>
-        <h3 className="text-xl font-bold text-stone-900">{title}</h3>
+        <h3 className="text-lg font-bold text-surface-900">{title}</h3>
       </div>
       <div className="p-6 md:p-8">
-        <div className="space-y-3">
+        <div className="space-y-0">
           {services.map((s) => (
-            <div key={s.name} className="flex items-center justify-between py-2 border-b border-stone-50 last:border-0">
-              <span className="text-sm text-stone-700">{s.name}</span>
-              <span className="text-sm font-semibold text-stone-900 whitespace-nowrap ml-4">{s.price}</span>
+            <div key={s.name} className="flex items-center justify-between py-2.5 border-b border-surface-50 last:border-0">
+              <span className="text-sm text-surface-700 flex items-center gap-2">
+                {s.name}
+                {s.flagged && (
+                  <span className="inline-flex items-center text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-100 whitespace-nowrap">
+                    Licensed Partner
+                  </span>
+                )}
+              </span>
+              <span className="text-sm font-semibold text-surface-900 whitespace-nowrap ml-4">{s.price}</span>
             </div>
           ))}
         </div>
-        <div className="mt-6 flex flex-col sm:flex-row gap-3">
-          <Link to="/assessment" className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer">
+        <div className="mt-6">
+          <Link to="/assessment" className="inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm py-3 px-6 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]">
             Book This Service
             <ArrowRight className="w-4 h-4" />
           </Link>
@@ -91,7 +98,6 @@ export default function Portfolio() {
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="lawn care pricing Covington KY, window cleaning cost Cincinnati, power washing price Northern KY, handyman rate Covington, home maintenance services" />
         <link rel="canonical" href={`${siteUrl}/portfolio`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
@@ -102,90 +108,54 @@ export default function Portfolio() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
       </Helmet>
+
       <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="relative bg-brand-600 text-white py-24 md:py-28 px-6 overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Services & Pricing
-          </h1>
-          <p className="text-xl text-brand-100 max-w-2xl mx-auto">
-            Transparent pricing. No surprises. Book individual services or save big with a monthly subscription.
-          </p>
-        </div>
-      </section>
 
-      {/* Services */}
-      <section className="py-20 md:py-28 px-6 bg-stone-50">
-        <div className="max-w-6xl mx-auto space-y-10">
-          <ServiceSection icon={Leaf} title="Lawn Care" color="text-green-600" bgColor="bg-green-50" services={lawnServices} />
-          <ServiceSection icon={Droplets} title="Window Cleaning" color="text-blue-600" bgColor="bg-blue-50" services={windowServices} />
-          <ServiceSection icon={SprayCan} title="Power Washing" color="text-cyan-600" bgColor="bg-cyan-50" services={powerWashServices} />
-          <ServiceSection icon={Wrench} title="Handyman & Repairs" color="text-orange-600" bgColor="bg-orange-50" services={handymanServices} />
-        </div>
-      </section>
-
-      {/* Subscription CTA */}
-      <section className="py-20 md:py-28 px-6 bg-stone-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            One subscription. One company. One bill.
-          </h2>
-          <p className="text-lg text-stone-400 mb-10 max-w-xl mx-auto">
-            We handle everything around your house — lawn, windows, power wash, handyman.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link to="/how-it-works" className="btn-primary-lg px-12 inline-flex">
-              See Our Plans
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link to="/assessment" className="btn-outline border-white/30 text-white hover:text-white hover:border-white inline-flex">
-              Book Free Assessment
-            </Link>
+        {/* Header */}
+        <section className="py-20 md:py-24 px-6 bg-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-surface-900 mb-4">
+              Services & Pricing
+            </h1>
+            <p className="text-lg text-surface-500 max-w-xl mx-auto">
+              Transparent pricing. No surprises. Book individual services or save with a monthly subscription.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials */}
-      <section className="py-20 md:py-28 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-stone-900 mb-3">Trusted by homeowners & investors</h2>
-            <p className="text-lg text-stone-500">Don't take our word for it.</p>
+        {/* Services */}
+        <section className="py-16 md:py-24 px-6 bg-gray-50">
+          <div className="max-w-6xl mx-auto space-y-8">
+            <ServiceSection icon={Leaf} title="Lawn Care" services={lawnServices} />
+            <ServiceSection icon={Droplets} title="Window Cleaning" services={windowServices} />
+            <ServiceSection icon={SprayCan} title="Power Washing" services={powerWashServices} />
+            <ServiceSection icon={Wrench} title="Handyman & Repairs" services={handymanServices} />
           </div>
+        </section>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { quote: "They found a failing water heater during a routine visit that would have flooded our unit. One catch saved us thousands.", name: 'Mike R.', role: 'Duplex Owner, Riverside' },
-              { quote: "The seasonal prep alone saves me 10 hours per month. Worth every penny. They proactively found issues before they became emergencies.", name: 'Jennifer T.', role: 'Triplex Owner, Main St' },
-              { quote: "Since Mursen started managing our property, we've had zero maintenance complaints. They fix things before we even know there's a problem.", name: 'Sarah K.', role: 'Homeowner, Highland Ave' },
-            ].map((t, i) => (
-              <div key={i} className="bg-stone-50 rounded-2xl p-8 border border-stone-100">
-                <div className="flex gap-1 mb-4">
-                  {[1,2,3,4,5].map(s => (
-                    <Star key={s} className="w-4 h-4 text-orange-400 fill-orange-400" />
-                  ))}
-                </div>
-                <blockquote className="text-stone-700 text-sm leading-relaxed mb-6">
-                  "{t.quote}"
-                </blockquote>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 font-bold text-xs">
-                    {t.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-stone-900 text-sm">{t.name}</div>
-                    <div className="text-xs text-stone-500">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+        {/* CTA */}
+        <section className="py-16 md:py-24 px-6 bg-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-surface-900 mb-4 tracking-tight">
+              One subscription. One company. One bill.
+            </h2>
+            <p className="text-lg text-surface-500 mb-8 max-w-md mx-auto">
+              Everything around your house — handled.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/how-it-works" className="btn-primary-lg px-12 inline-flex justify-center">
+                See Our Plans
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link to="/assessment" className="btn-secondary-lg inline-flex justify-center">
+                Book Free Assessment
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+      </div>
     </>
   );
 }

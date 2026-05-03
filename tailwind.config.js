@@ -6,17 +6,17 @@ export default {
       colors: {
         /* Semantic aliases — maps to what JSX expects */
         surface: {
-          50: '#fafaf9',
-          100: '#f5f5f4',
-          200: '#e7e5e4',
-          300: '#d6d3d1',
-          400: '#a8a29e',
-          500: '#78716c',
-          600: '#57534e',
-          700: '#44403c',
-          800: '#292524',
-          900: '#1c1917',
-          950: '#0c0a09',
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#1a1a2e',
+          950: '#0f172a',
         },
         primary: {
           50: '#f0fdf4',
@@ -32,16 +32,16 @@ export default {
           950: '#052e16',
         },
         accent: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
         },
         secondary: {
           50: '#f0fdfa',
@@ -56,7 +56,7 @@ export default {
           900: '#134e4a',
           950: '#042f2e',
         },
-        /* Warm Green / Teal — friendly, local, professional */
+        /* Green brand */
         brand: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -70,7 +70,7 @@ export default {
           900: '#14532d',
           950: '#052e16',
         },
-        /* Deep Teal for emphasis */
+        /* Teal */
         teal: {
           50: '#f0fdfa',
           100: '#ccfbf1',
@@ -84,7 +84,7 @@ export default {
           900: '#134e4a',
           950: '#042f2e',
         },
-        /* Warm Orange accent */
+        /* Orange */
         orange: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -111,7 +111,7 @@ export default {
           900: '#1c1917',
           950: '#0c0a09',
         },
-        /* Gray fallback */
+        /* Gray */
         gray: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -149,19 +149,19 @@ export default {
       },
       boxShadow: {
         'soft': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)',
-        'card': '0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04)',
-        'card-hover': '0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
-        'glow-brand': '0 0 48px rgba(22, 163, 74, 0.15)',
-        'glow-brand-hover': '0 0 64px rgba(22, 163, 74, 0.22)',
-        'glow-orange': '0 0 48px rgba(249, 115, 22, 0.15)',
+        'card': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)',
+        'card-hover': '0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
+        'glow-brand': '0 0 48px rgba(22, 163, 74, 0.12)',
+        'glow-brand-hover': '0 0 64px rgba(22, 163, 74, 0.18)',
+        'glow-orange': '0 0 48px rgba(249, 115, 22, 0.12)',
       },
       animation: {
-        'fade-up': 'fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'fade-up': 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
         'float': 'float 8s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: {
-          '0%': { opacity: 0, transform: 'translateY(32px)' },
+          '0%': { opacity: 0, transform: 'translateY(24px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
         float: {
