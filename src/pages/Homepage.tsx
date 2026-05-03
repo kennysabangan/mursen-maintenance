@@ -224,7 +224,7 @@ export default function Homepage() {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-10 max-w-xl opacity-0 animate-fade-up" style={{ animationDelay: '0.12s' }}>
-            One subscription. Lawn, windows, power wash, handyman — we handle everything so you don't have to.
+            One subscription. Lawn Care, Window Cleaning, Power Washing, Handyman — we handle everything so you don't have to.
           </p>
 
           {/* CTA */}
