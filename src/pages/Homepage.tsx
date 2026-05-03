@@ -203,48 +203,47 @@ export default function Homepage() {
 
       {/* ═══════════════ 1. HERO — PATTERN INTERRUPT ═══════════════ */}
       <section className="relative min-h-[100vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Full-bleed background image */}
+        {/* Full-bleed background image — bright daytime home */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"
-            alt="Beautiful modern home with manicured lawn"
+            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80&auto=format&fit=crop"
+            alt="Bright modern home with green lawn and blue sky"
             className="w-full h-full object-cover"
           />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/30" />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/55" />
         </div>
 
-        <div className="relative container-app py-20 md:py-28 text-center md:text-left">
-          <div className="max-w-3xl mx-auto md:mx-0">
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.05] opacity-0 animate-fade-up">
-              Your House.<br />
-              <span className="text-green-400">Handled.</span>
-            </h1>
+        {/* Centered content */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl px-6 py-20">
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.05] opacity-0 animate-fade-up">
+            Your House.<br />
+            <span className="text-green-400">Handled.</span>
+          </h1>
 
-            {/* Subheadline */}
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-10 max-w-xl mx-auto md:mx-0 opacity-0 animate-fade-up" style={{ animationDelay: '0.12s' }}>
-              One subscription. Lawn, windows, power wash, handyman — we handle everything so you don't have to.
-            </p>
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-10 max-w-xl opacity-0 animate-fade-up" style={{ animationDelay: '0.12s' }}>
+            One subscription. Lawn, windows, power wash, handyman — we handle everything so you don't have to.
+          </p>
 
-            {/* CTA */}
-            <div className="opacity-0 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-              <Link
-                to="/assessment"
-                className="inline-flex items-center justify-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold text-lg md:text-xl px-10 py-5 rounded-2xl transition-all duration-200 shadow-lg shadow-green-600/30 hover:shadow-green-500/40 w-full sm:w-auto min-h-[56px]"
-              >
-                Get My Free Quote
-                <ArrowRight className="w-6 h-6" />
-              </Link>
-            </div>
+          {/* CTA */}
+          <div className="opacity-0 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+            <Link
+              to="/assessment"
+              className="inline-flex items-center justify-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold text-lg md:text-xl px-10 py-5 rounded-2xl transition-all duration-200 shadow-lg shadow-green-600/30 hover:shadow-green-500/40 min-h-[56px]"
+            >
+              Get My Free Quote
+              <ArrowRight className="w-6 h-6" />
+            </Link>
+          </div>
 
-            {/* Trust bar */}
-            <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 text-sm text-gray-300 opacity-0 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Fully Insured</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Bonded</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Serving Covington & Cincinnati Metro</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> 20+ Properties Maintained</span>
-            </div>
+          {/* Trust bar */}
+          <div className="mt-10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-gray-300 opacity-0 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Fully Insured</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Bonded</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> Serving Covington & Cincinnati Metro</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-green-400" /> 20+ Properties Maintained</span>
           </div>
         </div>
       </section>
