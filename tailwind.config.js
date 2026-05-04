@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        /* Semantic aliases — maps to what JSX expects */
+        /* Anchor neutrals — deep navy/slate for headlines and dark sections */
         surface: {
           50: '#f8fafc',
           100: '#f1f5f9',
@@ -15,62 +15,64 @@ export default {
           600: '#475569',
           700: '#334155',
           800: '#1e293b',
-          900: '#1a1a2e',
-          950: '#0f172a',
+          900: '#0f172a',
+          950: '#020617',
         },
+        /* Primary — confident forest green for trust + nature */
         primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-          950: '#052e16',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+          950: '#022c22',
         },
+        /* Accent — warm amber for urgency / pricing highlights */
         accent: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
+        /* Secondary — calm sky blue for icons / chips */
         secondary: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          950: '#042f2e',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
         },
-        /* Green brand */
+        /* Brand alias — same as primary for legacy class names */
         brand: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-          950: '#052e16',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+          950: '#022c22',
         },
-        /* Teal */
         teal: {
           50: '#f0fdfa',
           100: '#ccfbf1',
@@ -84,7 +86,6 @@ export default {
           900: '#134e4a',
           950: '#042f2e',
         },
-        /* Orange */
         orange: {
           50: '#fff7ed',
           100: '#ffedd5',
@@ -97,7 +98,6 @@ export default {
           800: '#9a3412',
           900: '#7c2d12',
         },
-        /* Warm neutrals */
         stone: {
           50: '#fafaf9',
           100: '#f5f5f4',
@@ -111,7 +111,6 @@ export default {
           900: '#1c1917',
           950: '#0c0a09',
         },
-        /* Gray */
         gray: {
           50: '#f9fafb',
           100: '#f3f4f6',
@@ -128,7 +127,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display': ['4.5rem', { lineHeight: '1.05', letterSpacing: '-0.04em', fontWeight: '800' }],
@@ -148,15 +147,16 @@ export default {
         '32': '8rem',
       },
       boxShadow: {
-        'soft': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)',
-        'card': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)',
-        'card-hover': '0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
-        'glow-brand': '0 0 48px rgba(22, 163, 74, 0.12)',
-        'glow-brand-hover': '0 0 64px rgba(22, 163, 74, 0.18)',
-        'glow-orange': '0 0 48px rgba(249, 115, 22, 0.12)',
+        'soft': '0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06)',
+        'card': '0 4px 12px rgba(15, 23, 42, 0.04), 0 2px 4px rgba(15, 23, 42, 0.04)',
+        'card-hover': '0 12px 32px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.06)',
+        'lift': '0 20px 50px -12px rgba(15, 23, 42, 0.18)',
+        'glow-brand': '0 10px 40px -10px rgba(5, 150, 105, 0.45)',
+        'glow-accent': '0 10px 40px -10px rgba(217, 119, 6, 0.40)',
       },
       animation: {
         'fade-up': 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
         'float': 'float 8s ease-in-out infinite',
       },
       keyframes: {
@@ -164,10 +164,18 @@ export default {
           '0%': { opacity: 0, transform: 'translateY(24px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-12px)' },
         },
+      },
+      backgroundImage: {
+        'hero-gradient': 'linear-gradient(135deg, rgba(15,23,42,0.65) 0%, rgba(15,23,42,0.35) 60%, rgba(5,150,105,0.40) 100%)',
+        'mesh-light': 'radial-gradient(at 20% 0%, rgba(5,150,105,0.08) 0px, transparent 50%), radial-gradient(at 80% 100%, rgba(245,158,11,0.06) 0px, transparent 50%)',
       },
     },
   },
