@@ -14,36 +14,32 @@ const services = [
     name: 'Lawn Care',
     tagline: 'Mow, edge, trim, blow.',
     description: 'Weekly maintenance that keeps your curb appeal sharp through every season.',
-    image: 'https://images.unsplash.com/photo-1558435186-d31d126391fa?w=800&q=80&auto=format&fit=crop',
     points: ['Weekly or bi-weekly visits', 'Edging & trimming included', 'Seasonal cleanups'],
-    color: 'from-emerald-500 to-emerald-700',
+    gradient: 'from-emerald-500 via-emerald-600 to-primary-800',
   },
   {
     icon: Droplets,
     name: 'Window Cleaning',
     tagline: 'Streak-free, every time.',
     description: 'Spotless windows inside and out. Tracks, sills, and screens included.',
-    image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&q=80&auto=format&fit=crop',
     points: ['Interior + exterior options', 'Tracks & screens', 'Hard-water removal'],
-    color: 'from-sky-500 to-sky-700',
+    gradient: 'from-sky-500 via-sky-600 to-blue-800',
   },
   {
     icon: SprayCan,
     name: 'Power Washing',
     tagline: 'Restore like new.',
     description: 'Driveways, siding, decks, patios. Commercial-grade equipment, eco-safe detergents.',
-    image: 'https://images.unsplash.com/photo-1597211833711-1e84c1338107?w=800&q=80&auto=format&fit=crop',
     points: ['Driveways & walkways', 'Siding & fences', 'Soft-wash for roofs'],
-    color: 'from-indigo-500 to-indigo-700',
+    gradient: 'from-indigo-500 via-indigo-600 to-violet-800',
   },
   {
     icon: Wrench,
     name: 'Handyman & Repairs',
     tagline: 'Big list. One visit.',
     description: 'Drywall, fixtures, doors, mounts, paint touch-ups — all the small jobs handled.',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80&auto=format&fit=crop',
     points: ['Same-tech every visit', 'Licensed partner network', '90-day workmanship promise'],
-    color: 'from-amber-500 to-amber-700',
+    gradient: 'from-amber-500 via-orange-600 to-red-700',
   },
 ];
 
@@ -170,27 +166,11 @@ const testimonials = [
   },
 ];
 
-const beforeAfter = [
-  {
-    label: 'Lawn Care',
-    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&auto=format&fit=crop',
-    after: 'https://images.unsplash.com/photo-1558435186-d31d126391fa?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    label: 'Power Washing',
-    before: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80&auto=format&fit=crop',
-    after: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    label: 'Window Cleaning',
-    before: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&auto=format&fit=crop',
-    after: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    label: 'Handyman Repairs',
-    before: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80&auto=format&fit=crop',
-    after: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&auto=format&fit=crop',
-  },
+const results = [
+  { number: '500+', label: 'Jobs completed', sub: 'Across Northern KY since launch' },
+  { number: '20+', label: 'Properties maintained', sub: 'Including our own rentals' },
+  { number: '4.9 / 5', label: 'Average rating', sub: 'From 80+ verified reviews' },
+  { number: '< 24h', label: 'Quote turnaround', sub: 'On every free assessment' },
 ];
 
 const serviceAreas = [
@@ -273,15 +253,16 @@ export default function Homepage() {
       </Helmet>
 
       {/* ═════════ HERO ═════════ */}
-      <section className="relative overflow-hidden bg-surface-900">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-surface-900 to-surface-950">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80&auto=format&fit=crop"
-            alt="Bright modern home with manicured lawn"
+            src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=1920&q=80&auto=format&fit=crop"
+            alt="Traditional brick home with lush lawn"
             className="w-full h-full object-cover"
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface-900/95 via-surface-900/80 to-surface-900/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-surface-900/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-surface-900/95 via-surface-900/75 to-surface-900/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-900/70 via-transparent to-transparent" />
         </div>
 
         <div className="relative container-app pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">
@@ -360,16 +341,12 @@ export default function Homepage() {
                   to="/portfolio"
                   className="service-card group flex flex-col"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface-900/70 via-surface-900/0 to-transparent" />
+                  <div className={`relative aspect-[4/3] bg-gradient-to-br ${service.gradient} overflow-hidden flex items-center justify-center`}>
+                    <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 0px, transparent 50%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.3) 0px, transparent 50%)' }} />
+                    <Icon className="relative w-24 h-24 text-white/95 transition-transform duration-500 group-hover:scale-110" strokeWidth={1.5} />
                     <div className="absolute top-4 left-4">
-                      <div className={`w-11 h-11 rounded-xl bg-white/95 backdrop-blur flex items-center justify-center shadow-soft`}>
-                        <Icon className="w-5 h-5 text-primary-700" />
+                      <div className="px-3 py-1 rounded-full bg-white/20 backdrop-blur border border-white/30 text-[10px] font-bold uppercase tracking-wider text-white">
+                        {service.name.split(' ')[0]}
                       </div>
                     </div>
                   </div>
@@ -554,33 +531,25 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ═════════ BEFORE / AFTER ═════════ */}
+      {/* ═════════ RESULTS / BY THE NUMBERS ═════════ */}
       <section className="section bg-white">
         <div className="container-app">
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="eyebrow mb-4 justify-center">Real Work, Real Results</p>
             <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              See the difference.
+              The numbers behind our work.
             </h2>
-            <p className="lead mx-auto">Real properties from real customers across Cincinnati metro.</p>
+            <p className="lead mx-auto">Owner-operated since day one. Built on referrals from real homeowners and landlords across Northern Kentucky.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {beforeAfter.map((item) => (
-              <div key={item.label} className="bg-white rounded-2xl overflow-hidden border border-stone-200/70 shadow-soft hover:shadow-card-hover transition-all duration-300">
-                <div className="grid grid-cols-2 gap-px bg-stone-200">
-                  <div className="relative">
-                    <img src={item.before} alt={`${item.label} before`} className="w-full h-40 object-cover" />
-                    <span className="absolute top-2 left-2 bg-surface-900/80 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">Before</span>
-                  </div>
-                  <div className="relative">
-                    <img src={item.after} alt={`${item.label} after`} className="w-full h-40 object-cover" />
-                    <span className="absolute top-2 left-2 bg-primary-600 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">After</span>
-                  </div>
+            {results.map((r) => (
+              <div key={r.label} className="bg-gradient-to-br from-stone-50 to-white rounded-3xl p-7 border border-stone-200/70 shadow-soft hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
+                <div className="font-display text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-br from-primary-600 to-primary-800 bg-clip-text text-transparent mb-3">
+                  {r.number}
                 </div>
-                <div className="p-4">
-                  <p className="text-sm font-bold text-surface-900">{item.label}</p>
-                </div>
+                <div className="font-display text-base font-bold text-surface-900 mb-1">{r.label}</div>
+                <div className="text-sm text-surface-500 leading-relaxed">{r.sub}</div>
               </div>
             ))}
           </div>

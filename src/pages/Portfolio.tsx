@@ -57,7 +57,7 @@ const serviceCategories = [
     icon: Leaf,
     title: 'Lawn Care',
     blurb: 'Weekly mowing, edging, trimming, seasonal cleanups, mulch, and aeration.',
-    image: 'https://images.unsplash.com/photo-1558435186-d31d126391fa?w=800&q=80&auto=format&fit=crop',
+    gradient: 'from-emerald-500 via-emerald-600 to-primary-800',
     services: lawnServices,
     anchor: 'lawn',
   },
@@ -65,7 +65,7 @@ const serviceCategories = [
     icon: Droplets,
     title: 'Window Cleaning',
     blurb: 'Streak-free interior + exterior, screens, tracks, and gutter cleaning.',
-    image: 'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&q=80&auto=format&fit=crop',
+    gradient: 'from-sky-500 via-sky-600 to-blue-800',
     services: windowServices,
     anchor: 'windows',
   },
@@ -73,7 +73,7 @@ const serviceCategories = [
     icon: SprayCan,
     title: 'Power Washing',
     blurb: 'Driveways, siding, decks, fences, walkways, and soft-wash for roofs.',
-    image: 'https://images.unsplash.com/photo-1597211833711-1e84c1338107?w=800&q=80&auto=format&fit=crop',
+    gradient: 'from-indigo-500 via-indigo-600 to-violet-800',
     services: powerWashServices,
     anchor: 'powerwash',
   },
@@ -81,30 +81,25 @@ const serviceCategories = [
     icon: Wrench,
     title: 'Handyman & Repairs',
     blurb: 'Drywall, fixtures, doors, mounts, paint, and licensed-partner trades.',
-    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80&auto=format&fit=crop',
+    gradient: 'from-amber-500 via-orange-600 to-red-700',
     services: handymanServices,
     anchor: 'handyman',
   },
 ];
 
-function ServiceSection({ icon: Icon, title, services, image, anchor }: {
-  icon: React.ComponentType<{ className?: string }>;
+function ServiceSection({ icon: Icon, title, services, gradient, anchor }: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number | string }>;
   title: string;
   services: { name: string; price: string; flagged?: boolean }[];
-  image: string;
+  gradient: string;
   anchor: string;
 }) {
   return (
     <div id={anchor} className="bg-white rounded-3xl border border-stone-200/70 overflow-hidden shadow-soft scroll-mt-24">
       <div className="grid lg:grid-cols-[2fr_3fr]">
-        <div className="relative aspect-[4/3] lg:aspect-auto min-h-[200px] overflow-hidden">
-          <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-br from-surface-900/30 to-surface-900/60" />
-          <div className="absolute top-5 left-5">
-            <div className="w-12 h-12 rounded-2xl bg-white/95 backdrop-blur flex items-center justify-center shadow-soft">
-              <Icon className="w-6 h-6 text-primary-700" />
-            </div>
-          </div>
+        <div className={`relative aspect-[4/3] lg:aspect-auto min-h-[220px] overflow-hidden bg-gradient-to-br ${gradient} flex items-center justify-center`}>
+          <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 0px, transparent 50%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.3) 0px, transparent 50%)' }} />
+          <Icon className="relative w-28 h-28 text-white/95" strokeWidth={1.5} />
           <div className="absolute bottom-5 left-5 right-5">
             <h3 className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight">{title}</h3>
           </div>
@@ -217,7 +212,7 @@ export default function Portfolio() {
       <section className="section-alt">
         <div className="container-app space-y-8">
           {serviceCategories.map((c) => (
-            <ServiceSection key={c.title} icon={c.icon} title={c.title} services={c.services} image={c.image} anchor={c.anchor} />
+            <ServiceSection key={c.title} icon={c.icon} title={c.title} services={c.services} gradient={c.gradient} anchor={c.anchor} />
           ))}
         </div>
       </section>
