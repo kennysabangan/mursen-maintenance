@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
-  ArrowRight, Check, ChevronDown, ChevronUp, Phone, Mail,
+  ArrowRight, Check, ChevronDown, ChevronUp, Phone, Star, User,
   Leaf, Droplets, SprayCan, Wrench, Snowflake, Trash,
 } from 'lucide-react';
 
@@ -21,6 +21,13 @@ const services = [
   { num: '06', icon: Trash, name: 'Junk Hauling', tagline: 'Quarter to full truckload, single-call removal.', from: '$125' },
 ];
 
+const stats = [
+  { number: '500+', label: 'Jobs completed' },
+  { number: '20+', label: 'Properties maintained' },
+  { number: '4.9★', label: '80+ verified reviews' },
+  { number: '<24h', label: 'Quote turnaround' },
+];
+
 const valueBreakdown = [
   { item: 'Weekly lawn mow + edge + blow', detail: '28 visits · April through October · up to ½ acre', cost: '$1,540' },
   { item: '4 hours of handyman service every month', detail: 'Drywall, paint, doors, mounts, caulking · 48 hrs/yr', cost: '$3,600' },
@@ -30,56 +37,18 @@ const valueBreakdown = [
   { item: 'Annual gutter cleaning + bonus priority scheduling', detail: 'Late fall gutter clean · 72-hour response window', cost: '$440' },
 ];
 
+const beforeAfter = [
+  { service: 'Lawn Care', detail: 'Overgrown to manicured — bi-weekly cadence', city: 'Covington, KY', beforeGrad: 'from-stone-500 to-stone-700', afterGrad: 'from-emerald-600 to-forest-700' },
+  { service: 'Power Washing', detail: 'Driveway lifted — 3-car concrete', city: 'Florence, KY', beforeGrad: 'from-stone-600 to-ink-700', afterGrad: 'from-rust-400 to-rust-600' },
+  { service: 'Window Cleaning', detail: 'Two-story exterior + tracks', city: 'Fort Mitchell, KY', beforeGrad: 'from-ink-500 to-ink-700', afterGrad: 'from-sky-500 to-sky-700' },
+  { service: 'Handyman', detail: 'Drywall + paint touch-up · turnover ready', city: 'Newport, KY', beforeGrad: 'from-rust-700 to-ink-800', afterGrad: 'from-cream-300 to-cream-50' },
+];
+
 const plans = [
-  {
-    name: 'Starter',
-    price: '199',
-    note: 'Per Month',
-    features: [
-      '1 monthly handyman visit · up to 2 hours',
-      'Bi-weekly lawn mowing + edging (Apr–Oct)',
-      'Fall + spring cleanup, gutter check',
-    ],
-    bestFor: 'Best for: small homes, light upkeep needs.',
-    variant: 'cream',
-  },
-  {
-    name: 'Lawn Plus',
-    price: '129',
-    note: 'Per Month · Apr–Oct',
-    features: [
-      'Weekly mow + edge + blow (Apr–Oct)',
-      '$69/mo Nov–Mar · seasonal cleanups',
-      'Up to ½ acre · larger lots +$40/mo',
-    ],
-    bestFor: 'Best for: lawn handled, you do the rest.',
-    variant: 'cream',
-  },
-  {
-    name: 'Handyman Plus',
-    price: '149',
-    note: 'Per Month',
-    features: [
-      '1 monthly visit · up to 2 hours',
-      '5 business day scheduling window',
-      'Overage at $75/hr · no contract',
-    ],
-    bestFor: 'Best for: a regular fix-it guy on call.',
-    variant: 'cream',
-  },
-  {
-    name: 'Home Care',
-    price: '479',
-    note: 'Per Month',
-    features: [
-      '4 hours handyman every month',
-      'Weekly lawn (Apr–Oct) + monthly windows',
-      'Annual power wash + 3 seasonal cleanups',
-    ],
-    bestFor: 'Best for: homeowners who want it all done.',
-    variant: 'dark',
-    badge: 'Most Popular',
-  },
+  { name: 'Starter', price: '199', note: 'Per Month', features: ['1 monthly handyman visit · up to 2 hours', 'Bi-weekly lawn mowing + edging (Apr–Oct)', 'Fall + spring cleanup, gutter check'], bestFor: 'Best for: small homes, light upkeep needs.', variant: 'cream' },
+  { name: 'Lawn Plus', price: '129', note: 'Per Month · Apr–Oct', features: ['Weekly mow + edge + blow (Apr–Oct)', '$69/mo Nov–Mar · seasonal cleanups', 'Up to ½ acre · larger lots +$40/mo'], bestFor: 'Best for: lawn handled, you do the rest.', variant: 'cream' },
+  { name: 'Handyman Plus', price: '149', note: 'Per Month', features: ['1 monthly visit · up to 2 hours', '5 business day scheduling window', 'Overage at $75/hr · no contract'], bestFor: 'Best for: a regular fix-it guy on call.', variant: 'cream' },
+  { name: 'Home Care', price: '479', note: 'Per Month', features: ['4 hours handyman every month', 'Weekly lawn (Apr–Oct) + monthly windows', 'Annual power wash + 3 seasonal cleanups'], bestFor: 'Best for: homeowners who want it all done.', variant: 'dark', badge: 'Most Popular' },
 ];
 
 const propertyManagerPlan = {
@@ -87,18 +56,19 @@ const propertyManagerPlan = {
   price: '279',
   note: 'Per Unit / Month',
   description: 'Built specifically for landlords with multiple units.',
-  features: [
-    'Lawn maintenance + basic exterior upkeep',
-    'Tenant turnover punch-list included',
-    '24-hour priority response window',
-    'Volume: 3+ $249 · 5+ $229 per unit',
-  ],
+  features: ['Lawn maintenance + basic exterior upkeep', 'Tenant turnover punch-list included', '24-hour priority response window', 'Volume: 3+ $249 · 5+ $229 per unit'],
 };
 
 const volumePricing = [
   { tier: '1–2 units', price: '$279/mo' },
   { tier: '3–4 units', price: '$249/mo' },
   { tier: '5+ units', price: '$229/mo' },
+];
+
+const testimonials = [
+  { quote: "They caught a slow leak under our kitchen sink before it flooded the floor. Saved us thousands. Eight months in and they're worth every penny.", name: 'Sarah M.', location: 'Homeowner · Covington, KY', initials: 'SM' },
+  { quote: "I used to call four different people for my rentals. Now I call one. Mursen handles lawn, windows, handyman — they even painted a unit during turnover.", name: 'David R.', location: 'Property Owner · Florence, KY', initials: 'DR' },
+  { quote: "Our driveway was disgusting — oil stains, mold, years of grime. After their power wash it looked brand new. Three neighbors asked who did the work.", name: 'Jennifer K.', location: 'Homeowner · Fort Mitchell, KY', initials: 'JK' },
 ];
 
 const serviceAreas = [
@@ -139,37 +109,81 @@ export default function Homepage() {
       </Helmet>
 
       {/* ════════ HERO ════════ */}
-      <section className="bg-cream-100 pt-12 pb-0 md:pt-20 md:pb-0 relative overflow-hidden">
+      <section className="bg-cream-100 pt-12 md:pt-20 pb-0 relative overflow-hidden">
         <div className="container-app">
-          <p className="eyebrow mb-6">A better way to maintain a home</p>
+          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-14 items-end pb-12 md:pb-16">
+            {/* Left — text */}
+            <div>
+              <p className="eyebrow mb-6">A better way to maintain a home</p>
 
-          <h1 className="heading-display text-balance mb-8 max-w-5xl">
-            YOUR HOUSE.
-            <br />
-            <span className="accent-serif font-normal text-rust-500">Handled.</span>
-          </h1>
+              <h1 className="heading-display text-balance mb-6">
+                YOUR HOUSE.
+                <br />
+                <span className="accent-serif font-normal text-rust-500">Handled.</span>
+              </h1>
 
-          <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed mb-8">
-            One subscription. One bill. One company that does lawn care, window cleaning, power washing, and handyman work — so you stop juggling five vendors and start getting your weekends back.
-          </p>
+              <p className="text-lg md:text-xl text-ink-700 max-w-xl leading-relaxed mb-7">
+                One subscription. One bill. One company that does lawn care, window cleaning, power washing, and handyman work — so you stop juggling five vendors and start getting your weekends back.
+              </p>
 
-          {/* Trust pills */}
-          <div className="flex flex-wrap gap-2.5 mb-10">
-            <span className="pill-dark">Fully Insured</span>
-            <span className="pill-outline">Bonded</span>
-            <span className="pill-outline">Owner-Operated</span>
-            <span className="pill-outline">20+ Rentals Maintained</span>
-          </div>
+              {/* Trust pills */}
+              <div className="flex flex-wrap gap-2.5 mb-6">
+                <span className="pill-dark">Fully Insured</span>
+                <span className="pill-outline">Bonded</span>
+                <span className="pill-outline">Owner-Operated</span>
+                <span className="pill-outline">20+ Rentals Maintained</span>
+              </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 mb-16">
-            <Link to="/assessment" className="btn-dark-lg">
-              Stop Calling 5 Different Guys
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a href={PHONE_HREF} className="btn-outline">
-              <Phone className="w-4 h-4" />
-              {PHONE_DISPLAY}
-            </a>
+              {/* Google rating badge */}
+              <div className="inline-flex items-center gap-3 bg-cream-50 border border-ink-900/10 rounded-md px-4 py-2.5 mb-8">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-rust-500 fill-rust-500" />
+                  ))}
+                </div>
+                <span className="font-black text-ink-900">4.9</span>
+                <span className="w-px h-4 bg-ink-900/15" />
+                <span className="text-sm text-ink-500">
+                  <span className="font-bold text-ink-700">80+ reviews</span>
+                  <span className="hidden sm:inline"> · Google · BBB · Angi</span>
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link to="/assessment" className="btn-dark-lg">
+                  Stop Calling 5 Different Guys
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a href={PHONE_HREF} className="btn-outline">
+                  <Phone className="w-4 h-4" />
+                  {PHONE_DISPLAY}
+                </a>
+              </div>
+            </div>
+
+            {/* Right — hero photo with cream/rust fallback */}
+            <div className="relative aspect-[4/5] rounded-md overflow-hidden bg-gradient-to-br from-rust-400 via-rust-600 to-ink-800 shadow-card-hover">
+              <img
+                src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=900&q=80&auto=format&fit=crop"
+                alt="Traditional brick home in Covington, KY"
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+              {/* Editorial overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tl from-ink-900/30 via-transparent to-cream-100/10" />
+              <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-50 bg-ink-900/70 backdrop-blur px-2.5 py-1 rounded">
+                  ★ Now Serving
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-50 bg-ink-900/70 backdrop-blur px-2.5 py-1 rounded">
+                  Cincinnati Metro
+                </span>
+              </div>
+              <div className="absolute bottom-5 left-5 right-5">
+                <div className="text-cream-50 text-xs font-bold uppercase tracking-[0.18em] opacity-80 mb-1">From the field</div>
+                <div className="text-cream-50 accent-serif text-base md:text-lg leading-tight">"We treat every property like it's our own."</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -192,6 +206,20 @@ export default function Homepage() {
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ STATS STRIP ════════ */}
+      <section className="bg-cream-50 border-b border-ink-900/10">
+        <div className="container-app py-10 md:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 md:divide-x divide-ink-900/10">
+            {stats.map((s, i) => (
+              <div key={s.label} className={`text-center md:px-6 ${i === 0 ? 'md:pl-0' : ''} ${i === stats.length - 1 ? 'md:pr-0' : ''}`}>
+                <div className="text-4xl md:text-5xl font-black tracking-[-0.04em] text-rust-500 leading-none mb-2">{s.number}</div>
+                <div className="text-xs md:text-sm font-bold uppercase tracking-[0.14em] text-ink-700">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -236,7 +264,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ════════ THE HERO OFFER (Annual Value Breakdown) ════════ */}
+      {/* ════════ THE HERO OFFER ════════ */}
       <section className="section-cream-light">
         <div className="container-narrow">
           <p className="eyebrow mb-4">The Hero Offer</p>
@@ -268,13 +296,11 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Total band */}
           <div className="bg-ink-900 text-cream-50 px-6 py-5 rounded-md mt-3 flex items-center justify-between">
             <span className="font-black text-xs md:text-sm tracking-[0.10em] uppercase">Total Annual Value If Purchased Separately</span>
             <span className="text-2xl md:text-3xl font-black">$7,335</span>
           </div>
 
-          {/* Comparison cards */}
           <div className="grid sm:grid-cols-2 gap-3 mt-3">
             <div className="bg-cream-50 border border-ink-900/10 rounded-md p-6">
               <p className="page-meta mb-3">À La Carte Total</p>
@@ -294,7 +320,6 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Savings band */}
           <div className="bg-rust-500 text-cream-50 px-6 py-5 rounded-md mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <span className="font-black text-base md:text-lg uppercase tracking-[0.06em]">You Save</span>
@@ -311,8 +336,53 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ════════ FIVE PLANS ════════ */}
+      {/* ════════ BEFORE / AFTER ════════ */}
       <section className="section bg-cream-100">
+        <div className="container-app">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-3">
+            <div>
+              <p className="eyebrow mb-4">Recent Work</p>
+              <h2 className="heading-2 text-balance max-w-2xl">
+                Real properties. <span className="accent-serif font-normal text-rust-500">Real results.</span>
+              </h2>
+            </div>
+          </div>
+          <p className="text-xs uppercase tracking-[0.18em] text-ink-400 mb-10 italic">
+            ⚠ Sample work — placeholder until real before/after photos are loaded.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {beforeAfter.map((item) => (
+              <div key={item.service} className="bg-cream-50 border border-ink-900/10 rounded-md overflow-hidden flex flex-col">
+                <div className="grid grid-cols-2 gap-px bg-ink-900/15">
+                  <div className={`relative aspect-square bg-gradient-to-br ${item.beforeGrad} flex items-center justify-center`}>
+                    <span className="absolute top-2 left-2 bg-ink-900 text-cream-50 text-[9px] font-bold uppercase tracking-[0.18em] px-2 py-1 rounded">Before</span>
+                    <span className="text-cream-50/30 font-black text-3xl uppercase tracking-tight">B</span>
+                  </div>
+                  <div className={`relative aspect-square bg-gradient-to-br ${item.afterGrad} flex items-center justify-center`}>
+                    <span className="absolute top-2 left-2 bg-rust-500 text-cream-50 text-[9px] font-bold uppercase tracking-[0.18em] px-2 py-1 rounded">After</span>
+                    <span className="text-cream-50/30 font-black text-3xl uppercase tracking-tight">A</span>
+                  </div>
+                </div>
+                <div className="p-4 flex-1 flex flex-col">
+                  <div className="font-black uppercase text-sm tracking-[-0.01em] mb-1">{item.service}</div>
+                  <p className="text-xs text-ink-500 leading-relaxed flex-1">{item.detail}</p>
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-ink-400 mt-3 pt-3 border-t border-ink-900/8">{item.city}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link to="/portfolio" className="btn-link">
+              See more recent work <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ FIVE PLANS ════════ */}
+      <section className="section bg-cream-50">
         <div className="container-app">
           <p className="eyebrow mb-4">Pick the plan that fits</p>
           <h2 className="heading-2 text-balance mb-4 max-w-3xl">
@@ -324,7 +394,6 @@ export default function Homepage() {
             Whether you want the full bundle or just lawn handled, we've got a fit. Every plan is month-to-month with a 30-day cancellation policy. No long-term contracts. Ever.
           </p>
 
-          {/* 4-up plan grid */}
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
             {plans.map((plan) => {
               const isDark = plan.variant === 'dark';
@@ -365,7 +434,6 @@ export default function Homepage() {
             })}
           </div>
 
-          {/* Property Manager (full width) */}
           <div className="plan-card-forest">
             <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 items-start">
               <div>
@@ -399,8 +467,60 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ════════ FOR PROPERTY INVESTORS ════════ */}
+      {/* ════════ TESTIMONIALS ════════ */}
       <section className="section bg-cream-100">
+        <div className="container-app">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-3">
+            <div>
+              <p className="eyebrow mb-4">What clients say</p>
+              <h2 className="heading-2 text-balance max-w-2xl">
+                Loved by homeowners <span className="accent-serif font-normal text-rust-500">and landlords alike.</span>
+              </h2>
+            </div>
+            <div className="flex items-center gap-3 bg-cream-50 border border-ink-900/10 rounded-md px-4 py-3">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-rust-500 fill-rust-500" />
+                ))}
+              </div>
+              <div className="text-sm">
+                <span className="font-black text-ink-900">4.9</span>
+                <span className="text-ink-500"> · 80+ reviews</span>
+              </div>
+            </div>
+          </div>
+          <p className="text-xs uppercase tracking-[0.18em] text-ink-400 mb-10 italic">
+            ⚠ Sample testimonials — replaced with verified reviews when published.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {testimonials.map((t) => (
+              <div key={t.name} className="card-cream flex flex-col">
+                <div className="flex gap-1 mb-5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-rust-500 fill-rust-500" />
+                  ))}
+                </div>
+                <p className="accent-serif text-base md:text-lg text-ink-900 leading-relaxed mb-6 flex-grow">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-ink-900/10">
+                  <div className="w-11 h-11 bg-rust-500 text-cream-50 rounded-full flex items-center justify-center font-black text-sm">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-ink-900">{t.name}</p>
+                    <p className="text-xs text-ink-500">{t.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ FOR PROPERTY INVESTORS ════════ */}
+      <section className="section bg-cream-50">
         <div className="container-app">
           <div className="card-forest">
             <div className="grid lg:grid-cols-[1.5fr_1fr] gap-10 items-start p-2 md:p-4">
@@ -442,11 +562,51 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ════════ THE MURSEN PROMISE ════════ */}
+      {/* ════════ MEET THE OWNER ════════ */}
       <section className="section bg-cream-100">
         <div className="container-narrow">
+          <div className="bg-cream-50 border border-ink-900/10 rounded-md overflow-hidden">
+            <div className="grid md:grid-cols-[1fr_1.4fr]">
+              {/* Owner photo placeholder */}
+              <div className="relative aspect-[4/5] md:aspect-auto bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900 flex items-center justify-center">
+                <User className="w-24 h-24 text-cream-50/15" strokeWidth={1.2} />
+                <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-50 bg-rust-500 px-2.5 py-1 rounded">
+                    Owner-Operated
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 text-[10px] uppercase tracking-[0.18em] text-cream-50/60 italic">
+                  ⚠ Photo placeholder — real photo coming
+                </div>
+              </div>
+              {/* Bio */}
+              <div className="p-6 md:p-10">
+                <p className="eyebrow mb-4">Meet the Owner</p>
+                <h3 className="heading-3 text-balance mb-5">
+                  We built Mursen on <span className="accent-serif font-normal text-rust-500">our own rental units.</span>
+                </h3>
+                <p className="text-ink-700 leading-relaxed mb-4">
+                  After managing 20+ units across Northern Kentucky, we got tired of calling five different vendors and watching small problems become $2,000 emergencies. We built the maintenance company we wished existed — one that shows up, communicates, and actually finishes the punch list.
+                </p>
+                <p className="text-ink-700 leading-relaxed mb-6">
+                  Today we run that same company for homeowners and landlords across the Cincinnati metro. Same phone. Same crew. Same standards we set for ourselves.
+                </p>
+                <div className="flex items-center gap-4 pt-5 border-t border-ink-900/10">
+                  <div className="text-sm">
+                    <p className="font-bold text-ink-900">— The Mursen team</p>
+                    <p className="accent-serif text-ink-500 text-xs">Covington, KY · Est. 2024</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ PROMISE + WALK-THROUGH ════════ */}
+      <section className="section bg-cream-50">
+        <div className="container-narrow">
           <div className="grid md:grid-cols-2 gap-4">
-            {/* 30-day risk-free */}
             <div className="card-cream">
               <p className="eyebrow-plain mb-4">— The Mursen Promise</p>
               <h2 className="text-3xl md:text-4xl font-black uppercase text-rust-500 mb-5 leading-[1.0] tracking-[-0.02em]">
@@ -463,7 +623,6 @@ export default function Homepage() {
               </div>
             </div>
 
-            {/* Walk-through CTA */}
             <div className="card-dark">
               <p className="eyebrow-light mb-4">Get Started</p>
               <h2 className="text-2xl md:text-3xl font-black uppercase text-cream-50 mb-4 leading-[1.05] tracking-[-0.02em]">
