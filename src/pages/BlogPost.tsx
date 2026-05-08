@@ -84,7 +84,7 @@ export default function BlogPost() {
         {/* Featured Image */}
         <div className="container-app mb-12">
           <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden shadow-card">
+            <div className="relative rounded-md overflow-hidden shadow-card">
               <img
                 src={post.image}
                 alt={post.title}
@@ -110,7 +110,7 @@ export default function BlogPost() {
                   prose-a:text-brand-600 prose-a:no-underline hover:prose-a:underline
                   prose-strong:text-surface-900
                   prose-code:bg-stone-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:text-stone-800
-                  prose-pre:bg-stone-900 prose-pre:text-stone-100 prose-pre:p-4 prose-pre:rounded-xl prose-pre:overflow-x-auto
+                  prose-pre:bg-stone-900 prose-pre:text-stone-100 prose-pre:p-4 prose-pre:rounded-md prose-pre:overflow-x-auto
                   prose-blockquote:border-l-4 prose-blockquote:border-brand-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-stone-600
                 "
                 dangerouslySetInnerHTML={{ __html: post.content }}
@@ -122,7 +122,7 @@ export default function BlogPost() {
         {/* Author & Share */}
         <section className="section">
           <div className="container-app">
-            <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 bg-white rounded-2xl p-6 border border-stone-100 shadow-soft">
+            <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 bg-white rounded-md p-6 border border-stone-100 shadow-soft">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center">
                   <span className="text-brand-700 font-bold text-lg">{post.author.charAt(0)}</span>
@@ -155,7 +155,7 @@ export default function BlogPost() {
               <h2 className="text-2xl font-bold text-surface-900 mb-8 tracking-tight">Related Articles</h2>
               <div className="grid md:grid-cols-3 gap-6">
                 {relatedPosts.map(rp => (
-                  <article key={rp.slug} className="bg-white rounded-xl border border-stone-100 overflow-hidden hover:shadow-md transition-shadow group">
+                  <article key={rp.slug} className="bg-white rounded-md border border-stone-100 overflow-hidden hover:shadow-md transition-shadow group">
                     <div className="h-32 overflow-hidden">
                       <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PLACEHOLDER_IMAGE; }} />
                     </div>

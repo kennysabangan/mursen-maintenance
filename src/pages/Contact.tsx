@@ -1,246 +1,247 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Phone, Mail, MapPin, Clock, Shield, Award, Building2, Star, MessageSquare, ArrowRight, User, MessageCircle, Check } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck, Award, Building2, Star, ArrowRight, User as UserIcon, MessageCircle, Check } from 'lucide-react';
 import { useState } from 'react';
+
+const PHONE_DISPLAY = '(859) MURSEN-1';
+const PHONE_HREF = 'tel:+18596877361';
+const EMAIL = 'hi@mursen.com';
+
+const values = [
+  { icon: ShieldCheck, title: 'Reliability', desc: 'We show up. On time. Every time. Non-negotiable.' },
+  { icon: Star, title: 'Transparency', desc: 'Clear pricing, photo evidence, no hidden fees. Ever.' },
+  { icon: Award, title: 'Quality', desc: 'We do it right the first time, or we fix it free.' },
+];
+
+const credentials = [
+  { icon: ShieldCheck, label: 'Fully Insured', sub: 'Commercial General Liability' },
+  { icon: Award, label: 'Bonded', sub: '$1M surety bond' },
+  { icon: Building2, label: 'Licensed', sub: 'KY Trade Licenses' },
+  { icon: Star, label: 'BBB Accredited', sub: 'A+ Rating' },
+];
 
 export default function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'Contact Us | Mursen Maintenance - Cincinnati & Northern KY';
-  const seoDescription = 'Get in touch with Mursen Maintenance. Call (859) 555-0123 or email hello@mursenmaintenance.com. Fully insured, bonded property care across Cincinnati metro: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods.';
+  const siteUrl = 'https://mursen.com';
+  const seoTitle = 'About Mursen | Built by landlords for the Cincinnati metro';
+  const seoDescription = 'Mursen Home Services started managing 20+ rental units of our own. Reach us at (859) MURSEN-1 or hi@mursen.com. Covington, KY · Cincinnati metro.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="Covington contact, property maintenance contact, rental maintenance Kentucky" />
         <link rel="canonical" href={`${siteUrl}/contact`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${siteUrl}/contact`} />
-        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
-        <meta property="og:site_name" content="Mursen Maintenance" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
       </Helmet>
-      <div className="min-h-screen bg-white">
-      {/* Header — light */}
-      <section className="py-20 md:py-24 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-surface-900 mb-4">About Us &amp; Contact</h1>
-          <p className="text-lg text-surface-500 max-w-xl mx-auto">
-            We built the maintenance solution we wish we had for our own rental properties.
+
+      {/* HERO */}
+      <section className="bg-cream-100 pt-20 md:pt-28 pb-16 md:pb-20">
+        <div className="container-app">
+          <div className="flex items-start justify-between mb-12">
+            <p className="eyebrow">About Us</p>
+            <span className="page-meta hidden md:inline">Mursen · Est. 2024</span>
+          </div>
+          <h1 className="heading-display mb-8 text-balance max-w-5xl">
+            BUILT BY
+            <br />
+            <span className="accent-serif font-normal text-rust-500">landlords.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed">
+            We started managing our own rental properties across Northern Kentucky and got tired of the maintenance nightmares — no-shows, inflated quotes, contractors who don't communicate. So we built the company we wished existed.
           </p>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-20 md:py-28 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-6">
-            <p className="text-lg text-stone-600 leading-relaxed">
-              We started managing our own rental properties across Northern Kentucky and got frustrated with the same maintenance nightmares you face — no-shows, inflated quotes, emergency repairs at 2 AM, and contractors who don't communicate.
-            </p>
-            <p className="text-lg text-stone-600 leading-relaxed">
-              So we built the solution we wish existed — a maintenance service that treats every property like a business operation. We developed the 75-point inspection system, the same-technician guarantee, and the vendor concierge network to make property maintenance predictable, professional, and hands-off.
-            </p>
-            <p className="text-lg text-stone-600 leading-relaxed">
-              We're local. We care about this community. Your property matters to us because we live here too — and because we've been in your shoes.
-            </p>
-          </div>
-
-          {/* Values */}
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            {[
-              { icon: Shield, title: 'Reliability', desc: 'We show up. On time. Every time. It is non-negotiable.', color: 'brand' },
-              { icon: Star, title: 'Transparency', desc: 'Clear pricing, photo evidence, no hidden fees. Ever.', color: 'orange' },
-              { icon: Award, title: 'Quality', desc: 'We do it right the first time, or we fix it free.', color: 'teal' },
-            ].map((value, i) => {
-              const Icon = value.icon;
-              return (
-                <div key={i} className="text-center">
-                  <div className={`w-14 h-14 bg-${value.color}-50 rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                    <Icon className={`w-7 h-7 text-${value.color}-600`} />
-                  </div>
-                  <h3 className="font-semibold text-lg text-stone-900 mb-2">{value.title}</h3>
-                  <p className="text-stone-500 text-sm leading-relaxed">{value.desc}</p>
+      {/* OWNER STORY */}
+      <section className="bg-cream-50 border-y border-ink-900/10 py-20 md:py-28">
+        <div className="container-narrow">
+          <div className="bg-cream-100 border border-ink-900/10 rounded-md overflow-hidden">
+            <div className="grid md:grid-cols-[1fr_1.4fr]">
+              <div className="relative aspect-[4/5] md:aspect-auto bg-gradient-to-br from-ink-700 via-ink-800 to-ink-900 flex items-center justify-center">
+                <UserIcon className="w-24 h-24 text-cream-50/15" strokeWidth={1.2} />
+                <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-50 bg-rust-500 px-2.5 py-1 rounded">Owner-Operated</span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Credentials */}
-      <section className="py-16 md:py-20 px-6 bg-stone-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-stone-900 mb-10">Fully Credentialed. Fully Committed.</h2>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            {[
-              { label: 'Fully Insured', sub: 'Commercial General Liability', icon: Shield, color: 'brand' },
-              { label: 'Bonded', sub: '$1M surety bond', icon: Award, color: 'teal' },
-              { label: 'Licensed', sub: 'KY Trade Licenses', icon: Building2, color: 'orange' },
-              { label: 'BBB Accredited', sub: 'A+ Rating', icon: Star, color: 'brand' },
-            ].map((badge, i) => {
-              const BadgeIcon = badge.icon;
-              return (
-                <div key={i} className="bg-white px-6 py-5 rounded-xl border border-stone-100 shadow-soft min-w-[160px] hover:shadow-card transition-shadow duration-300">
-                  <BadgeIcon className={`w-6 h-6 text-${badge.color}-600 mx-auto mb-3`} />
-                  <div className="text-sm font-semibold text-stone-900">{badge.label}</div>
-                  <div className="text-xs text-stone-500 mt-1">{badge.sub}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-20 md:py-28 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl font-bold text-stone-900 mb-3">Get In Touch</h2>
-            <p className="text-lg text-stone-500">We respond within 2 hours during business hours.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-14">
-            {/* Contact Info */}
-            <div className="space-y-10">
-              <div>
-                <h3 className="text-2xl font-bold text-stone-900 mb-8 tracking-tight">Contact Information</h3>
-                <div className="space-y-6">
-                  {[
-                    { icon: Phone, label: 'Phone', value: '(859) 555-0123', href: 'tel:+18595550123' },
-                    { icon: Mail, label: 'Email', value: 'hello@mursenmaintenance.com', href: 'mailto:hello@mursenmaintenance.com' },
-                    { icon: MapPin, label: 'Office', value: '123 Main Street, Covington, KY 41011' },
-                    { icon: Clock, label: 'Business Hours', value: 'Mon–Fri, 8am–6pm EST' },
-                  ].map((item, i) => {
-                    const ItemIcon = item.icon;
-                    return (
-                      <div key={i} className="flex items-start gap-4">
-                        <div className="w-10 h-10 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                          <ItemIcon className="w-5 h-5 text-brand-600" />
-                        </div>
-                        <div>
-                          <div className="font-semibold text-stone-700 text-sm">{item.label}</div>
-                          {item.href ? (
-                            <a href={item.href} className="text-brand-600 hover:text-brand-700 font-medium transition-colors">
-                              {item.value}
-                            </a>
-                          ) : (
-                            <div className="text-stone-600 text-sm">{item.value}</div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <div className="absolute bottom-4 left-4 right-4 text-[10px] uppercase tracking-[0.18em] text-cream-50/60 italic">⚠ Photo placeholder — real photo coming</div>
               </div>
-
-              {/* Quick Assessment CTA */}
-              <div className="bg-teal-50 rounded-xl p-6 border border-teal-100">
-                <div className="flex items-start gap-4">
-                  <MessageSquare className="w-6 h-6 text-teal-700 flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-stone-900 mb-1">Quick Assessment</h4>
-                    <p className="text-sm text-stone-600 mb-3">Tell us about your property and we'll get back to you with a custom plan.</p>
-                    <Link to="/assessment" className="inline-flex items-center gap-1 text-brand-600 hover:text-brand-700 font-semibold text-sm group">
-                      Schedule Free Assessment <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+              <div className="p-6 md:p-10">
+                <p className="eyebrow mb-4">Our Story</p>
+                <h3 className="heading-3 text-balance mb-5">
+                  Twenty units. <span className="accent-serif font-normal text-rust-500">Five vendors. Every weekend.</span>
+                </h3>
+                <div className="space-y-4 text-ink-700 leading-relaxed">
+                  <p>
+                    We started managing our own rental properties across Northern Kentucky and got frustrated with the same maintenance nightmares — no-shows, inflated quotes, emergency repairs at 2 AM, and contractors who don't communicate.
+                  </p>
+                  <p>
+                    So we built the solution we wished existed: a maintenance company that treats every property like a business operation. Same crew, same standards, photo report after every visit. We made the bet that landlords aren't the only ones who want this — homeowners do too.
+                  </p>
+                  <p>
+                    Today we run that company across the Cincinnati metro. Same phone we use for our own units. Same standards. Same answer to "can you handle this": yes.
+                  </p>
+                </div>
+                <div className="pt-5 mt-6 border-t border-ink-900/10">
+                  <p className="accent-serif text-ink-500">— The Mursen team · Covington, KY</p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Contact Form */}
+      {/* VALUES */}
+      <section className="section bg-cream-100">
+        <div className="container-app">
+          <p className="eyebrow mb-4">What we believe</p>
+          <h2 className="heading-2 text-balance mb-12 max-w-3xl">
+            Three values. <span className="accent-serif font-normal text-rust-500">Every visit.</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {values.map((v) => {
+              const Icon = v.icon;
+              return (
+                <div key={v.title} className="card-cream">
+                  <Icon className="w-8 h-8 text-rust-500 mb-5" strokeWidth={1.6} />
+                  <h3 className="text-xl font-black uppercase tracking-[-0.02em] mb-3">{v.title}</h3>
+                  <p className="text-ink-700 leading-relaxed text-sm">{v.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CREDENTIALS */}
+      <section className="bg-cream-50 border-y border-ink-900/10 py-14 md:py-16">
+        <div className="container-app">
+          <p className="eyebrow mb-4 text-center justify-center">Fully Credentialed</p>
+          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-[-0.02em] mb-10 text-center">
+            Insured. Bonded. <span className="accent-serif font-normal text-rust-500">Locked in.</span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {credentials.map((c) => {
+              const Icon = c.icon;
+              return (
+                <div key={c.label} className="bg-cream-100 border border-ink-900/10 rounded-md p-5 text-center">
+                  <Icon className="w-6 h-6 text-rust-500 mx-auto mb-3" strokeWidth={1.6} />
+                  <div className="font-black uppercase text-sm tracking-[-0.01em] text-ink-900">{c.label}</div>
+                  <div className="text-xs text-ink-500 mt-1">{c.sub}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT INFO + FORM */}
+      <section className="section bg-cream-100">
+        <div className="container-app">
+          <p className="eyebrow mb-4">Get in touch</p>
+          <h2 className="heading-2 text-balance mb-12 max-w-3xl">
+            Real number. <span className="accent-serif font-normal text-rust-500">Real people. Same day.</span>
+          </h2>
+
+          <div className="grid lg:grid-cols-2 gap-10">
+            {/* Info */}
             <div>
-              <h3 className="text-2xl font-bold text-stone-900 mb-8 tracking-tight">Send a Message</h3>
+              <div className="card-cream mb-5">
+                <h3 className="font-black uppercase text-sm tracking-[0.06em] mb-5">Direct Lines</h3>
+                <ul className="space-y-4">
+                  {[
+                    { icon: Phone, label: 'Call/Text', value: PHONE_DISPLAY, href: PHONE_HREF },
+                    { icon: Mail, label: 'Email', value: EMAIL, href: `mailto:${EMAIL}` },
+                    { icon: MapPin, label: 'Office', value: 'Covington, KY 41011' },
+                    { icon: Clock, label: 'Hours', value: 'Mon–Fri 8am–6pm · Sat 9am–2pm' },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.label} className="flex items-start gap-4 pb-4 border-b border-ink-900/8 last:border-0 last:pb-0">
+                        <div className="w-10 h-10 bg-rust-500/10 rounded-md flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-4 h-4 text-rust-500" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-ink-400">{item.label}</div>
+                          {item.href ? (
+                            <a href={item.href} className="font-bold text-ink-900 hover:text-rust-500 transition-colors">{item.value}</a>
+                          ) : (
+                            <div className="font-bold text-ink-900">{item.value}</div>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <div className="card-dark">
+                <p className="eyebrow-light mb-3">Quick Path</p>
+                <h4 className="text-xl font-black uppercase tracking-[-0.02em] text-cream-50 mb-3">Skip the form.</h4>
+                <p className="text-cream-100/80 text-sm mb-5 leading-relaxed">
+                  Already know what you need? Book a free 15-minute walk-through and we'll quote you on the spot.
+                </p>
+                <Link to="/assessment" className="inline-flex items-center gap-2 bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-xs uppercase tracking-[0.10em] py-3 px-5 rounded-md transition-colors">
+                  Book Walk-Through <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="card-cream">
+              <p className="eyebrow mb-3">Send a message</p>
+              <h3 className="text-2xl font-black uppercase tracking-[-0.02em] mb-6">Tell us about your home.</h3>
               {formSubmitted ? (
-                <div className="bg-brand-50 border border-brand-100 rounded-xl p-10 text-center">
-                  <Check className="w-12 h-12 text-brand-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-brand-800 mb-2 tracking-tight">Message Sent!</h3>
-                  <p className="text-stone-600 mb-6">We'll get back to you within 2 hours.</p>
-                  <button onClick={() => setFormSubmitted(false)} className="text-brand-600 hover:text-brand-700 font-semibold">
-                    Send Another Message
+                <div className="bg-cream-100 border border-rust-500/30 rounded-md p-8 text-center">
+                  <Check className="w-10 h-10 text-rust-500 mx-auto mb-3" />
+                  <h4 className="text-xl font-black uppercase tracking-[-0.02em] text-ink-900 mb-2">Message sent.</h4>
+                  <p className="text-ink-500 text-sm mb-5">We respond within 2 hours during business hours.</p>
+                  <button onClick={() => setFormSubmitted(false)} className="text-sm font-bold text-rust-500 hover:text-rust-700">
+                    Send another message
                   </button>
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setFormSubmitted(true);
-                  }}
-                  className="space-y-5"
+                  onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }}
+                  className="space-y-4"
                 >
                   <div>
-                    <label htmlFor="contactName" className="block text-sm font-semibold text-stone-700 mb-2">
-                      Your Name <span className="text-red-500">*</span>
-                    </label>
+                    <label htmlFor="name" className="block text-[10px] font-bold uppercase tracking-[0.18em] text-ink-700 mb-2">Your Name</label>
                     <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 pointer-events-none" />
-                      <input
-                        type="text"
-                        id="contactName"
-                        name="contactName"
-                        required
-                        placeholder="John Smith"
-                        className="input-field-icon"
-                      />
+                      <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400 pointer-events-none" />
+                      <input id="name" type="text" required placeholder="John Smith" className="input-field-icon" />
                     </div>
                   </div>
-
                   <div>
-                    <label htmlFor="contactEmail" className="block text-sm font-semibold text-stone-700 mb-2">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
+                    <label htmlFor="email" className="block text-[10px] font-bold uppercase tracking-[0.18em] text-ink-700 mb-2">Email</label>
                     <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 pointer-events-none" />
-                      <input
-                        type="email"
-                        id="contactEmail"
-                        name="contactEmail"
-                        required
-                        placeholder="john@example.com"
-                        className="input-field-icon"
-                      />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400 pointer-events-none" />
+                      <input id="email" type="email" required placeholder="john@example.com" className="input-field-icon" />
                     </div>
                   </div>
-
                   <div>
-                    <label htmlFor="contactMessage" className="block text-sm font-semibold text-stone-700 mb-2">
-                      How can we help? <span className="text-red-500">*</span>
-                    </label>
+                    <label htmlFor="message" className="block text-[10px] font-bold uppercase tracking-[0.18em] text-ink-700 mb-2">How can we help?</label>
                     <div className="relative">
-                      <MessageCircle className="absolute left-4 top-4 w-5 h-5 text-stone-400 pointer-events-none" />
+                      <MessageCircle className="absolute left-4 top-4 w-4 h-4 text-ink-400 pointer-events-none" />
                       <textarea
-                        id="contactMessage"
-                        name="contactMessage"
-                        required
+                        id="message"
                         rows={5}
+                        required
                         placeholder="Tell us about your property maintenance needs..."
-                        className="w-full pl-12 pr-4 py-3.5 border border-stone-200 rounded-xl bg-white text-stone-800 placeholder:text-stone-400 focus:ring-2 focus:ring-brand-500/30 focus:border-brand-500 focus:outline-none transition-all duration-200 shadow-soft resize-none"
+                        className="w-full pl-12 pr-4 py-3.5 border border-ink-200 rounded-md bg-cream-50 text-ink-900 placeholder:text-ink-400 focus:ring-2 focus:ring-rust-500/20 focus:border-rust-500 focus:outline-none transition-all duration-150 resize-none"
                       />
                     </div>
                   </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-300 cursor-pointer hover:shadow-glow-brand focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2"
-                  >
-                    Send Message
+                  <button type="submit" className="btn-primary w-full">
+                    Send Message <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-xs text-stone-400 text-center">We typically respond within 2 hours during business hours (Mon-Fri, 8am-6pm EST).</p>
+                  <p className="text-xs text-ink-400 text-center">We respond within 2 hours · Mon–Fri 8am–6pm EST</p>
                 </form>
               )}
             </div>
           </div>
         </div>
       </section>
-    </div>
     </>
   );
 }
