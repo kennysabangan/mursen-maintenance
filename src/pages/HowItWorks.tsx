@@ -1,89 +1,63 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Check, Search, Shield, Calendar, Hammer, Phone, Award, Users } from 'lucide-react';
+import { ArrowRight, Phone, Star, ShieldCheck, Users, Award } from 'lucide-react';
 
-const plans = [
-  {
-    name: 'Lawn Plus',
-    price: 109,
-    note: '/mo (Apr–Oct) · $59/mo (Nov–Mar)',
-    description: 'Hands-off lawn care, year-round.',
-    features: ['Weekly mow + edge + blow', 'Seasonal cleanups included', 'Gutter check each visit'],
-  },
-  {
-    name: 'Handyman Plus',
-    price: 149,
-    note: '/mo',
-    description: 'Monthly fix-it visits.',
-    features: ['1 visit/month (2 hrs)', '5-day scheduling window', 'Same technician every visit'],
-  },
-  {
-    name: 'Starter',
-    price: 199,
-    note: '/mo',
-    description: 'Lawn + handyman essentials.',
-    features: ['1 handyman visit/mo (2 hrs)', 'Biweekly lawn mowing', 'Same technician every visit', 'Monthly property summary'],
-  },
-  {
-    name: 'Home Care',
-    price: 479,
-    note: '/mo',
-    description: 'The complete bundle.',
-    popular: true,
-    features: ['1 visit (4 hrs handyman)', 'Weekly lawn + edging', 'Monthly window cleaning', 'Annual power wash', 'Priority 48hr SLA', '24/7 hotline for urgent issues'],
-  },
-  {
-    name: 'Property Manager',
-    price: 279,
-    note: '/unit/mo',
-    description: 'Built for landlords.',
-    features: ['Rental-unit optimized', 'Priority scheduling', 'Tenant turnover support', '3+ units: $249 · 5+: $229'],
-  },
-];
+const PHONE_DISPLAY = '(859) MURSEN-1';
+const PHONE_HREF = 'tel:+18596877361';
+const EMAIL = 'hi@mursen.com';
 
 const steps = [
   {
-    number: '01',
-    icon: Search,
-    title: 'Tell Us About Your Home',
-    description: 'Submit a quick form online or call us directly. We learn your property type, priorities, and your schedule.',
-    details: [
-      'Free 75-point assessment',
-      'No high-pressure sales',
-      'Same-day or next-day availability',
-      'Talk to a real local owner',
-    ],
+    num: '01',
+    title: 'Pick the plan',
+    description: 'Choose à la carte for a one-time job or a monthly bundle for the whole property. Five plans, zero contracts.',
+    bullets: ['Free 15-min walk-through', 'Flat-rate quote on the spot', 'No high-pressure pitch'],
   },
   {
-    number: '02',
-    icon: Calendar,
-    title: 'Get Your Custom Plan',
-    description: 'Within 24 hours we send a flat-rate plan tailored to your home with photos, scope, and timing.',
-    details: [
-      'Detailed photo assessment',
-      'Flat-rate, no surprise pricing',
-      'Pick à la carte or subscribe',
-      'Lock in your start date',
-    ],
+    num: '02',
+    title: 'We show up',
+    description: 'Same crew every visit. Photo report after every job. Issues flagged before they become emergencies.',
+    bullets: ['Same tech every visit', 'Photo report after each service', 'Insured & bonded team'],
   },
   {
-    number: '03',
-    icon: Hammer,
-    title: 'We Handle the Rest',
-    description: 'Same crew every visit. Photo report after every service. Issues flagged before they become emergencies.',
-    details: [
-      'Same friendly tech each time',
-      'Photo documentation included',
-      'Cancel any time, no contracts',
-      '30-day money-back promise',
-    ],
+    num: '03',
+    title: 'Live better',
+    description: 'Your weekends back. Your honey-do list handled. Cancel any month — we earn your business each cycle.',
+    bullets: ['30-day risk-free guarantee', 'Cancel any month, no fees', 'Subscriber rate $75/hr extras'],
   },
 ];
 
+const plans = [
+  { name: 'Starter', price: '199', note: 'Per Month', features: ['1 monthly handyman visit · up to 2 hours', 'Bi-weekly lawn mowing + edging (Apr–Oct)', 'Fall + spring cleanup, gutter check'], bestFor: 'Best for: small homes, light upkeep needs.', variant: 'cream' },
+  { name: 'Lawn Plus', price: '129', note: 'Per Month · Apr–Oct', features: ['Weekly mow + edge + blow (Apr–Oct)', '$69/mo Nov–Mar · seasonal cleanups', 'Up to ½ acre · larger lots +$40/mo'], bestFor: 'Best for: lawn handled, you do the rest.', variant: 'cream' },
+  { name: 'Handyman Plus', price: '149', note: 'Per Month', features: ['1 monthly visit · up to 2 hours', '5 business day scheduling window', 'Overage at $75/hr · no contract'], bestFor: 'Best for: a regular fix-it guy on call.', variant: 'cream' },
+  { name: 'Home Care', price: '479', note: 'Per Month', features: ['4 hours handyman every month', 'Weekly lawn (Apr–Oct) + monthly windows', 'Annual power wash + 3 seasonal cleanups'], bestFor: 'Best for: homeowners who want it all done.', variant: 'dark', badge: 'Most Popular' },
+];
+
+const propertyManagerPlan = {
+  name: 'Property Manager',
+  price: '279',
+  note: 'Per Unit / Month',
+  description: 'Built specifically for landlords with multiple units.',
+  features: ['Lawn maintenance + basic exterior upkeep', 'Tenant turnover punch-list included', '24-hour priority response window', 'Volume: 3+ $249 · 5+ $229 per unit'],
+};
+
+const testimonials = [
+  { quote: "They caught a slow leak before it flooded the floor. Saved us thousands.", name: 'Sarah M.', location: 'Covington, KY', initials: 'SM' },
+  { quote: "I used to call four people for my rentals. Now I call one.", name: 'David R.', location: 'Florence, KY', initials: 'DR' },
+  { quote: "Three neighbors asked who power-washed our driveway. Mursen.", name: 'Jennifer K.', location: 'Fort Mitchell, KY', initials: 'JK' },
+];
+
+const promiseCards = [
+  { icon: Award, title: '30-Day Risk-Free', body: 'If we miss a visit, we credit it. If we damage something, we fix it. If you\'re not happy in 30 days, we refund the first month — no questions.' },
+  { icon: Users, title: 'Same Tech Every Visit', body: 'You\'ll see the same friendly face on your property. They learn your home, your priorities, your schedule.' },
+  { icon: ShieldCheck, title: 'Insured & Bonded', body: 'Commercial GL coverage, workers\' comp, and a $1M surety bond. Proof on request, every time.' },
+];
+
 export default function HowItWorks() {
-  const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'How It Works | Mursen Maintenance';
-  const seoDescription = '3 steps: Tell us about your home, get a custom plan, we handle the rest. Lawn, windows, power wash, handyman in Covington KY.';
+  const siteUrl = 'https://mursen.com';
+  const seoTitle = 'How It Works | Mursen — Five Plans. Zero Headaches.';
+  const seoDescription = 'Three simple steps: pick a plan, we show up, you live better. Five subscription plans for homeowners and landlords across Covington KY and Cincinnati metro.';
 
   return (
     <>
@@ -93,144 +67,198 @@ export default function HowItWorks() {
         <link rel="canonical" href={`${siteUrl}/how-it-works`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`${siteUrl}/how-it-works`} />
-        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
-        <meta property="og:site_name" content="Mursen Maintenance" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      {/* Hero */}
-      <section className="relative bg-surface-900 overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-600 blur-3xl" />
-          <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-accent-500 blur-3xl opacity-50" />
-        </div>
-        <div className="relative container-app py-20 md:py-28">
-          <div className="max-w-3xl">
-            <p className="eyebrow-light mb-4">How It Works</p>
-            <h1 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-5 text-balance">
-              From quote to clean<br />in <span className="text-primary-400">three simple steps.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-stone-300 leading-relaxed max-w-2xl mb-8">
-              No contracts, no high-pressure sales calls, no mystery pricing. Just a clear path from "I need help" to "everything is handled."
-            </p>
+      {/* HERO */}
+      <section className="bg-cream-100 pt-20 md:pt-28 pb-16 md:pb-20">
+        <div className="container-app">
+          <div className="flex items-start justify-between mb-12">
+            <p className="eyebrow">Pick the plan that fits</p>
+            <span className="page-meta hidden md:inline">How It Works · 03/04</span>
+          </div>
+
+          <h1 className="heading-display mb-8 text-balance max-w-5xl">
+            FIVE PLANS.
+            <br />
+            <span className="accent-serif font-normal text-rust-500">Zero headaches.</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed mb-10">
+            Whether you want the full bundle or just lawn handled, we've got a fit. Every plan is month-to-month with a 30-day cancellation policy. No long-term contracts. Ever.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/assessment" className="btn-primary-lg">
-              Start Your Free Quote <ArrowRight className="w-5 h-5" />
+              Book Free Walk-Through <ArrowRight className="w-4 h-4" />
             </Link>
+            <a href={PHONE_HREF} className="btn-outline">
+              <Phone className="w-4 h-4" />
+              {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Steps */}
-      <section className="section bg-white">
+      {/* 3 STEPS */}
+      <section className="bg-cream-50 border-y border-ink-900/10 py-20 md:py-24">
         <div className="container-app">
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
-            <div className="hidden md:block absolute top-12 left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent" />
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.number} className="bg-white rounded-3xl p-7 border border-stone-200/70 shadow-soft hover:shadow-card-hover transition-all duration-300">
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="step-number">{step.number}</div>
-                    <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary-700" />
-                    </div>
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-surface-900 mb-3">{step.title}</h3>
-                  <p className="text-surface-600 leading-relaxed mb-5">{step.description}</p>
-                  <ul className="space-y-2.5">
-                    {step.details.map((d) => (
-                      <li key={d} className="flex items-start gap-2.5 text-sm text-surface-700">
-                        <Check className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+          <p className="eyebrow mb-4">Three Steps</p>
+          <h2 className="heading-2 text-balance mb-12 max-w-3xl">
+            From quote to clean. <span className="accent-serif font-normal text-rust-500">In a week.</span>
+          </h2>
 
-      {/* Pricing Plans */}
-      <section className="section-alt">
-        <div className="container-app">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="eyebrow mb-4 justify-center">Membership Plans</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">Choose your plan.</h2>
-            <p className="lead mx-auto">All plans are month-to-month. No contracts, no cancellation fees.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col ${
-                  plan.popular
-                    ? 'bg-gradient-to-br from-primary-700 to-surface-900 text-white border border-primary-500/30 shadow-glow-brand lg:scale-105 lg:-my-2'
-                    : 'bg-white border border-stone-200/70 shadow-soft hover:shadow-card-hover hover:-translate-y-1'
-                }`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-500 text-surface-900 text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap uppercase tracking-wider shadow-glow-accent">
-                    Most Popular
-                  </div>
-                )}
-
-                <h3 className={`font-display text-base font-bold mb-1 ${plan.popular ? 'text-white' : 'text-surface-900'}`}>{plan.name}</h3>
-                <p className={`text-xs mb-4 ${plan.popular ? 'text-primary-200' : 'text-surface-500'}`}>{plan.description}</p>
-
-                <div className="mb-5">
-                  <span className={`font-display text-3xl font-extrabold tracking-tight ${plan.popular ? 'text-white' : 'text-surface-900'}`}>
-                    ${plan.price}
-                  </span>
-                  <span className={`text-xs ml-1 ${plan.popular ? 'text-primary-200' : 'text-surface-400'}`}>{plan.note}</span>
+          <div className="grid md:grid-cols-3 gap-4">
+            {steps.map((step, i) => (
+              <div key={step.num} className="relative bg-cream-100 border border-ink-900/10 rounded-md p-7 flex flex-col">
+                {/* Visual block (gradient placeholder) */}
+                <div className={`relative aspect-[16/9] rounded-md mb-6 overflow-hidden ${
+                  i === 0 ? 'bg-gradient-to-br from-rust-400 to-rust-700' :
+                  i === 1 ? 'bg-gradient-to-br from-ink-700 to-ink-900' :
+                  'bg-gradient-to-br from-forest-600 to-forest-800'
+                } flex items-center justify-center`}>
+                  <span className="text-cream-50/15 font-black text-7xl tracking-[-0.04em]">{step.num}</span>
+                  <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-[0.18em] text-cream-50 bg-ink-900/40 backdrop-blur px-2.5 py-1 rounded">Step {step.num}</span>
                 </div>
 
-                <ul className="space-y-2 mb-6 flex-grow">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-start gap-2">
-                      <Check className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-primary-300' : 'text-primary-600'}`} strokeWidth={3} />
-                      <span className={`text-xs ${plan.popular ? 'text-stone-200' : 'text-surface-700'}`}>{f}</span>
+                <h3 className="text-2xl font-black uppercase tracking-[-0.02em] mb-3">{step.title}</h3>
+                <p className="text-ink-700 leading-relaxed mb-5">{step.description}</p>
+                <ul className="space-y-2 mt-auto">
+                  {step.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2 text-sm text-ink-700">
+                      <span className="text-rust-500 font-black flex-shrink-0">›</span>
+                      <span>{b}</span>
                     </li>
                   ))}
                 </ul>
-
-                <Link
-                  to="/assessment"
-                  className={`block w-full text-center py-3 rounded-full font-semibold text-sm transition-all duration-200 min-h-[44px] ${
-                    plan.popular
-                      ? 'bg-accent-500 hover:bg-accent-400 text-surface-900'
-                      : 'bg-surface-900 hover:bg-primary-700 text-white'
-                  }`}
-                >
-                  Get Started
-                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Promise band */}
-      <section className="section bg-white">
+      {/* 5 PLANS */}
+      <section className="section bg-cream-100">
         <div className="container-app">
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              { icon: Award, title: '30-Day Money Back', desc: 'Not happy in 30 days? Full refund. No questions asked.' },
-              { icon: Users, title: 'Same Tech Every Visit', desc: 'Build a relationship. They learn your home over time.' },
-              { icon: Shield, title: 'Insured & Bonded', desc: '$1M surety bond. Commercial GL coverage. Workers\' comp.' },
-            ].map(b => {
-              const Icon = b.icon;
+          <p className="eyebrow mb-4">All Plans · Side by side</p>
+          <h2 className="heading-2 text-balance mb-12 max-w-3xl">
+            Choose your <span className="accent-serif font-normal text-rust-500">starting point.</span>
+          </h2>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-4">
+            {plans.map((plan) => {
+              const isDark = plan.variant === 'dark';
+              const cardClass = isDark ? 'plan-card-dark' : 'plan-card';
               return (
-                <div key={b.title} className="feature-card">
-                  <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6 text-primary-700" />
+                <div key={plan.name} className={cardClass}>
+                  {plan.badge && (
+                    <div className="absolute -top-3 right-6 bg-rust-500 text-cream-50 text-[10px] font-bold uppercase tracking-[0.16em] px-3 py-1 rounded">{plan.badge}</div>
+                  )}
+                  <div className="flex items-start justify-between mb-6">
+                    <h3 className={`text-xl font-black uppercase tracking-[-0.01em] ${isDark ? 'text-cream-50' : 'text-ink-900'}`}>{plan.name}</h3>
+                    <div className="text-right">
+                      <div className={`text-4xl font-black tracking-[-0.03em] leading-none ${isDark ? 'text-cream-50' : 'text-ink-900'}`}>${plan.price}</div>
+                      <div className={`text-[10px] font-bold uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-cream-100/60' : 'text-ink-400'}`}>{plan.note}</div>
+                    </div>
                   </div>
-                  <h3 className="font-display text-lg font-bold text-surface-900 mb-2">{b.title}</h3>
-                  <p className="text-sm text-surface-600 leading-relaxed">{b.desc}</p>
+                  <ul className="space-y-2 mb-5">
+                    {plan.features.map((f) => (
+                      <li key={f} className={`flex items-start gap-2 text-sm ${isDark ? 'text-cream-100/90' : 'text-ink-700'}`}>
+                        <span className="text-rust-400 font-black flex-shrink-0">›</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={`pt-4 border-t mb-5 ${isDark ? 'border-cream-100/15' : 'border-ink-900/10'}`}>
+                    <p className={`accent-serif text-sm ${isDark ? 'text-cream-100/70' : 'text-ink-500'}`}>{plan.bestFor}</p>
+                  </div>
+                  <Link to="/assessment" className={`flex items-center justify-center gap-2 w-full font-bold text-xs uppercase tracking-[0.10em] py-3 px-5 rounded-md transition-colors ${
+                    isDark ? 'bg-rust-500 hover:bg-rust-600 text-cream-50' : 'bg-ink-900 hover:bg-ink-800 text-cream-50'
+                  }`}>
+                    Get Started <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="plan-card-forest">
+            <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 items-start">
+              <div>
+                <h3 className="text-xl font-black uppercase tracking-[-0.01em] text-cream-50 mb-1">{propertyManagerPlan.name}</h3>
+                <p className="accent-serif text-cream-100/80 mb-5">{propertyManagerPlan.description}</p>
+                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                  {propertyManagerPlan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-cream-100/90">
+                      <span className="text-rust-300 font-black flex-shrink-0">›</span>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="text-right md:border-l md:border-cream-100/15 md:pl-8">
+                <div className="text-5xl font-black tracking-[-0.03em] text-cream-50 leading-none">${propertyManagerPlan.price}</div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-100/70 mt-2 mb-5">{propertyManagerPlan.note}</div>
+                <Link to="/assessment" className="inline-flex items-center gap-2 bg-cream-50 hover:bg-cream-100 text-forest-700 font-bold text-xs uppercase tracking-[0.10em] py-3 px-5 rounded-md transition-colors">
+                  Talk to Us <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS LINE */}
+      <section className="bg-cream-50 border-y border-ink-900/10 py-14 md:py-20">
+        <div className="container-app">
+          <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
+            <p className="eyebrow">What subscribers say</p>
+            <div className="flex items-center gap-2 text-sm text-ink-500">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-rust-500 fill-rust-500" />
+                ))}
+              </div>
+              <span><span className="font-black text-ink-900">4.9</span> · 80+ reviews</span>
+            </div>
+          </div>
+          <p className="text-xs uppercase tracking-[0.18em] text-ink-400 mb-8 italic">⚠ Sample testimonials — replaced with verified reviews when published.</p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {testimonials.map((t) => (
+              <div key={t.name} className="bg-cream-100 border border-ink-900/10 rounded-md p-6 flex flex-col">
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 text-rust-500 fill-rust-500" />
+                  ))}
+                </div>
+                <p className="accent-serif text-base text-ink-900 leading-relaxed mb-5 flex-grow">"{t.quote}"</p>
+                <div className="flex items-center gap-2.5 pt-3 border-t border-ink-900/10">
+                  <div className="w-9 h-9 bg-rust-500 text-cream-50 rounded-full flex items-center justify-center font-black text-xs">{t.initials}</div>
+                  <div>
+                    <p className="text-sm font-bold text-ink-900">{t.name}</p>
+                    <p className="text-xs text-ink-500">{t.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PROMISE BAND */}
+      <section className="section bg-cream-100">
+        <div className="container-app">
+          <p className="eyebrow mb-4">The Mursen Promise</p>
+          <h2 className="heading-2 text-balance mb-12 max-w-3xl">
+            Three guarantees. <span className="accent-serif font-normal text-rust-500">Zero asterisks.</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {promiseCards.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div key={p.title} className="card-cream">
+                  <Icon className="w-8 h-8 text-rust-500 mb-5" strokeWidth={1.6} />
+                  <h3 className="text-xl font-black uppercase tracking-[-0.02em] mb-3">{p.title}</h3>
+                  <p className="text-ink-700 leading-relaxed text-sm">{p.body}</p>
                 </div>
               );
             })}
@@ -238,27 +266,25 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="bg-surface-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary-600 blur-3xl" />
-        </div>
-        <div className="relative container-app py-20 md:py-28 text-center max-w-3xl mx-auto">
-          <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight mb-5 text-balance">
+      {/* FINAL CTA */}
+      <section className="bg-ink-900 text-cream-50">
+        <div className="container-narrow py-20 md:py-28 text-center">
+          <p className="eyebrow-light mb-4 justify-center">Get Started</p>
+          <h2 className="heading-1 text-balance mb-6">
             Ready when you are.
+            <br />
+            <span className="accent-serif font-normal text-rust-300">15 minutes to a quote.</span>
           </h2>
-          <p className="text-lg text-stone-300 mb-10">
-            Start with a free assessment or call us for à la carte work today.
-          </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/assessment" className="btn-primary-lg">
-              Get Free Quote <ArrowRight className="w-5 h-5" />
+              Book Free Walk-Through <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="tel:+18595550123" className="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 backdrop-blur border border-white/20 text-white font-semibold text-lg px-9 py-4 rounded-full transition-all duration-200 min-h-[56px]">
-              <Phone className="w-5 h-5" />
-              (859) 555-0123
+            <a href={PHONE_HREF} className="btn-outline-light">
+              <Phone className="w-4 h-4" />
+              {PHONE_DISPLAY}
             </a>
           </div>
+          <p className="text-cream-100/60 text-sm mt-8">{EMAIL} · mursen.com/start</p>
         </div>
       </section>
     </>

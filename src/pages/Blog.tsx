@@ -25,40 +25,43 @@ export default function Blog() {
   return (
     <>
       <Helmet>
-        <title>Property Maintenance Blog | Mursen Maintenance</title>
-        <meta name="description" content="Expert insights on property maintenance, rental tips, and home care from Mursen Maintenance." />
-        <link rel="canonical" href={`https://mursenmaintenance.com/blog`} />
+        <title>Resources | Mursen — Property maintenance insights for Cincinnati metro</title>
+        <meta name="description" content="Expert insights on property maintenance, rental tips, and home care from the Mursen team. Covington KY · Cincinnati metro." />
+        <link rel="canonical" href={`https://mursen.com/blog`} />
       </Helmet>
 
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-cream-100">
         {/* Hero */}
-        <section className="section bg-white border-b border-stone-100">
+        <section className="bg-cream-100 pt-20 md:pt-28 pb-16 md:pb-20 border-b border-ink-900/10">
           <div className="container-app">
-            <nav className="text-sm text-stone-500 mb-6 flex items-center gap-2">
-              <Link to="/" className="hover:text-brand-600 transition-colors">Home</Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-stone-900 font-medium">Blog</span>
+            <nav className="text-xs uppercase tracking-[0.18em] text-ink-400 mb-6 flex items-center gap-2">
+              <Link to="/" className="hover:text-rust-500 transition-colors">Home</Link>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-ink-700 font-bold">Resources</span>
             </nav>
-            <div className="max-w-3xl">
-              <h1 className="text-h2 text-surface-900 mb-4 tracking-tight">Insights & Tips</h1>
-              <p className="text-lg text-surface-500 leading-relaxed">
-                Expert advice on property maintenance, rental management, and keeping your home in peak condition.
-              </p>
-            </div>
+            <p className="eyebrow mb-4">From the field</p>
+            <h1 className="heading-display mb-6 text-balance">
+              INSIGHTS
+              <br />
+              <span className="accent-serif font-normal text-rust-500">& tips.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed">
+              Expert advice on property maintenance, rental management, and keeping your home in peak condition.
+            </p>
           </div>
         </section>
 
         {/* Category Filter */}
-        <section className="section-alt">
+        <section className="bg-cream-50 py-16 md:py-20">
           <div className="container-app">
             <div className="flex flex-wrap gap-3 justify-center mb-12">
               {categories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer ${
                     activeCategory === cat
-                      ? 'bg-brand-600 text-white shadow-glow-brand'
+                      ? 'bg-brand-600 text-white shadow-soft'
                       : 'bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600'
                   }`}
                 >
@@ -69,7 +72,7 @@ export default function Blog() {
 
             {/* Featured Post */}
             {featuredPost && activeCategory === 'All' && (
-              <article className="mb-16 bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-card hover:shadow-card-hover transition-all duration-300 group">
+              <article className="mb-16 bg-white rounded-md overflow-hidden border border-stone-100 shadow-card hover:shadow-card-hover transition-all duration-300 group">
                 <div className="grid md:grid-cols-2">
                   <div className="h-64 md:h-auto relative overflow-hidden">
                     <img
@@ -122,7 +125,7 @@ export default function Blog() {
                 {gridPosts.map(post => (
                   <article
                     key={post.slug}
-                    className="bg-white rounded-2xl border border-stone-100 shadow-soft overflow-hidden hover:shadow-card hover:-translate-y-1 transition-all duration-300 group flex flex-col"
+                    className="bg-white rounded-md border border-stone-100 shadow-soft overflow-hidden hover:shadow-card hover:-translate-y-1 transition-all duration-300 group flex flex-col"
                   >
                     <div className="h-48 relative overflow-hidden">
                       <img
@@ -168,19 +171,22 @@ export default function Blog() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="section bg-gray-50">
-          <div className="container-app text-center max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-surface-900 mb-4 tracking-tight">Stay Informed</h2>
-            <p className="text-surface-500 mb-8">
-              Get the latest property maintenance tips and Mursen updates delivered to your inbox.
+        <section className="bg-ink-900 text-cream-50">
+          <div className="container-narrow py-20 md:py-24 text-center">
+            <p className="eyebrow-light mb-4 justify-center">Stay In The Loop</p>
+            <h2 className="heading-2 text-balance mb-4">
+              Tips from the field. <span className="accent-serif font-normal text-rust-300">Once a month.</span>
+            </h2>
+            <p className="text-cream-100/80 mb-8 max-w-md mx-auto">
+              Practical maintenance tips for homeowners and landlords across Cincinnati metro. No spam.
             </p>
             <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={e => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-xl bg-white border border-surface-200 text-surface-900 placeholder:text-surface-400 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                className="flex-1 px-4 py-3.5 rounded-md bg-cream-50 border border-cream-50 text-ink-900 placeholder:text-ink-400 focus:ring-2 focus:ring-rust-500 focus:outline-none"
               />
-              <button type="submit" className="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors whitespace-nowrap min-h-[44px]">
+              <button type="submit" className="bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-xs uppercase tracking-[0.10em] px-6 py-3.5 rounded-md transition-colors whitespace-nowrap min-h-[48px]">
                 Subscribe
               </button>
             </form>
