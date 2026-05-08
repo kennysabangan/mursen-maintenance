@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
 
   html {
     scroll-behavior: smooth;
@@ -17,21 +15,23 @@
 
   body {
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    color: #0f172a;
-    background: #ffffff;
-    line-height: 1.6;
+    color: #0f0f0f;
+    background: #f4ede0;
+    line-height: 1.55;
     font-size: 16px;
+    font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.025em;
     color: inherit;
+    font-weight: 800;
   }
 
   ::selection {
-    background-color: rgba(5, 150, 105, 0.15);
-    color: #0f172a;
+    background-color: rgba(193, 74, 30, 0.20);
+    color: #0f0f0f;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -46,168 +46,172 @@
 
 @layer components {
   /* ───── Layout ───── */
-  .container-app {
-    @apply max-w-7xl mx-auto px-5 md:px-8;
-  }
-  .container-narrow {
-    @apply max-w-5xl mx-auto px-5 md:px-8;
-  }
-  .section {
-    @apply py-20 md:py-28;
-  }
-  .section-tight {
-    @apply py-14 md:py-20;
-  }
-  .section-alt {
-    @apply py-20 md:py-28 bg-stone-50;
-  }
-  .section-dark {
-    @apply py-20 md:py-28 bg-surface-900 text-white;
-  }
+  .container-app { @apply max-w-7xl mx-auto px-5 md:px-8; }
+  .container-narrow { @apply max-w-5xl mx-auto px-5 md:px-8; }
+  .container-tight { @apply max-w-3xl mx-auto px-5 md:px-8; }
 
-  /* ───── Eyebrow / Section labels ───── */
+  .section { @apply py-20 md:py-28; }
+  .section-tight { @apply py-14 md:py-20; }
+  .section-cream { @apply py-20 md:py-28 bg-cream-100; }
+  .section-cream-light { @apply py-20 md:py-28 bg-cream-50; }
+  .section-ink { @apply py-20 md:py-28 bg-ink-900 text-cream-50; }
+
+  /* ───── Eyebrow ───── */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-700;
+    @apply inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-rust-500;
+  }
+  .eyebrow::before {
+    content: '— ';
+    margin-right: 0.4em;
   }
   .eyebrow-light {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-300;
+    @apply inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-rust-300;
+  }
+  .eyebrow-light::before {
+    content: '— ';
+    margin-right: 0.4em;
+  }
+  .eyebrow-plain {
+    @apply inline-flex items-center text-[11px] font-bold uppercase tracking-[0.22em] text-ink-500;
+  }
+
+  /* ───── Italic serif accent ───── */
+  .accent-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* ───── Display headlines ───── */
+  .heading-display {
+    @apply text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-black tracking-[-0.045em] leading-[0.95];
+  }
+  .heading-1 {
+    @apply text-4xl sm:text-5xl md:text-6xl font-black tracking-[-0.04em] leading-[1.0];
+  }
+  .heading-2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-black tracking-[-0.035em] leading-[1.05];
+  }
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-extrabold tracking-[-0.02em] leading-[1.15];
+  }
+  .lead {
+    @apply text-base md:text-lg leading-relaxed text-ink-500;
   }
 
   /* ───── Buttons ───── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-primary-600/25 min-h-[48px] shadow-glow-brand hover:shadow-lift hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-sm uppercase tracking-[0.08em] px-7 py-4 rounded-md transition-colors duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-rust-500 focus:ring-offset-2 focus:ring-offset-cream-100 min-h-[48px];
   }
   .btn-primary-lg {
-    @apply btn-primary text-lg px-9 py-4 min-h-[56px];
-  }
-  .btn-accent {
-    @apply inline-flex items-center justify-center gap-2.5 bg-accent-500 hover:bg-accent-600 text-surface-900 font-bold text-base px-7 py-3.5 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-accent-500/25 min-h-[48px] shadow-glow-accent hover:-translate-y-0.5;
-  }
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2.5 bg-white hover:bg-stone-50 border border-stone-200 hover:border-stone-300 text-surface-900 font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-stone-200 min-h-[48px];
-  }
-  .btn-secondary-lg {
-    @apply btn-secondary text-lg px-9 py-4 min-h-[56px];
-  }
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-stone-200 hover:border-primary-500 text-surface-900 hover:text-primary-700 font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-200 cursor-pointer min-h-[48px] bg-white;
-  }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 text-surface-700 hover:text-primary-700 font-semibold text-sm transition-colors duration-200;
+    @apply btn-primary text-base px-9 py-5 min-h-[56px];
   }
   .btn-dark {
-    @apply inline-flex items-center justify-center gap-2.5 bg-surface-900 hover:bg-surface-800 text-white font-semibold text-base px-7 py-3.5 rounded-full transition-all duration-200 cursor-pointer min-h-[48px] hover:-translate-y-0.5;
+    @apply inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-ink-800 text-cream-50 font-bold text-sm uppercase tracking-[0.08em] px-7 py-4 rounded-md transition-colors duration-150 cursor-pointer min-h-[48px];
+  }
+  .btn-dark-lg {
+    @apply btn-dark text-base px-9 py-5 min-h-[56px];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-ink-900 hover:bg-ink-900 text-ink-900 hover:text-cream-50 font-bold text-sm uppercase tracking-[0.08em] px-7 py-4 rounded-md transition-colors duration-150 cursor-pointer min-h-[48px] bg-transparent;
+  }
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 border border-cream-50/40 hover:bg-cream-50 text-cream-50 hover:text-ink-900 font-bold text-sm uppercase tracking-[0.08em] px-7 py-4 rounded-md transition-colors duration-150 cursor-pointer min-h-[48px] bg-transparent;
+  }
+  .btn-link {
+    @apply inline-flex items-center gap-1.5 text-ink-900 font-semibold text-sm border-b border-rust-500 hover:text-rust-500 transition-colors duration-150;
   }
 
   /* ───── Form Elements ───── */
   .input-field {
-    @apply w-full px-4 py-3.5 border border-stone-200 rounded-xl bg-white text-surface-900 placeholder:text-stone-400 focus:ring-4 focus:ring-primary-500/15 focus:border-primary-500 focus:outline-none transition-all duration-200;
+    @apply w-full px-4 py-3.5 border border-ink-200 rounded-md bg-cream-50 text-ink-900 placeholder:text-ink-400 focus:ring-2 focus:ring-rust-500/20 focus:border-rust-500 focus:outline-none transition-all duration-150;
   }
   .input-field-icon {
-    @apply w-full pl-12 pr-4 py-3.5 border border-stone-200 rounded-xl bg-white text-surface-900 placeholder:text-stone-400 focus:ring-4 focus:ring-primary-500/15 focus:border-primary-500 focus:outline-none transition-all duration-200;
+    @apply w-full pl-12 pr-4 py-3.5 border border-ink-200 rounded-md bg-cream-50 text-ink-900 placeholder:text-ink-400 focus:ring-2 focus:ring-rust-500/20 focus:border-rust-500 focus:outline-none transition-all duration-150;
   }
   .select-field {
-    @apply w-full pl-12 pr-10 py-3.5 border border-stone-200 rounded-xl bg-white text-surface-900 cursor-pointer appearance-none focus:ring-4 focus:ring-primary-500/15 focus:border-primary-500 focus:outline-none transition-all duration-200;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    @apply w-full pl-12 pr-10 py-3.5 border border-ink-200 rounded-md bg-cream-50 text-ink-900 cursor-pointer appearance-none focus:ring-2 focus:ring-rust-500/20 focus:border-rust-500 focus:outline-none transition-all duration-150;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b6b6b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 0.75rem center;
     background-repeat: no-repeat;
     background-size: 1.25em 1.25em;
   }
 
-  /* ───── Cards ───── */
-  .card {
-    @apply bg-white rounded-2xl p-7 border border-stone-200/70 transition-all duration-300 shadow-soft;
+  /* ───── Editorial cards ───── */
+  .card-cream {
+    @apply bg-cream-50 border border-ink-900/10 rounded-md p-6 md:p-8 transition-all duration-200;
   }
-  .card:hover {
-    @apply shadow-card-hover -translate-y-1 border-stone-200;
+  .card-cream:hover { @apply border-ink-900/20 shadow-card-hover; }
+
+  .card-white {
+    @apply bg-white border border-ink-900/8 rounded-md p-6 md:p-8 transition-all duration-200 shadow-soft;
+  }
+  .card-white:hover { @apply shadow-card-hover; }
+
+  .card-dark {
+    @apply bg-ink-900 text-cream-50 border border-ink-900 rounded-md p-6 md:p-8 transition-all duration-200;
   }
 
-  .service-card {
-    @apply relative bg-white rounded-3xl overflow-hidden border border-stone-200/70 transition-all duration-300 shadow-soft cursor-pointer;
-  }
-  .service-card:hover {
-    @apply shadow-card-hover -translate-y-1.5 border-primary-200;
+  .card-forest {
+    @apply bg-forest-700 text-cream-50 border border-forest-800 rounded-md p-6 md:p-8 transition-all duration-200;
   }
 
-  .feature-card {
-    @apply bg-white rounded-2xl p-7 border border-stone-200/70 transition-all duration-300 shadow-soft;
-  }
-  .feature-card:hover {
-    @apply shadow-card-hover -translate-y-1;
+  .card-rust {
+    @apply bg-rust-500 text-cream-50 border border-rust-600 rounded-md p-6 md:p-8 transition-all duration-200;
   }
 
-  .stat-card {
-    @apply bg-white rounded-2xl p-6 border border-stone-200/70 shadow-soft text-center;
+  /* ───── Plan cards (the 5-plan grid) ───── */
+  .plan-card {
+    @apply relative bg-cream-50 border border-ink-900/10 rounded-md p-7 transition-all duration-200;
+  }
+  .plan-card:hover { @apply border-ink-900/25; }
+
+  .plan-card-dark {
+    @apply relative bg-ink-900 text-cream-50 border border-ink-800 rounded-md p-7 transition-all duration-200;
   }
 
-  /* ───── Pricing Cards ───── */
-  .pricing-card-default {
-    @apply relative bg-white rounded-3xl p-8 border border-stone-200 transition-all duration-300 shadow-soft;
-  }
-  .pricing-card-default:hover {
-    @apply shadow-card-hover -translate-y-1 border-stone-300;
-  }
-  .pricing-card-highlighted {
-    @apply relative rounded-3xl p-8 text-white border-2 border-primary-500/30 transition-all duration-300;
-    background: linear-gradient(140deg, #064e3b 0%, #0f172a 100%);
-    box-shadow: 0 20px 60px -15px rgba(5, 150, 105, 0.55), 0 0 0 1px rgba(16, 185, 129, 0.20) inset;
-  }
-  .pricing-card-highlighted:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 30px 80px -15px rgba(5, 150, 105, 0.65), 0 0 0 1px rgba(16, 185, 129, 0.30) inset;
-  }
-  .pricing-popular-badge {
-    @apply absolute -top-4 left-1/2 -translate-x-1/2 bg-accent-500 text-surface-900 text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap uppercase tracking-wider shadow-glow-accent;
+  .plan-card-forest {
+    @apply relative bg-forest-700 text-cream-50 border border-forest-800 rounded-md p-7 transition-all duration-200;
   }
 
-  /* ───── Badges / Pills ───── */
-  .badge {
-    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold;
+  /* ───── Pills / Trust badges ───── */
+  .pill-dark {
+    @apply inline-flex items-center text-[10px] font-bold uppercase tracking-[0.16em] text-cream-50 bg-ink-900 px-3 py-1.5 rounded;
   }
-  .badge-primary {
-    @apply badge bg-primary-50 text-primary-700 border border-primary-100;
+  .pill-outline {
+    @apply inline-flex items-center text-[10px] font-bold uppercase tracking-[0.16em] text-ink-900 border border-ink-900 px-3 py-1.5 rounded bg-transparent;
   }
-  .badge-accent {
-    @apply badge bg-accent-50 text-accent-700 border border-accent-100;
-  }
-  .badge-dark {
-    @apply badge bg-surface-900 text-white;
+  .pill-rust {
+    @apply inline-flex items-center text-[10px] font-bold uppercase tracking-[0.16em] text-cream-50 bg-rust-500 px-3 py-1.5 rounded;
   }
 
-  /* ───── Typography helpers ───── */
-  .heading-display {
-    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05];
-  }
-  .heading-1 {
-    @apply font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08];
-  }
-  .heading-2 {
-    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.12];
-  }
-  .heading-3 {
-    @apply font-display text-2xl md:text-3xl font-bold tracking-tight;
-  }
-  .lead {
-    @apply text-lg md:text-xl leading-relaxed text-surface-600;
+  /* ───── Section meta (page numbers, running headers) ───── */
+  .page-meta {
+    @apply text-[10px] font-bold uppercase tracking-[0.22em] text-ink-400;
   }
 
-  /* ───── Glow / decorative ───── */
-  .glow-orb {
-    @apply absolute rounded-full pointer-events-none;
-    filter: blur(120px);
+  /* ───── Section number (big rust 01/02/03 in front of headlines) ───── */
+  .section-number {
+    @apply text-rust-500 font-black text-sm tracking-[0.06em];
   }
 
-  /* Number ring used in step components */
-  .step-number {
-    @apply w-12 h-12 rounded-full bg-primary-600 text-white font-bold text-lg flex items-center justify-center shadow-glow-brand;
+  /* ───── Chevron list marker ───── */
+  .list-chevron > li {
+    @apply relative pl-5;
+  }
+  .list-chevron > li::before {
+    content: '›';
+    @apply absolute left-0 top-0 text-rust-500 font-bold;
   }
 
-  /* Reading width for paragraph text inside sections */
+  /* ───── Reading width ───── */
   .section p:not(.no-clamp),
-  .section-alt p:not(.no-clamp),
-  .section-dark p:not(.no-clamp),
+  .section-cream p:not(.no-clamp),
+  .section-cream-light p:not(.no-clamp),
+  .section-ink p:not(.no-clamp),
   .section-tight p:not(.no-clamp) {
-    max-width: 68ch;
+    max-width: 62ch;
   }
 }
 
@@ -216,5 +220,4 @@
   .animate-delay-100 { animation-delay: 0.1s; }
   .animate-delay-200 { animation-delay: 0.2s; }
   .animate-delay-300 { animation-delay: 0.3s; }
-  .animate-delay-400 { animation-delay: 0.4s; }
 }

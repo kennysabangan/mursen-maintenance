@@ -2,175 +2,103 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
-  ArrowRight, Check, ShieldCheck, ChevronDown, ChevronUp,
-  Phone, Calendar, Leaf, Droplets, SprayCan, Wrench,
-  Star, Clock, Users, Award, MapPin, Search, Hammer,
-  ThumbsUp, BadgeCheck, Sparkles,
+  ArrowRight, Check, ChevronDown, ChevronUp, Phone, Mail,
+  Leaf, Droplets, SprayCan, Wrench, Snowflake, Trash,
 } from 'lucide-react';
 
+const PHONE_DISPLAY = '(859) MURSEN-1';
+const PHONE_HREF = 'tel:+18596877361';
+const EMAIL = 'hi@mursen.com';
+
+/* ─── DATA ─── */
+
 const services = [
-  {
-    icon: Leaf,
-    name: 'Lawn Care',
-    tagline: 'Mow, edge, trim, blow.',
-    description: 'Weekly maintenance that keeps your curb appeal sharp through every season.',
-    points: ['Weekly or bi-weekly visits', 'Edging & trimming included', 'Seasonal cleanups'],
-    gradient: 'from-emerald-500 via-emerald-600 to-primary-800',
-  },
-  {
-    icon: Droplets,
-    name: 'Window Cleaning',
-    tagline: 'Streak-free, every time.',
-    description: 'Spotless windows inside and out. Tracks, sills, and screens included.',
-    points: ['Interior + exterior options', 'Tracks & screens', 'Hard-water removal'],
-    gradient: 'from-sky-500 via-sky-600 to-blue-800',
-  },
-  {
-    icon: SprayCan,
-    name: 'Power Washing',
-    tagline: 'Restore like new.',
-    description: 'Driveways, siding, decks, patios. Commercial-grade equipment, eco-safe detergents.',
-    points: ['Driveways & walkways', 'Siding & fences', 'Soft-wash for roofs'],
-    gradient: 'from-indigo-500 via-indigo-600 to-violet-800',
-  },
-  {
-    icon: Wrench,
-    name: 'Handyman & Repairs',
-    tagline: 'Big list. One visit.',
-    description: 'Drywall, fixtures, doors, mounts, paint touch-ups — all the small jobs handled.',
-    points: ['Same-tech every visit', 'Licensed partner network', '90-day workmanship promise'],
-    gradient: 'from-amber-500 via-orange-600 to-red-700',
-  },
+  { num: '01', icon: Leaf, name: 'Lawn Care', tagline: 'Mowing, edging, leaves, mulch, aeration, light tree work.', from: '$55' },
+  { num: '02', icon: Droplets, name: 'Window Cleaning', tagline: 'Interior, exterior, screens, tracks, gutters, dryer vents.', from: '$145' },
+  { num: '03', icon: SprayCan, name: 'Power Washing', tagline: 'Driveways, siding, decks, fences, soft-wash roofs.', from: '$165' },
+  { num: '04', icon: Wrench, name: 'Handyman', tagline: 'Drywall, doors, paint, fixtures, mounts, caulking.', from: '$75/hr' },
+  { num: '05', icon: Snowflake, name: 'Snow & Seasonal', tagline: 'Plowing, salt, leaf cleanup, holiday lights.', from: '$55' },
+  { num: '06', icon: Trash, name: 'Junk Hauling', tagline: 'Quarter to full truckload, single-call removal.', from: '$125' },
 ];
 
-const trustPillars = [
-  {
-    icon: ShieldCheck,
-    title: 'Fully Insured & Bonded',
-    description: 'Commercial GL coverage and a $1M surety bond. Your home and our team are protected.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'One Vendor, One Bill',
-    description: 'Stop juggling five contractors. Every service on one subscription, one invoice.',
-  },
-  {
-    icon: Users,
-    title: 'Same Tech Every Visit',
-    description: 'You\'ll see the same friendly face on your property. They learn your home over time.',
-  },
-  {
-    icon: ThumbsUp,
-    title: '100% Satisfaction Promise',
-    description: 'If we miss something we fix it free. 30-day money-back on all subscriptions.',
-  },
-];
-
-const steps = [
-  {
-    number: '01',
-    icon: Search,
-    title: 'Tell Us About Your Home',
-    description: 'Fill out a quick form or call us. We learn your property, your priorities, and your schedule.',
-  },
-  {
-    number: '02',
-    icon: Calendar,
-    title: 'Get a Custom Plan',
-    description: 'A free assessment + flat-rate plan tailored to your home. No surprises, no upsells.',
-  },
-  {
-    number: '03',
-    icon: Hammer,
-    title: 'We Handle the Rest',
-    description: 'Recurring visits start within a week. Photo reports after every job. You stay in the loop.',
-  },
+const valueBreakdown = [
+  { item: 'Weekly lawn mow + edge + blow', detail: '28 visits · April through October · up to ½ acre', cost: '$1,540' },
+  { item: '4 hours of handyman service every month', detail: 'Drywall, paint, doors, mounts, caulking · 48 hrs/yr', cost: '$3,600' },
+  { item: 'Monthly exterior window cleaning', detail: '7 visits · April through October', cost: '$1,015' },
+  { item: 'Annual driveway + walkway power wash', detail: 'Spring scheduling · scheduled around your calendar', cost: '$165' },
+  { item: 'Fall leaf cleanup (×2) + spring cleanup', detail: 'Three full seasonal cleanups, no extra charge', cost: '$575' },
+  { item: 'Annual gutter cleaning + bonus priority scheduling', detail: 'Late fall gutter clean · 72-hour response window', cost: '$440' },
 ];
 
 const plans = [
   {
-    name: 'Lawn Plus',
-    price: '109',
-    period: '/mo',
-    seasonalNote: 'Apr–Oct · pauses winter',
-    description: 'Perfect for hands-off lawn care year-round.',
+    name: 'Starter',
+    price: '199',
+    note: 'Per Month',
     features: [
-      'Weekly mow + edge + blow',
-      'Seasonal cleanups included',
-      'Gutter check on every visit',
-      'Photo report after each service',
+      '1 monthly handyman visit · up to 2 hours',
+      'Bi-weekly lawn mowing + edging (Apr–Oct)',
+      'Fall + spring cleanup, gutter check',
     ],
-    cta: 'Get Lawn Plus',
+    bestFor: 'Best for: small homes, light upkeep needs.',
+    variant: 'cream',
+  },
+  {
+    name: 'Lawn Plus',
+    price: '129',
+    note: 'Per Month · Apr–Oct',
+    features: [
+      'Weekly mow + edge + blow (Apr–Oct)',
+      '$69/mo Nov–Mar · seasonal cleanups',
+      'Up to ½ acre · larger lots +$40/mo',
+    ],
+    bestFor: 'Best for: lawn handled, you do the rest.',
+    variant: 'cream',
+  },
+  {
+    name: 'Handyman Plus',
+    price: '149',
+    note: 'Per Month',
+    features: [
+      '1 monthly visit · up to 2 hours',
+      '5 business day scheduling window',
+      'Overage at $75/hr · no contract',
+    ],
+    bestFor: 'Best for: a regular fix-it guy on call.',
+    variant: 'cream',
   },
   {
     name: 'Home Care',
     price: '479',
-    period: '/mo',
-    seasonalNote: 'Most popular for homeowners',
-    description: 'The complete bundle — every service, priority scheduling.',
+    note: 'Per Month',
     features: [
-      'Weekly lawn mowing & edging',
-      'Monthly exterior window cleaning',
-      '4 hours of handyman work / mo',
-      'Annual driveway power wash',
-      'Priority 48-hour scheduling',
-      'Photo report after every visit',
+      '4 hours handyman every month',
+      'Weekly lawn (Apr–Oct) + monthly windows',
+      'Annual power wash + 3 seasonal cleanups',
     ],
-    cta: 'Get Home Care',
-    highlight: true,
-  },
-  {
-    name: 'Property Manager',
-    price: '279',
-    period: '/unit/mo',
-    seasonalNote: 'Volume pricing for 3+ units',
-    description: 'Built for landlords and rental investors.',
-    features: [
-      'Optimized for rental units',
-      'Tenant turnover support',
-      'Priority scheduling',
-      '3+ units: $249 · 5+ units: $229',
-    ],
-    cta: 'Talk to Us',
+    bestFor: 'Best for: homeowners who want it all done.',
+    variant: 'dark',
+    badge: 'Most Popular',
   },
 ];
 
-const stats = [
-  { number: '20+', label: 'Properties maintained' },
-  { number: '500+', label: 'Jobs completed' },
-  { number: '4.9★', label: 'Average rating' },
-  { number: '< 24h', label: 'Quote turnaround' },
-];
+const propertyManagerPlan = {
+  name: 'Property Manager',
+  price: '279',
+  note: 'Per Unit / Month',
+  description: 'Built specifically for landlords with multiple units.',
+  features: [
+    'Lawn maintenance + basic exterior upkeep',
+    'Tenant turnover punch-list included',
+    '24-hour priority response window',
+    'Volume: 3+ $249 · 5+ $229 per unit',
+  ],
+};
 
-const testimonials = [
-  {
-    quote: "They caught a slow leak under our kitchen sink before it flooded the floor. Saved us thousands. Eight months in and they're worth every penny.",
-    name: 'Sarah M.',
-    location: 'Homeowner · Covington, KY',
-    initials: 'SM',
-    rating: 5,
-  },
-  {
-    quote: "I used to call four different people for my rentals. Now I call one. Mursen handles lawn, windows, handyman — they even painted a unit during turnover.",
-    name: 'David R.',
-    location: 'Property Owner · Florence, KY',
-    initials: 'DR',
-    rating: 5,
-  },
-  {
-    quote: "Our driveway was disgusting — oil stains, mold, years of grime. After their power wash it looked brand new. Three neighbors asked who did the work.",
-    name: 'Jennifer K.',
-    location: 'Homeowner · Fort Mitchell, KY',
-    initials: 'JK',
-    rating: 5,
-  },
-];
-
-const results = [
-  { number: '500+', label: 'Jobs completed', sub: 'Across Northern KY since launch' },
-  { number: '20+', label: 'Properties maintained', sub: 'Including our own rentals' },
-  { number: '4.9 / 5', label: 'Average rating', sub: 'From 80+ verified reviews' },
-  { number: '< 24h', label: 'Quote turnaround', sub: 'On every free assessment' },
+const volumePricing = [
+  { tier: '1–2 units', price: '$279/mo' },
+  { tier: '3–4 units', price: '$249/mo' },
+  { tier: '5+ units', price: '$229/mo' },
 ];
 
 const serviceAreas = [
@@ -180,38 +108,22 @@ const serviceAreas = [
 ];
 
 const faqs = [
-  {
-    q: 'How quickly can you start?',
-    a: 'Most new clients have their first visit within 5–7 business days of their free assessment. Urgent jobs can often be scheduled same-week.',
-  },
-  {
-    q: 'Are you insured and bonded?',
-    a: 'Yes, 100%. We carry commercial general liability insurance, workers\' comp, and a $1M surety bond. Proof of insurance available on request.',
-  },
-  {
-    q: 'Can I cancel my subscription anytime?',
-    a: 'Yes. All plans are month-to-month with no contracts or cancellation fees. We earn your business every month.',
-  },
-  {
-    q: 'What happens in winter when there\'s no lawn to mow?',
-    a: 'Lawn-only plans pause Dec–Mar at a reduced rate. Bundled plans (Home Care) swap mowing for seasonal services like gutter cleaning, leaf removal, and winter prep.',
-  },
-  {
-    q: 'Do you service my area?',
-    a: 'We serve Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and the greater Cincinnati metro. Call us to confirm your address.',
-  },
-  {
-    q: 'What if I need more handyman hours than my plan includes?',
-    a: 'No problem. Subscribers get a discounted rate ($75/hr vs. $95/hr for non-subscribers). Just let us know and we\'ll schedule the extra time.',
-  },
+  { q: 'How quickly can you start?', a: 'Most new clients have their first visit within 5–7 business days of booking. Urgent jobs can often be scheduled same-week.' },
+  { q: 'Are you insured and bonded?', a: 'Yes. We carry commercial general liability insurance, workers\' comp, and a $1M surety bond. Proof of insurance available on request.' },
+  { q: 'Can I cancel my subscription anytime?', a: 'Yes. All plans are month-to-month with a 30-day cancellation policy. No contracts. We earn your business every month.' },
+  { q: 'What happens in winter when there\'s no lawn to mow?', a: 'Lawn-only plans drop to $69/mo Dec–Mar. Bundled plans swap mowing for seasonal services like gutter cleaning, leaf removal, and snow.' },
+  { q: 'Do you service my area?', a: 'We serve Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and the greater Cincinnati metro. Call to confirm your address.' },
+  { q: 'What if I need more handyman hours than my plan includes?', a: 'No problem. Subscribers get $75/hr (vs. $95/hr non-subscriber). Just let us know and we\'ll schedule the extra time.' },
 ];
+
+/* ─── COMPONENT ─── */
 
 export default function Homepage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'Mursen Maintenance | Lawn, Windows, Power Wash & Handyman | Covington KY';
-  const seoDescription = 'One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman services in Covington KY and Cincinnati metro. Plans from $109/mo.';
+  const siteUrl = 'https://mursen.com';
+  const seoTitle = 'Mursen — Your House. Handled. | Lawn, Windows, Power Wash, Handyman in Covington KY';
+  const seoDescription = 'One subscription. Lawn care, window cleaning, power washing, handyman, and seasonal services across Covington KY and Cincinnati metro. Plans from $129/mo. Stop calling 5 different guys.';
 
   return (
     <>
@@ -224,149 +136,98 @@ export default function Homepage() {
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${siteUrl}/`} />
-        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
-        <meta property="og:site_name" content="Mursen Maintenance" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'LocalBusiness',
-            'name': 'Mursen Maintenance',
-            'description': seoDescription,
-            'url': siteUrl,
-            'telephone': '+18595550123',
-            'address': {
-              '@type': 'PostalAddress',
-              'streetAddress': '123 Main Street',
-              'addressLocality': 'Covington',
-              'addressRegion': 'KY',
-              'postalCode': '41011',
-              'addressCountry': 'US'
-            },
-            'priceRange': '$$',
-            'image': `${siteUrl}/favicon.svg`,
-          })}
-        </script>
       </Helmet>
 
-      {/* ═════════ HERO ═════════ */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-surface-900 to-surface-950">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=1920&q=80&auto=format&fit=crop"
-            alt="Traditional brick home with lush lawn"
-            className="w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface-900/95 via-surface-900/75 to-surface-900/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-surface-900/70 via-transparent to-transparent" />
-        </div>
+      {/* ════════ HERO ════════ */}
+      <section className="bg-cream-100 pt-12 pb-0 md:pt-20 md:pb-0 relative overflow-hidden">
+        <div className="container-app">
+          <p className="eyebrow mb-6">A better way to maintain a home</p>
 
-        <div className="relative container-app pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide mb-6 animate-fade-up opacity-0">
-              <Sparkles className="w-3.5 h-3.5 text-accent-400" />
-              Trusted by 100+ homeowners across Northern KY
-            </div>
+          <h1 className="heading-display text-balance mb-8 max-w-5xl">
+            YOUR HOUSE.
+            <br />
+            <span className="accent-serif font-normal text-rust-500">Handled.</span>
+          </h1>
 
-            <h1 className="font-display text-white font-extrabold tracking-tight leading-[1.05] text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 animate-fade-up opacity-0 animate-delay-100">
-              Your Home,<br />
-              <span className="text-primary-400">Beautifully Maintained.</span>
-            </h1>
+          <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed mb-8">
+            One subscription. One bill. One company that does lawn care, window cleaning, power washing, and handyman work — so you stop juggling five vendors and start getting your weekends back.
+          </p>
 
-            <p className="text-lg md:text-xl text-stone-200 leading-relaxed mb-8 max-w-xl animate-fade-up opacity-0 animate-delay-200">
-              Lawn care, window cleaning, power washing, and handyman service — bundled into one simple subscription. No more juggling vendors.
-            </p>
+          {/* Trust pills */}
+          <div className="flex flex-wrap gap-2.5 mb-10">
+            <span className="pill-dark">Fully Insured</span>
+            <span className="pill-outline">Bonded</span>
+            <span className="pill-outline">Owner-Operated</span>
+            <span className="pill-outline">20+ Rentals Maintained</span>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 animate-fade-up opacity-0 animate-delay-300">
-              <Link
-                to="/assessment"
-                className="inline-flex items-center justify-center gap-2.5 bg-primary-600 hover:bg-primary-500 text-white font-semibold text-lg px-8 py-4 rounded-full transition-all duration-200 shadow-glow-brand hover:-translate-y-0.5 min-h-[56px]"
-              >
-                Get a Free Quote
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <a
-                href="tel:+18595550123"
-                className="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 backdrop-blur border border-white/30 text-white font-semibold text-lg px-8 py-4 rounded-full transition-all duration-200 min-h-[56px]"
-              >
-                <Phone className="w-5 h-5" />
-                (859) 555-0123
-              </a>
-            </div>
-
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-stone-300 animate-fade-up opacity-0 animate-delay-400">
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> Fully Insured & Bonded</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> Free Estimates</span>
-              <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> Cancel Anytime</span>
-            </div>
+          <div className="flex flex-col sm:flex-row gap-3 mb-16">
+            <Link to="/assessment" className="btn-dark-lg">
+              Stop Calling 5 Different Guys
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a href={PHONE_HREF} className="btn-outline">
+              <Phone className="w-4 h-4" />
+              {PHONE_DISPLAY}
+            </a>
           </div>
         </div>
 
-        {/* Stat strip */}
-        <div className="relative bg-white/5 backdrop-blur border-t border-white/10">
-          <div className="container-app grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-            {stats.map((s) => (
-              <div key={s.label} className="py-6 px-4 text-center">
-                <div className="text-2xl md:text-3xl font-extrabold text-white font-display">{s.number}</div>
-                <div className="text-xs md:text-sm text-stone-300 mt-1">{s.label}</div>
-              </div>
-            ))}
+        {/* Black band — service strip */}
+        <div className="bg-ink-900 text-cream-50">
+          <div className="container-app py-10 md:py-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
+              {services.slice(0, 4).map((s) => (
+                <Link key={s.num} to="/portfolio" className="group">
+                  <div className="text-rust-400 font-bold text-xs tracking-[0.16em] mb-2">{s.num}</div>
+                  <div className="font-black text-xl tracking-[-0.02em] mb-2 uppercase group-hover:text-rust-300 transition-colors">{s.name}</div>
+                  <div className="text-cream-100/70 text-sm leading-snug">{s.tagline}</div>
+                </Link>
+              ))}
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-10 pt-8 border-t border-cream-100/15">
+              <div className="text-cream-100/70 text-sm">Mursen Home Services · Covington, KY 41011</div>
+              <Link to="/assessment" className="inline-flex items-center gap-2 bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-xs uppercase tracking-[0.10em] py-2.5 px-4 rounded-md transition-colors">
+                One Call. One Company. One Bill.
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═════════ SERVICES — THE CENTERPIECE ═════════ */}
-      <section className="section bg-white relative">
+      {/* ════════ ALL 6 SERVICES (cream cards) ════════ */}
+      <section className="section bg-cream-100">
         <div className="container-app">
-          <div className="max-w-2xl mb-12 md:mb-16">
-            <p className="eyebrow mb-4">Our Services</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              Everything your home needs, under one roof.
-            </h2>
-            <p className="lead">
-              Pick a single service or bundle them all. Either way, you get the same crew who learns your property — and a flat-rate price you can count on.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <p className="eyebrow mb-4">Every Service</p>
+              <h2 className="heading-2 text-balance max-w-2xl">
+                Six services. <span className="accent-serif font-normal text-rust-500">One number to call.</span>
+              </h2>
+            </div>
+            <Link to="/portfolio" className="btn-link">
+              See full pricing menu <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-            {services.map((service) => {
-              const Icon = service.icon;
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((s) => {
+              const Icon = s.icon;
               return (
-                <Link
-                  key={service.name}
-                  to="/portfolio"
-                  className="service-card group flex flex-col"
-                >
-                  <div className={`relative aspect-[4/3] bg-gradient-to-br ${service.gradient} overflow-hidden flex items-center justify-center`}>
-                    <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 0px, transparent 50%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.3) 0px, transparent 50%)' }} />
-                    <Icon className="relative w-24 h-24 text-white/95 transition-transform duration-500 group-hover:scale-110" strokeWidth={1.5} />
-                    <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 rounded-full bg-white/20 backdrop-blur border border-white/30 text-[10px] font-bold uppercase tracking-wider text-white">
-                        {service.name.split(' ')[0]}
-                      </div>
-                    </div>
+                <Link key={s.num} to="/portfolio" className="card-cream group flex flex-col">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="section-number">{s.num}</div>
+                    <Icon className="w-6 h-6 text-ink-400 group-hover:text-rust-500 transition-colors" strokeWidth={1.6} />
                   </div>
-
-                  <div className="flex-1 p-6 flex flex-col">
-                    <h3 className="font-display text-xl font-bold text-surface-900 mb-1">{service.name}</h3>
-                    <p className="text-sm text-primary-700 font-semibold mb-3">{service.tagline}</p>
-                    <p className="text-sm text-surface-600 leading-relaxed mb-5 flex-1">{service.description}</p>
-                    <ul className="space-y-2 mb-5">
-                      {service.points.map((p) => (
-                        <li key={p} className="flex items-start gap-2 text-sm text-surface-700">
-                          <Check className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
-                          <span>{p}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="flex items-center justify-between pt-4 border-t border-stone-100">
-                      <span className="text-sm font-semibold text-primary-700 group-hover:text-primary-600">Learn more</span>
-                      <ArrowRight className="w-4 h-4 text-primary-700 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                  <h3 className="text-2xl font-black tracking-[-0.02em] uppercase mb-2 group-hover:text-rust-500 transition-colors">{s.name}</h3>
+                  <p className="text-sm text-ink-500 leading-relaxed mb-6 flex-1">{s.tagline}</p>
+                  <div className="flex items-center justify-between pt-5 border-t border-ink-900/10">
+                    <span className="text-sm">
+                      <span className="text-ink-400 italic">from </span>
+                      <span className="font-bold text-ink-900">{s.from}</span>
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-ink-400 group-hover:text-rust-500 group-hover:translate-x-1 transition-all" />
                   </div>
                 </Link>
               );
@@ -375,233 +236,283 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ═════════ TRUST PILLARS ═════════ */}
-      <section className="section-alt">
-        <div className="container-app">
-          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-start">
-            <div>
-              <p className="eyebrow mb-4">Why Mursen</p>
-              <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-                Reliable like it's our own home.
-              </h2>
-              <p className="lead mb-6">
-                We started Mursen because we maintain 20+ rental units ourselves and we were tired of the same headaches you're tired of.
-              </p>
-              <Link to="/contact" className="btn-ghost">
-                Read our story <ArrowRight className="w-4 h-4" />
-              </Link>
+      {/* ════════ THE HERO OFFER (Annual Value Breakdown) ════════ */}
+      <section className="section-cream-light">
+        <div className="container-narrow">
+          <p className="eyebrow mb-4">The Hero Offer</p>
+          <h2 className="heading-2 text-balance mb-4 max-w-3xl">
+            Everything your home needs.
+            <br />
+            <span className="accent-serif font-normal text-rust-500">For one flat monthly price.</span>
+          </h2>
+          <p className="lead text-ink-500 max-w-2xl mb-12">
+            We bundled the four services every homeowner buys separately — and added the seasonal stuff most companies forget. Here's exactly what's included, and what each piece would cost à la carte:
+          </p>
+
+          {/* Breakdown table */}
+          <div className="bg-cream-50 border border-ink-900/10 rounded-md overflow-hidden">
+            <div className="px-6 py-4 border-b border-ink-900/10 flex items-center justify-between">
+              <span className="font-black text-sm tracking-[0.06em] uppercase">Home Care · Annual Value Breakdown</span>
+              <span className="page-meta hidden sm:inline">À La Carte Cost</span>
             </div>
-
-            <div className="grid sm:grid-cols-2 gap-5">
-              {trustPillars.map((p) => {
-                const Icon = p.icon;
-                return (
-                  <div key={p.title} className="feature-card">
-                    <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center mb-5">
-                      <Icon className="w-6 h-6 text-primary-700" />
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-surface-900 mb-2">{p.title}</h3>
-                    <p className="text-sm text-surface-600 leading-relaxed">{p.description}</p>
+            <div className="divide-y divide-ink-900/8">
+              {valueBreakdown.map((b) => (
+                <div key={b.item} className="px-6 py-5 flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="font-bold text-ink-900 text-sm md:text-base">{b.item}</div>
+                    <div className="text-xs md:text-sm text-ink-500 mt-1">{b.detail}</div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═════════ HOW IT WORKS ═════════ */}
-      <section className="section bg-white">
-        <div className="container-app">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="eyebrow mb-4 justify-center">Simple Process</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              From quote to clean in three steps.
-            </h2>
-            <p className="lead mx-auto">
-              No high-pressure sales calls. No mystery pricing. Just a clear path from "I need help" to "everything is handled."
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
-            {/* Connector line */}
-            <div className="hidden md:block absolute top-12 left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent" />
-
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.number} className="relative bg-white rounded-3xl p-8 border border-stone-200/70 shadow-soft hover:shadow-card-hover transition-all">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="step-number">{step.number}</div>
-                    <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary-700" />
-                    </div>
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-surface-900 mb-3">{step.title}</h3>
-                  <p className="text-surface-600 leading-relaxed">{step.description}</p>
+                  <div className="text-base md:text-lg font-black text-ink-900 whitespace-nowrap">{b.cost}</div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
-          <div className="mt-12 text-center">
+          {/* Total band */}
+          <div className="bg-ink-900 text-cream-50 px-6 py-5 rounded-md mt-3 flex items-center justify-between">
+            <span className="font-black text-xs md:text-sm tracking-[0.10em] uppercase">Total Annual Value If Purchased Separately</span>
+            <span className="text-2xl md:text-3xl font-black">$7,335</span>
+          </div>
+
+          {/* Comparison cards */}
+          <div className="grid sm:grid-cols-2 gap-3 mt-3">
+            <div className="bg-cream-50 border border-ink-900/10 rounded-md p-6">
+              <p className="page-meta mb-3">À La Carte Total</p>
+              <div className="flex items-baseline gap-1.5 mb-2">
+                <span className="text-4xl font-black">$611</span>
+                <span className="text-sm text-ink-500 font-bold">/mo avg</span>
+              </div>
+              <p className="accent-serif text-ink-500">Five vendors · five invoices · five phone numbers</p>
+            </div>
+            <div className="bg-rust-500 text-cream-50 rounded-md p-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cream-100/80 mb-3">Your Mursen Price</p>
+              <div className="flex items-baseline gap-1.5 mb-2">
+                <span className="text-4xl font-black">$479</span>
+                <span className="text-sm font-bold">/mo</span>
+              </div>
+              <p className="accent-serif text-cream-100/90">One company. One bill. One call.</p>
+            </div>
+          </div>
+
+          {/* Savings band */}
+          <div className="bg-rust-500 text-cream-50 px-6 py-5 rounded-md mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <span className="font-black text-base md:text-lg uppercase tracking-[0.06em]">You Save</span>
+              <p className="text-cream-100/80 text-sm mt-0.5">vs. à la carte rates · plus the time managing 5 vendors</p>
+            </div>
+            <span className="text-3xl md:text-4xl font-black accent-serif font-normal">$1,587/yr</span>
+          </div>
+
+          <div className="text-center mt-10">
             <Link to="/assessment" className="btn-primary-lg">
-              Start Your Free Quote
-              <ArrowRight className="w-5 h-5" />
+              Get My Home Care Quote <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ═════════ MEMBERSHIP PLANS ═════════ */}
-      <section className="section-alt" id="plans">
+      {/* ════════ FIVE PLANS ════════ */}
+      <section className="section bg-cream-100">
         <div className="container-app">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="eyebrow mb-4 justify-center">Membership Plans</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              Pick the plan that fits your home.
-            </h2>
-            <p className="lead mx-auto">
-              All plans are month-to-month. No contracts. Cancel anytime. Looking for something custom? <Link to="/assessment" className="text-primary-700 font-semibold underline decoration-primary-300 hover:decoration-primary-600">Tell us about your home</Link>.
-            </p>
+          <p className="eyebrow mb-4">Pick the plan that fits</p>
+          <h2 className="heading-2 text-balance mb-4 max-w-3xl">
+            Five plans.
+            <br />
+            <span className="accent-serif font-normal text-rust-500">Zero headaches.</span>
+          </h2>
+          <p className="lead text-ink-500 max-w-2xl mb-12">
+            Whether you want the full bundle or just lawn handled, we've got a fit. Every plan is month-to-month with a 30-day cancellation policy. No long-term contracts. Ever.
+          </p>
+
+          {/* 4-up plan grid */}
+          <div className="grid sm:grid-cols-2 gap-4 mb-4">
+            {plans.map((plan) => {
+              const isDark = plan.variant === 'dark';
+              const cardClass = isDark ? 'plan-card-dark' : 'plan-card';
+              return (
+                <div key={plan.name} className={cardClass}>
+                  {plan.badge && (
+                    <div className="absolute -top-3 right-6 bg-rust-500 text-cream-50 text-[10px] font-bold uppercase tracking-[0.16em] px-3 py-1 rounded">
+                      {plan.badge}
+                    </div>
+                  )}
+                  <div className="flex items-start justify-between mb-6">
+                    <h3 className={`text-xl font-black uppercase tracking-[-0.01em] ${isDark ? 'text-cream-50' : 'text-ink-900'}`}>
+                      {plan.name}
+                    </h3>
+                    <div className="text-right">
+                      <div className={`text-4xl font-black tracking-[-0.03em] leading-none ${isDark ? 'text-cream-50' : 'text-ink-900'}`}>
+                        ${plan.price}
+                      </div>
+                      <div className={`text-[10px] font-bold uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-cream-100/60' : 'text-ink-400'}`}>
+                        {plan.note}
+                      </div>
+                    </div>
+                  </div>
+                  <ul className="space-y-2 mb-5">
+                    {plan.features.map((f) => (
+                      <li key={f} className={`flex items-start gap-2 text-sm ${isDark ? 'text-cream-100/90' : 'text-ink-700'}`}>
+                        <span className="text-rust-400 font-black flex-shrink-0">›</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className={`pt-4 border-t ${isDark ? 'border-cream-100/15' : 'border-ink-900/10'}`}>
+                    <p className={`accent-serif text-sm ${isDark ? 'text-cream-100/70' : 'text-ink-500'}`}>{plan.bestFor}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={plan.highlight ? 'pricing-card-highlighted' : 'pricing-card-default'}
-              >
-                {plan.highlight && (
-                  <div className="pricing-popular-badge">Most Popular</div>
-                )}
-
-                <div className="mb-6">
-                  <h3 className={`font-display text-xl font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-surface-900'}`}>
-                    {plan.name}
-                  </h3>
-                  <p className={`text-sm ${plan.highlight ? 'text-primary-200' : 'text-surface-500'}`}>
-                    {plan.description}
-                  </p>
-                </div>
-
-                <div className="mb-6 pb-6 border-b border-dashed">
-                  <div className="flex items-baseline gap-1">
-                    <span className={`font-display text-5xl font-extrabold tracking-tight ${plan.highlight ? 'text-white' : 'text-surface-900'}`}>
-                      ${plan.price}
-                    </span>
-                    <span className={`text-base font-medium ${plan.highlight ? 'text-primary-200' : 'text-surface-500'}`}>
-                      {plan.period}
-                    </span>
-                  </div>
-                  <p className={`text-xs mt-2 ${plan.highlight ? 'text-primary-300' : 'text-surface-400'}`}>
-                    {plan.seasonalNote}
-                  </p>
-                </div>
-
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5">
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${plan.highlight ? 'bg-primary-500/30' : 'bg-primary-100'}`}>
-                        <Check className={`w-3 h-3 ${plan.highlight ? 'text-primary-200' : 'text-primary-700'}`} strokeWidth={3} />
-                      </div>
-                      <span className={`text-sm ${plan.highlight ? 'text-stone-200' : 'text-surface-700'}`}>{f}</span>
+          {/* Property Manager (full width) */}
+          <div className="plan-card-forest">
+            <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 items-start">
+              <div>
+                <h3 className="text-xl font-black uppercase tracking-[-0.01em] text-cream-50 mb-1">{propertyManagerPlan.name}</h3>
+                <p className="accent-serif text-cream-100/80 mb-5">{propertyManagerPlan.description}</p>
+                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                  {propertyManagerPlan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-cream-100/90">
+                      <span className="text-rust-300 font-black flex-shrink-0">›</span>
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
-
-                <Link
-                  to="/assessment"
-                  className={`flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-full font-semibold text-sm transition-all duration-200 min-h-[48px] ${
-                    plan.highlight
-                      ? 'bg-accent-500 hover:bg-accent-400 text-surface-900'
-                      : 'bg-surface-900 hover:bg-primary-700 text-white'
-                  }`}
-                >
-                  {plan.cta}
-                  <ArrowRight className="w-4 h-4" />
+              </div>
+              <div className="text-right md:border-l md:border-cream-100/15 md:pl-8">
+                <div className="text-5xl font-black tracking-[-0.03em] text-cream-50 leading-none">${propertyManagerPlan.price}</div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-cream-100/70 mt-2 mb-5">{propertyManagerPlan.note}</div>
+                <Link to="/assessment" className="inline-flex items-center gap-2 bg-cream-50 hover:bg-cream-100 text-forest-700 font-bold text-xs uppercase tracking-[0.10em] py-3 px-5 rounded-md transition-colors">
+                  Talk to Us
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
-            ))}
+            </div>
           </div>
 
-          <p className="text-center text-sm text-surface-500 mt-8">
-            Need à la carte pricing? <Link to="/portfolio" className="text-primary-700 font-semibold underline decoration-primary-300 hover:decoration-primary-600">View all services & rates →</Link>
-          </p>
+          <div className="text-center mt-10">
+            <Link to="/how-it-works" className="btn-link">
+              Compare all plans in detail <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ═════════ RESULTS / BY THE NUMBERS ═════════ */}
-      <section className="section bg-white">
+      {/* ════════ FOR PROPERTY INVESTORS ════════ */}
+      <section className="section bg-cream-100">
         <div className="container-app">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="eyebrow mb-4 justify-center">Real Work, Real Results</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              The numbers behind our work.
-            </h2>
-            <p className="lead mx-auto">Owner-operated since day one. Built on referrals from real homeowners and landlords across Northern Kentucky.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {results.map((r) => (
-              <div key={r.label} className="bg-gradient-to-br from-stone-50 to-white rounded-3xl p-7 border border-stone-200/70 shadow-soft hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
-                <div className="font-display text-5xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-br from-primary-600 to-primary-800 bg-clip-text text-transparent mb-3">
-                  {r.number}
-                </div>
-                <div className="font-display text-base font-bold text-surface-900 mb-1">{r.label}</div>
-                <div className="text-sm text-surface-500 leading-relaxed">{r.sub}</div>
+          <div className="card-forest">
+            <div className="grid lg:grid-cols-[1.5fr_1fr] gap-10 items-start p-2 md:p-4">
+              <div>
+                <p className="eyebrow-light mb-4">For Property Investors</p>
+                <h2 className="heading-2 text-balance mb-5 text-cream-50">
+                  One sign-up.
+                  <br />
+                  <span className="accent-serif font-normal text-rust-300">Twenty subscriptions.</span>
+                </h2>
+                <p className="text-cream-100/85 leading-relaxed mb-4 max-w-xl">
+                  We built this company on the back of <strong className="text-cream-50">20+ rental units we maintain ourselves</strong>. We know what landlords actually need: fast response, predictable invoices, and someone who can handle tenant turnovers without you flying out to inspect.
+                </p>
+                <p className="text-cream-100/85 leading-relaxed max-w-xl">
+                  Sign up your portfolio once. We assign a dedicated point of contact, lock in priority scheduling, and quote you volume pricing. Most clients with 5+ units cut their property management workload by half within 60 days.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═════════ TESTIMONIALS ═════════ */}
-      <section className="section-alt">
-        <div className="container-app">
-          <div className="grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-16">
-            <div>
-              <p className="eyebrow mb-4">Customer Stories</p>
-              <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-                Loved by homeowners and landlords alike.
-              </h2>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-accent-500 fill-accent-500" />
+              <div className="bg-forest-800 rounded-md p-6">
+                <div className="page-meta text-cream-100/60 mb-4">Volume Pricing · Per Unit</div>
+                <div className="space-y-3 mb-4 pb-4 border-b border-cream-100/15">
+                  {volumePricing.map((v) => (
+                    <div key={v.tier} className="flex items-baseline justify-between text-cream-50">
+                      <span className="text-sm">{v.tier}</span>
+                      <span className="font-black text-lg">{v.price}</span>
+                    </div>
                   ))}
                 </div>
-                <span className="font-bold text-surface-900">4.9 / 5</span>
-                <span className="text-sm text-surface-500">based on 80+ reviews</span>
+                <div className="flex items-baseline justify-between mb-5">
+                  <span className="accent-serif text-rust-300">10 units saves</span>
+                  <span className="font-black text-rust-300">$6,000/yr</span>
+                </div>
+                <Link to="/assessment" className="flex items-center justify-center gap-2 bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-xs uppercase tracking-[0.10em] py-3.5 px-5 rounded-md transition-colors">
+                  Investor Walk-Through
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-              <p className="text-surface-600 leading-relaxed mb-6">
-                Every visit ends with a photo report and a thumbs-up survey. We're proud of our average rating — and we work hard for every star.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ THE MURSEN PROMISE ════════ */}
+      <section className="section bg-cream-100">
+        <div className="container-narrow">
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* 30-day risk-free */}
+            <div className="card-cream">
+              <p className="eyebrow-plain mb-4">— The Mursen Promise</p>
+              <h2 className="text-3xl md:text-4xl font-black uppercase text-rust-500 mb-5 leading-[1.0] tracking-[-0.02em]">
+                30-Day<br />Risk-Free.
+              </h2>
+              <p className="text-ink-700 leading-relaxed mb-4">
+                <strong>If we miss a scheduled visit, we credit you the full visit value.</strong> If a tech damages something, we fix it on our dime. If you're not satisfied in your first 30 days, we refund your first month — no questions, no fine print, no awkward phone calls.
               </p>
-              <Link to="/contact" className="btn-ghost">
-                Read more reviews <ArrowRight className="w-4 h-4" />
-              </Link>
+              <p className="text-ink-700 leading-relaxed mb-6">
+                We're not the cheapest crew in town. We don't try to be. We're the one you keep, because nothing else slips off your plate.
+              </p>
+              <div className="pt-4 border-t border-ink-900/10">
+                <p className="accent-serif text-ink-500">— The Mursen team</p>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5">
-              {testimonials.map((t, i) => (
-                <div key={i} className={`feature-card flex flex-col ${i === 0 ? 'md:col-span-2' : ''}`}>
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(t.rating)].map((_, j) => (
-                      <Star key={j} className="w-4 h-4 text-accent-500 fill-accent-500" />
-                    ))}
-                  </div>
-                  <p className="text-base text-surface-800 leading-relaxed mb-5 flex-grow">
-                    "{t.quote}"
-                  </p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-stone-100">
-                    <div className="w-11 h-11 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-glow-brand">
-                      {t.initials}
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-surface-900">{t.name}</p>
-                      <p className="text-xs text-surface-500">{t.location}</p>
-                    </div>
-                  </div>
+            {/* Walk-through CTA */}
+            <div className="card-dark">
+              <p className="eyebrow-light mb-4">Get Started</p>
+              <h2 className="text-2xl md:text-3xl font-black uppercase text-cream-50 mb-4 leading-[1.05] tracking-[-0.02em]">
+                Book a Free<br />15-Min<br />Walk-Through.
+              </h2>
+              <p className="text-cream-100/85 leading-relaxed mb-6">
+                We'll quote your home, walk your property, and lock in your launch pricing on the spot. No high-pressure pitch. Just a real number.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-baseline justify-between gap-3 pb-2 border-b border-cream-100/15">
+                  <span className="page-meta text-cream-100/60">Call/Text</span>
+                  <a href={PHONE_HREF} className="font-black text-cream-50 hover:text-rust-300 transition-colors">{PHONE_DISPLAY}</a>
+                </div>
+                <div className="flex items-baseline justify-between gap-3 pb-2 border-b border-cream-100/15">
+                  <span className="page-meta text-cream-100/60">Online</span>
+                  <Link to="/assessment" className="font-bold text-cream-50 hover:text-rust-300 transition-colors">mursen.com/start</Link>
+                </div>
+                <div className="flex items-baseline justify-between gap-3 pb-2 border-b border-cream-100/15">
+                  <span className="page-meta text-cream-100/60">Email</span>
+                  <a href={`mailto:${EMAIL}`} className="font-bold text-cream-50 hover:text-rust-300 transition-colors">{EMAIL}</a>
+                </div>
+              </div>
+              <div className="text-xs leading-relaxed text-cream-100/70">
+                <span className="text-rust-300 font-bold uppercase tracking-[0.10em]">Launch Pricing — </span>
+                <span className="accent-serif">Sign up before season-end and lock your monthly rate for 12 months. We're capping new homeowners at 50 this quarter.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════ SERVICE AREAS ════════ */}
+      <section className="section-tight bg-cream-100">
+        <div className="container-app">
+          <div className="grid lg:grid-cols-[1fr_2fr] gap-10 items-start">
+            <div>
+              <p className="eyebrow mb-4">Where We Work</p>
+              <h2 className="heading-3 text-balance mb-4">
+                Northern Kentucky <span className="accent-serif font-normal text-rust-500">& Cincinnati metro.</span>
+              </h2>
+              <p className="text-ink-500 leading-relaxed">
+                Local crews, local owners. We live where we work — and we treat every property like it's our own.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 lg:border-l lg:border-ink-900/15 lg:pl-10">
+              {serviceAreas.map((a) => (
+                <div key={a} className="flex items-center gap-2 text-ink-700">
+                  <span className="w-1.5 h-1.5 bg-rust-500 rounded-full flex-shrink-0" />
+                  <span className="text-sm font-bold">{a}</span>
                 </div>
               ))}
             </div>
@@ -609,96 +520,34 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ═════════ SERVICE AREA ═════════ */}
-      <section className="section bg-white">
-        <div className="container-app">
-          <div className="rounded-3xl bg-surface-900 text-white overflow-hidden relative">
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-primary-500 blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full bg-accent-500 blur-3xl opacity-60" />
-            </div>
-            <div className="relative p-8 md:p-14 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-3 py-1.5 rounded-full text-xs font-semibold mb-5">
-                  <MapPin className="w-3.5 h-3.5 text-primary-300" />
-                  Service Areas
-                </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4 text-balance">
-                  Proudly serving Northern Kentucky and Cincinnati Metro.
-                </h2>
-                <p className="text-stone-300 mb-6 leading-relaxed">
-                  Local crews, local owners. We live where we work — and we treat every property like it's our own.
-                </p>
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-white text-surface-900 hover:bg-stone-100 font-semibold text-sm px-5 py-3 rounded-full transition-colors min-h-[44px]">
-                  Check My Address
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                {serviceAreas.map((area) => (
-                  <div key={area} className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm font-semibold text-white flex items-center gap-2 transition-colors">
-                    <MapPin className="w-3.5 h-3.5 text-primary-400 flex-shrink-0" />
-                    {area}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═════════ GUARANTEE ═════════ */}
-      <section className="section-alt">
-        <div className="container-app">
-          <div className="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-14 border border-stone-200/70 shadow-card relative overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-primary-100/60 blur-3xl pointer-events-none" />
-            <div className="relative grid md:grid-cols-[auto_1fr] gap-8 items-center">
-              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-glow-brand">
-                <Award className="w-12 h-12 text-white" />
-              </div>
-              <div>
-                <p className="eyebrow mb-3">Our Guarantee</p>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-surface-900 tracking-tight mb-4 text-balance">
-                  100% satisfaction or your money back.
-                </h2>
-                <p className="text-lg text-surface-600 leading-relaxed">
-                  If we miss something, we come back and fix it — free. If you're not happy in your first 30 days, we refund every penny. No questions, no hassle, no risk to you.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═════════ FAQ ═════════ */}
-      <section className="section bg-white">
+      {/* ════════ FAQ ════════ */}
+      <section className="section-cream-light">
         <div className="container-narrow">
           <div className="text-center mb-12">
-            <p className="eyebrow mb-4 justify-center">Frequently Asked</p>
-            <h2 className="heading-2 text-surface-900 mb-5 text-balance">
-              Got questions? We've got answers.
+            <p className="eyebrow mb-4">Common Questions</p>
+            <h2 className="heading-2 text-balance">
+              Got questions? <span className="accent-serif font-normal text-rust-500">We've got answers.</span>
             </h2>
-            <p className="lead mx-auto">
-              Don't see what you're looking for? <a href="tel:+18595550123" className="text-primary-700 font-semibold underline decoration-primary-300 hover:decoration-primary-600">Call us at (859) 555-0123</a>.
+            <p className="lead text-ink-500 mt-4 mx-auto">
+              Don't see what you're looking for? <a href={PHONE_HREF} className="text-ink-900 font-bold border-b border-rust-500 hover:text-rust-500 transition-colors">Call {PHONE_DISPLAY}</a>.
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {faqs.map((faq, i) => (
-              <div key={i} className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${openFaq === i ? 'border-primary-200 shadow-card' : 'border-stone-200 shadow-soft'}`}>
+              <div key={i} className={`bg-cream-50 border rounded-md transition-colors duration-150 overflow-hidden ${openFaq === i ? 'border-ink-900/25' : 'border-ink-900/10'}`}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-left cursor-pointer hover:bg-stone-50 transition-colors"
+                  className="w-full flex items-center justify-between p-5 md:p-6 text-left cursor-pointer hover:bg-cream-100/40 transition-colors"
                 >
-                  <span className="text-base md:text-lg font-semibold text-surface-900 pr-4">{faq.q}</span>
-                  <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${openFaq === i ? 'bg-primary-600 text-white' : 'bg-stone-100 text-surface-700'}`}>
+                  <span className="font-bold text-ink-900 pr-4 text-base md:text-lg">{faq.q}</span>
+                  <div className={`w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0 transition-colors ${openFaq === i ? 'bg-rust-500 text-cream-50' : 'bg-ink-900/5 text-ink-500'}`}>
                     {openFaq === i ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
                 {openFaq === i && (
                   <div className="px-5 md:px-6 pb-6 -mt-1">
-                    <p className="text-surface-600 leading-relaxed">{faq.a}</p>
+                    <p className="text-ink-700 leading-relaxed">{faq.a}</p>
                   </div>
                 )}
               </div>
@@ -707,39 +556,32 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ═════════ FINAL CTA ═════════ */}
-      <section className="bg-surface-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-primary-600 blur-3xl" />
-        </div>
-        <div className="relative container-app py-20 md:py-28 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 px-4 py-1.5 rounded-full text-xs font-semibold mb-6">
-            <Clock className="w-3.5 h-3.5 text-accent-400" />
-            Quotes returned within 24 hours
-          </div>
-          <h2 className="font-display text-3xl md:text-5xl font-extrabold tracking-tight mb-5 text-balance">
-            Stop juggling vendors. <br className="hidden md:block" />
-            <span className="text-primary-400">Start enjoying your home.</span>
+      {/* ════════ FINAL CTA ════════ */}
+      <section className="bg-ink-900 text-cream-50">
+        <div className="container-narrow py-20 md:py-28 text-center">
+          <p className="eyebrow-light mb-4 justify-center">Get Started</p>
+          <h2 className="heading-1 text-balance mb-6">
+            Ready to stop juggling vendors?
+            <br />
+            <span className="accent-serif font-normal text-rust-300">We'll quote you in 15 minutes.</span>
           </h2>
-          <p className="text-lg text-stone-300 mb-10 max-w-xl mx-auto">
-            One subscription. One team. One bill. Get your free quote and we'll have a custom plan back to you in 24 hours.
+          <p className="text-lg text-cream-100/80 max-w-2xl mx-auto mb-10">
+            Walk your property, lock in your launch pricing, and start handing off the to-do list. No high-pressure pitch — just a real number.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
             <Link to="/assessment" className="btn-primary-lg">
-              Get My Free Quote
-              <ArrowRight className="w-5 h-5" />
+              Book Free Walk-Through
+              <ArrowRight className="w-4 h-4" />
             </Link>
-            <a href="tel:+18595550123" className="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 backdrop-blur border border-white/20 text-white font-semibold text-lg px-9 py-4 rounded-full transition-all duration-200 min-h-[56px]">
-              <Phone className="w-5 h-5" />
-              (859) 555-0123
+            <a href={PHONE_HREF} className="btn-outline-light">
+              <Phone className="w-4 h-4" />
+              {PHONE_DISPLAY}
             </a>
           </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-stone-400">
-            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> No contracts</span>
-            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> Cancel anytime</span>
-            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-primary-400" /> Money-back guarantee</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-cream-100/70">
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-rust-300" /> No contracts</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-rust-300" /> Cancel anytime</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-rust-300" /> 30-day money-back</span>
           </div>
         </div>
       </section>
