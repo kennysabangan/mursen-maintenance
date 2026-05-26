@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
   ArrowRight, Check, ChevronDown, ChevronUp, Phone, Star, User,
-  Leaf, Droplets, SprayCan, Wrench, Snowflake, Trash,
+  Leaf, Droplets, SprayCan, Wrench, Snowflake,
 } from 'lucide-react';
 
 const PHONE_DISPLAY = '(859) MURSEN-1';
@@ -18,7 +18,6 @@ const services = [
   { num: '03', icon: SprayCan, name: 'Power Washing', tagline: 'Driveways, siding, decks, fences, soft-wash roofs.', from: '$165' },
   { num: '04', icon: Wrench, name: 'Handyman', tagline: 'Drywall, doors, paint, fixtures, mounts, caulking.', from: '$75/hr' },
   { num: '05', icon: Snowflake, name: 'Snow & Seasonal', tagline: 'Plowing, salt, leaf cleanup, holiday lights.', from: '$55' },
-  { num: '06', icon: Trash, name: 'Junk Hauling', tagline: 'Quarter to full truckload, single-call removal.', from: '$125' },
 ];
 
 const stats = [
@@ -231,7 +230,7 @@ export default function Homepage() {
             <div>
               <p className="eyebrow mb-4">Every Service</p>
               <h2 className="heading-2 text-balance max-w-2xl">
-                Six services. <span className="accent-serif font-normal text-rust-500">One number to call.</span>
+                Five services. <span className="accent-serif font-normal text-rust-500">One number to call.</span>
               </h2>
             </div>
             <Link to="/portfolio" className="btn-link">

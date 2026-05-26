@@ -255,7 +255,6 @@ function Footer() {
               <li><Link to="/portfolio#powerwash" className="hover:text-rust-500 transition-colors">Power Washing</Link></li>
               <li><Link to="/portfolio#handyman" className="hover:text-rust-500 transition-colors">Handyman</Link></li>
               <li><Link to="/portfolio#seasonal" className="hover:text-rust-500 transition-colors">Snow & Seasonal</Link></li>
-              <li><Link to="/portfolio#seasonal" className="hover:text-rust-500 transition-colors">Junk Hauling</Link></li>
             </ul>
           </div>
 

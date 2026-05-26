@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Leaf, Droplets, SprayCan, Wrench, Snowflake, Trash, Phone, Check } from 'lucide-react';
+import { ArrowRight, Leaf, Droplets, SprayCan, Wrench, Snowflake, Phone, Check } from 'lucide-react';
 
 const PHONE_DISPLAY = '(859) MURSEN-1';
 const PHONE_HREF = 'tel:+18596877361';
@@ -64,9 +64,6 @@ const seasonalServices = [
   { name: 'Snow — driveway + walkway', detail: '', price: '$85 – $125' },
   { name: 'Snow — seasonal contract (Dec–Mar)', detail: 'Unlimited visits per snow event', price: '$325 – $525' },
   { name: 'Salt / de-ice application', detail: '', price: '$35 – $65' },
-  { name: 'Junk hauling — ¼ truckload', detail: '', price: '$125 – $175' },
-  { name: 'Junk hauling — ½ truckload', detail: '', price: '$225 – $295' },
-  { name: 'Junk hauling — full truckload', detail: '', price: '$385 – $495' },
   { name: 'Holiday lights — single-story install', detail: '', price: '$225 – $375' },
   { name: 'Holiday lights — two-story install', detail: '', price: '$375 – $625' },
   { name: 'Holiday lights — takedown & storage', detail: '', price: '$145 – $245' },
@@ -78,7 +75,7 @@ const serviceCategories = [
   { num: '02', icon: Droplets, title: 'Window Cleaning', tagline: 'Interior · exterior · screens · gutters · vents', services: windowServices, anchor: 'windows' },
   { num: '03', icon: SprayCan, title: 'Power Washing', tagline: 'Driveway · siding · decks · fence · roof · staining', services: powerWashServices, anchor: 'powerwash' },
   { num: '04', icon: Wrench, title: 'Handyman', tagline: 'Drywall · paint · doors · mounts · caulking', services: handymanServices, anchor: 'handyman', footnote: 'Plumbing & electrical requiring KY licensure (faucet replacement, toilet rebuild, light/fan fixture swap) — coordinated through our licensed partner network. We remain your single point of contact. Quoted separately.' },
-  { num: '05', icon: Snowflake, title: 'Seasonal & Specialty', tagline: 'Snow · holiday lights · junk hauling', services: seasonalServices, anchor: 'seasonal' },
+  { num: '05', icon: Snowflake, title: 'Seasonal & Specialty', tagline: 'Snow · holiday lights', services: seasonalServices, anchor: 'seasonal' },
 ];
 
 function PriceTable({ num, icon: Icon, title, tagline, services, anchor, footnote }: {
@@ -124,7 +121,7 @@ function PriceTable({ num, icon: Icon, title, tagline, services, anchor, footnot
 export default function Portfolio() {
   const siteUrl = 'https://mursen.com';
   const seoTitle = 'Services & Pricing | Mursen — Every Service. One Number.';
-  const seoDescription = 'Transparent pricing for lawn care, window cleaning, power washing, handyman, snow, and junk hauling. Serving Covington KY and Cincinnati metro.';
+  const seoDescription = 'Transparent pricing for lawn care, window cleaning, power washing, handyman, and snow removal. Serving Covington KY and Cincinnati metro.';
 
   return (
     <>
@@ -159,7 +156,7 @@ export default function Portfolio() {
 
           {/* 6-service jump grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-10">
-            {serviceCategories.slice(0, 6).map((c) => {
+            {serviceCategories.slice(0, 5).map((c) => {
               return (
                 <a key={c.anchor} href={`#${c.anchor}`} className="card-cream group flex items-center gap-4 hover:border-rust-400">
                   <span className="section-number text-base">{c.num}</span>
