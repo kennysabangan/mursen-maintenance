@@ -50,10 +50,7 @@ const handymanServices = [
   { name: 'Drywall patch — large / full sheet', detail: 'Tape, mud, prime · paint quoted separately', price: '$185 – $295' },
   { name: 'Interior door installation', detail: 'Pre-hung · trim included', price: '$165 – $245' },
   { name: 'Door lock / deadbolt install', detail: 'Standard or smart lock', price: '$95 – $115' },
-  { name: 'TV mount — up to 65"', detail: 'Wall mount · cable concealment available', price: '$135' },
-  { name: 'TV mount — 65"+ or over fireplace', detail: 'Larger mount or specialty placement', price: '$185 – $245' },
   { name: 'Caulking — tub, shower, windows', detail: 'Old caulk removed · re-sealed', price: '$95 – $135' },
-  { name: 'Furniture assembly', detail: 'Hourly · IKEA, Wayfair, etc.', price: '$75/hr' },
   { name: 'Paint touch-up — per room', detail: 'Spot repair · paint provided by you', price: '$115 – $215' },
   { name: 'Full room paint — walls only', detail: '2 coats · standard size room', price: '$325 – $475' },
   { name: 'Full room paint — walls + trim + ceiling', detail: 'Complete room · cut-in detail', price: '$475 – $725' },
@@ -64,10 +61,7 @@ const seasonalServices = [
   { name: 'Snow — driveway + walkway', detail: '', price: '$85 – $125' },
   { name: 'Snow — seasonal contract (Dec–Mar)', detail: 'Unlimited visits per snow event', price: '$325 – $525' },
   { name: 'Salt / de-ice application', detail: '', price: '$35 – $65' },
-  { name: 'Holiday lights — single-story install', detail: '', price: '$225 – $375' },
-  { name: 'Holiday lights — two-story install', detail: '', price: '$375 – $625' },
-  { name: 'Holiday lights — takedown & storage', detail: '', price: '$145 – $245' },
-  { name: 'Christmas tree disposal', detail: 'Curbside pickup · zero hassle', price: '$45' },
+
 ];
 
 const serviceCategories = [
@@ -75,7 +69,7 @@ const serviceCategories = [
   { num: '02', icon: Droplets, title: 'Window Cleaning', tagline: 'Interior · exterior · screens · gutters · vents', services: windowServices, anchor: 'windows' },
   { num: '03', icon: SprayCan, title: 'Power Washing', tagline: 'Driveway · siding · decks · fence · roof · staining', services: powerWashServices, anchor: 'powerwash' },
   { num: '04', icon: Wrench, title: 'Handyman', tagline: 'Drywall · paint · doors · mounts · caulking', services: handymanServices, anchor: 'handyman', footnote: 'Plumbing & electrical requiring KY licensure (faucet replacement, toilet rebuild, light/fan fixture swap) — coordinated through our licensed partner network. We remain your single point of contact. Quoted separately.' },
-  { num: '05', icon: Snowflake, title: 'Seasonal & Specialty', tagline: 'Snow · holiday lights', services: seasonalServices, anchor: 'seasonal' },
+  { num: '05', icon: Snowflake, title: 'Seasonal & Specialty', tagline: 'Snow · salt · de-ice', services: seasonalServices, anchor: 'seasonal' },
 ];
 
 function PriceTable({ num, icon: Icon, title, tagline, services, anchor, footnote }: {

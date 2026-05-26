@@ -17,7 +17,7 @@ const services = [
   { num: '02', icon: Droplets, name: 'Window Cleaning', tagline: 'Interior, exterior, screens, tracks, gutters, dryer vents.', from: '$145' },
   { num: '03', icon: SprayCan, name: 'Power Washing', tagline: 'Driveways, siding, decks, fences, soft-wash roofs.', from: '$165' },
   { num: '04', icon: Wrench, name: 'Handyman', tagline: 'Drywall, doors, paint, fixtures, mounts, caulking.', from: '$75/hr' },
-  { num: '05', icon: Snowflake, name: 'Snow & Seasonal', tagline: 'Plowing, salt, leaf cleanup, holiday lights.', from: '$55' },
+  { num: '05', icon: Snowflake, name: 'Snow & Seasonal', tagline: 'Plowing, salt, leaf cleanup.', from: '$55' },
 ];
 
 const stats = [
