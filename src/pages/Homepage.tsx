@@ -213,10 +213,15 @@ export default function Homepage() {
       </Helmet>
 
       {/* ═══════════════ 1. HERO — BOLD & WELCOMING ═══════════════ */}
-      <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-brand-600">
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+      <section className="relative min-h-[85vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Background image with green overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-home.jpg"
+            alt="Beautiful suburban home with perfectly maintained lawn"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-brand-700/80" />
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl px-6 py-20">
@@ -473,23 +478,23 @@ export default function Homepage() {
             {[
               {
                 label: 'Lawn Care',
-                before: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=75',
-                after: 'https://images.unsplash.com/photo-1558435186-d31d126391fa?w=400&q=75',
+                before: '/images/before-after/lawn-before.jpg',
+                after: '/images/before-after/lawn-after.jpg',
               },
               {
                 label: 'Power Washing',
-                before: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&q=75',
-                after: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&q=75',
+                before: '/images/before-after/powerwash-before.jpg',
+                after: '/images/before-after/powerwash-after.jpg',
               },
               {
                 label: 'Window Cleaning',
-                before: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=75',
-                after: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=75',
+                before: '/images/before-after/windows-before.jpg',
+                after: '/images/before-after/windows-after.jpg',
               },
               {
                 label: 'Handyman Repairs',
-                before: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&q=75',
-                after: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=75',
+                before: '/images/before-after/handyman-before.jpg',
+                after: '/images/before-after/handyman-after.jpg',
               },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
