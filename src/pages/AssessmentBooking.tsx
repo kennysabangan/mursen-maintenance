@@ -39,7 +39,7 @@ export default function AssessmentBooking() {
 
   const siteUrl = 'https://mursenmaintenance.com';
   const seoTitle = 'Free Property Assessment | Mursen Maintenance';
-  const seoDescription = 'Book a free 75-point property health assessment. Get a detailed photo report within 24 hours. No obligation. Servicing the entire Cincinnati metro: Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati neighborhoods.';
+  const seoDescription = 'Book a free 75-point property health assessment. Get a detailed photo report within 24 hours. No obligation. Servicing the entire Cincinnati metro.';
 
   if (submitted) {
     return (
@@ -47,32 +47,21 @@ export default function AssessmentBooking() {
         <Helmet>
           <title>{seoTitle}</title>
           <meta name="description" content={seoDescription} />
-          <meta name="keywords" content="free property assessment, Covington property inspection, rental property health check" />
           <link rel="canonical" href={`${siteUrl}/assessment`} />
-          <meta property="og:title" content={seoTitle} />
-          <meta property="og:description" content={seoDescription} />
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={`${siteUrl}/assessment`} />
-          <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
-          <meta property="og:site_name" content="Mursen Maintenance" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={seoTitle} />
-          <meta name="twitter:description" content={seoDescription} />
-          <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
         </Helmet>
-        <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6">
+        <div className="min-h-screen bg-white flex items-center justify-center px-6">
         <div className="max-w-md w-full text-center animate-fade-up">
-          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-12">
-            <div className="w-16 h-16 bg-brand-600/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-8 h-8 text-brand-400" />
+          <div className="bg-white border border-gray-200 rounded-2xl p-12 shadow-card">
+            <div className="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-8 h-8 text-brand-600" />
             </div>
-            <h2 className="font-display text-2xl font-bold text-white mb-3 uppercase">Assessment Scheduled!</h2>
-            <p className="text-gray-400 mb-8 leading-relaxed">
+            <h2 className="font-display text-2xl font-bold text-gray-900 mb-3 uppercase">Assessment Scheduled!</h2>
+            <p className="text-gray-500 mb-8 leading-relaxed">
               We'll contact you within 2 hours to confirm your appointment. Get ready for a comprehensive 75-point inspection!
             </p>
             <button
               onClick={() => { setSubmitted(false); setFormData(initialFormData); }}
-              className="text-brand-400 hover:text-brand-300 font-semibold cursor-pointer transition-colors inline-flex items-center gap-1"
+              className="text-brand-600 hover:text-brand-700 font-semibold cursor-pointer transition-colors inline-flex items-center gap-1"
             >
               Schedule Another Assessment
               <ArrowRight className="w-4 h-4" />
@@ -89,48 +78,37 @@ export default function AssessmentBooking() {
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="free property assessment, Covington property inspection, rental property health check" />
         <link rel="canonical" href={`${siteUrl}/assessment`} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${siteUrl}/assessment`} />
-        <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
-        <meta property="og:site_name" content="Mursen Maintenance" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={`${siteUrl}/og-image.jpg`} />
       </Helmet>
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="py-20 md:py-24 px-6 bg-[#0a0a0a]">
+      <section className="py-20 md:py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-brand-600/10 border border-brand-600/20 text-brand-400 px-4 py-2 rounded-full text-sm font-bold mb-6">
+          <div className="inline-flex items-center gap-2 bg-brand-50 text-brand-600 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-brand-100">
             <Sparkles className="w-4 h-4" />
             Free · No Obligation · 24hr Report
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 uppercase">
+          <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 uppercase">
             Free Property Health Assessment
           </h1>
           <p className="text-lg text-gray-500 max-w-xl mx-auto mb-8 leading-relaxed">
             A comprehensive 75-point inspection with a detailed photo report. We identify every issue that could cost you money down the road.
           </p>
-          <div className="inline-flex items-center gap-4 bg-gray-900/50 border border-gray-800 px-8 py-4 rounded-xl">
+          <div className="inline-flex items-center gap-4 bg-amber-50 border border-amber-200 px-8 py-4 rounded-xl">
             <span className="text-lg">
-              <span className="text-gray-500 line-through">$399</span>
-              <span className="mx-2 text-gray-600">→</span>
-              <span className="text-brand-400 font-extrabold text-2xl">Free</span>
+              <span className="text-gray-400 line-through">$399</span>
+              <span className="mx-2 text-gray-300">→</span>
+              <span className="text-brand-600 font-extrabold text-2xl">Free</span>
             </span>
           </div>
         </div>
       </section>
 
       {/* Form */}
-      <section className="py-20 px-6 -mt-8">
+      <section className="py-20 px-6 bg-gray-50 -mt-8">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 md:p-12">
-            <h2 className="font-display text-2xl font-bold text-white mb-8 tracking-tight uppercase">Tell Us About Your Property</h2>
+          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-card border border-gray-100">
+            <h2 className="font-display text-2xl font-bold text-gray-900 mb-8 tracking-tight uppercase">Tell Us About Your Property</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -144,16 +122,10 @@ export default function AssessmentBooking() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">Property Type <span className="text-red-400">*</span></label>
+                <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Property Type <span className="text-red-500">*</span></label>
                 <div className="relative">
-                  <Home className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
-                  <select
-                    name="propertyType"
-                    required
-                    value={formData.propertyType}
-                    onChange={handleChange}
-                    className="select-field"
-                  >
+                  <Home className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                  <select name="propertyType" required value={formData.propertyType} onChange={handleChange} className="select-field">
                     <option value="">Select property type</option>
                     <option value="single-family">Single-Family Home</option>
                     <option value="duplex">Duplex</option>
@@ -167,18 +139,18 @@ export default function AssessmentBooking() {
 
               {formData.propertyType === 'multi-family' && (
                 <div>
-                  <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">Number of Units <span className="text-red-400">*</span></label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Number of Units <span className="text-red-500">*</span></label>
                   <div className="relative">
-                    <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                    <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                     <input type="number" name="units" required min="3" value={formData.units} onChange={handleChange} className="input-field-icon" placeholder="3" />
                   </div>
                 </div>
               )}
 
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">How did you hear about us?</label>
+                <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">How did you hear about us?</label>
                 <div className="relative">
-                  <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                  <MessageSquare className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                   <select name="howHeard" value={formData.howHeard} onChange={handleChange} className="select-field">
                     <option value="">Select an option</option>
                     <option value="google">Google Search</option>
@@ -192,9 +164,9 @@ export default function AssessmentBooking() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">Preferred Date &amp; Time <span className="text-red-400">*</span></label>
+                <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Preferred Date &amp; Time <span className="text-red-500">*</span></label>
                 <div className="relative">
-                  <CalendarDays className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                  <CalendarDays className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                   <input type="datetime-local" name="dateTime" required value={formData.dateTime} onChange={handleChange} className="input-field-icon" />
                 </div>
               </div>
@@ -203,7 +175,7 @@ export default function AssessmentBooking() {
                 <CalendarDays className="w-5 h-5" />
                 Schedule Free Assessment
               </button>
-              <p className="text-xs text-gray-600 text-center">
+              <p className="text-xs text-gray-400 text-center">
                 By submitting, you agree to our terms and privacy policy. We respond within 2 hours.
               </p>
             </form>
@@ -217,9 +189,9 @@ export default function AssessmentBooking() {
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={i} className="bg-gray-900/50 border border-gray-800 rounded-xl p-5 text-center">
-                  <Icon className="w-6 h-6 text-brand-400 mx-auto mb-3" />
-                  <h3 className="font-bold text-sm text-white mb-1">{item.title}</h3>
+                <div key={i} className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-soft">
+                  <Icon className="w-6 h-6 text-brand-600 mx-auto mb-3" />
+                  <h3 className="font-bold text-sm text-gray-900 mb-1">{item.title}</h3>
                   <p className="text-xs text-gray-500">{item.desc}</p>
                 </div>
               );
@@ -246,11 +218,11 @@ function FormField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-bold text-gray-300 mb-2 uppercase tracking-wide">
-        {label} {required && <span className="text-red-400">*</span>}
+      <label htmlFor={name} className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="relative">
-        <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+        <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
         <input
           type={type}
           id={name}

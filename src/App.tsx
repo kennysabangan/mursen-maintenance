@@ -37,14 +37,14 @@ function Header() {
 
   return (
     <>
-      <header className={`sticky top-0 z-50 bg-[#0a0a0a] transition-shadow duration-200 ${scrolled ? 'border-b border-gray-800' : 'border-b border-gray-900/50'}`}>
+      <header className={`sticky top-0 z-50 bg-white transition-shadow duration-200 ${scrolled ? 'shadow-sm border-b border-gray-100' : ''}`}>
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2.5 group cursor-pointer">
-            <div className="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center group-hover:bg-brand-500 transition-colors">
+            <div className="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center group-hover:bg-brand-700 transition-colors">
               <Home className="w-4 h-4 text-white" />
             </div>
-            <span className="text-lg font-display font-bold tracking-tight text-white uppercase">
-              Mursen<span className="text-brand-400">.</span>
+            <span className="text-lg font-display font-bold tracking-tight text-gray-900 uppercase">
+              Mursen<span className="text-brand-600">.</span>
             </span>
           </Link>
 
@@ -55,8 +55,8 @@ function Header() {
                 to={link.to}
                 className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer ${
                   isActive(link.to)
-                    ? 'text-brand-400 bg-brand-600/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'text-brand-700 bg-brand-50'
+                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 {link.label}
@@ -67,7 +67,7 @@ function Header() {
           <div className="flex items-center gap-3">
             <Link
               to="/assessment"
-              className="hidden md:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px] shadow-lg shadow-brand-600/20"
+              className="hidden md:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]"
             >
               Free Assessment
               <ArrowRight className="w-4 h-4" />
@@ -75,10 +75,10 @@ function Header() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition cursor-pointer"
+              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50 transition cursor-pointer"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X className="w-5 h-5 text-gray-300" /> : <Menu className="w-5 h-5 text-gray-300" />}
+              {mobileOpen ? <X className="w-5 h-5 text-gray-700" /> : <Menu className="w-5 h-5 text-gray-700" />}
             </button>
           </div>
         </div>
@@ -86,22 +86,22 @@ function Header() {
 
       {/* Full-screen mobile overlay */}
       {mobileOpen && (
-        <div className="md:hidden fixed inset-0 z-[60] bg-[#0a0a0a] animate-fade-up">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800">
+        <div className="md:hidden fixed inset-0 z-[60] bg-white animate-fade-up">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <Link to="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
               <div className="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center">
                 <Home className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-display font-bold tracking-tight text-white uppercase">
-                Mursen<span className="text-brand-400">.</span>
+              <span className="text-lg font-display font-bold tracking-tight text-gray-900 uppercase">
+                Mursen<span className="text-brand-600">.</span>
               </span>
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
-              className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition cursor-pointer"
+              className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-50 transition cursor-pointer"
               aria-label="Close menu"
             >
-              <X className="w-5 h-5 text-gray-300" />
+              <X className="w-5 h-5 text-gray-700" />
             </button>
           </div>
           <nav className="px-6 py-8 space-y-2">
@@ -112,8 +112,8 @@ function Header() {
                 onClick={() => setMobileOpen(false)}
                 className={`block px-5 py-4 rounded-xl font-medium text-base cursor-pointer transition-colors ${
                   isActive(link.to)
-                    ? 'bg-brand-600/10 text-brand-400'
-                    : 'text-gray-300 hover:bg-white/5'
+                    ? 'bg-brand-50 text-brand-700'
+                    : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
                 {link.label}
@@ -122,7 +122,7 @@ function Header() {
             <Link
               to="/assessment"
               onClick={() => setMobileOpen(false)}
-              className="block w-full text-center bg-brand-600 text-white font-bold py-4 px-6 rounded-xl mt-6 hover:bg-brand-500 transition-colors min-h-[48px]"
+              className="block w-full text-center bg-brand-600 text-white font-bold py-4 px-6 rounded-xl mt-6 hover:bg-brand-700 transition-colors min-h-[48px]"
             >
               Free Assessment
             </Link>
@@ -135,7 +135,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] border-t border-gray-900">
+    <footer className="bg-gray-50 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid md:grid-cols-4 gap-10 mb-10">
           <div className="md:col-span-1">
@@ -143,20 +143,20 @@ function Footer() {
               <div className="w-8 h-8 bg-brand-600 rounded-xl flex items-center justify-center">
                 <Home className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-display font-bold tracking-tight text-white uppercase">
-                Mursen<span className="text-brand-400">.</span>
+              <span className="text-lg font-display font-bold tracking-tight text-gray-900 uppercase">
+                Mursen<span className="text-brand-600">.</span>
               </span>
             </div>
             <p className="text-sm leading-relaxed text-gray-500">
               One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
             </p>
-            <p className="text-xs text-gray-600 mt-2">
+            <p className="text-xs text-gray-400 mt-2">
               Owner-operated. We maintain 20+ rental units.
             </p>
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-500 mb-4">Company</h4>
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-400 mb-4">Company</h4>
             <ul className="space-y-2.5">
               {[
                 { to: '/contact', label: 'About Us' },
@@ -166,7 +166,7 @@ function Footer() {
                 { to: '/contact', label: 'Contact' },
               ].map(link => (
                 <li key={link.label}>
-                  <Link to={link.to} className="text-sm text-gray-500 hover:text-brand-400 transition-colors cursor-pointer">
+                  <Link to={link.to} className="text-sm text-gray-500 hover:text-brand-600 transition-colors cursor-pointer">
                     {link.label}
                   </Link>
                 </li>
@@ -175,7 +175,7 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-500 mb-4">Services</h4>
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-400 mb-4">Services</h4>
             <ul className="space-y-2.5 text-sm text-gray-500">
               <li>Lawn Mowing &amp; Care</li>
               <li>Window Cleaning</li>
@@ -185,29 +185,29 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-500 mb-4">Contact</h4>
+            <h4 className="font-display font-bold text-xs uppercase tracking-widest text-gray-400 mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-2.5 text-sm text-gray-500">
-                <Phone className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                <a href="tel:+18595550123" className="hover:text-brand-400 transition-colors">(859) 555-0123</a>
+                <Phone className="w-4 h-4 text-brand-600 flex-shrink-0" />
+                <a href="tel:+18595550123" className="hover:text-brand-600 transition-colors">(859) 555-0123</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-gray-500">
-                <Mail className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                <a href="mailto:hello@mursenmaintenance.com" className="hover:text-brand-400 transition-colors">hello@mursenmaintenance.com</a>
+                <Mail className="w-4 h-4 text-brand-600 flex-shrink-0" />
+                <a href="mailto:hello@mursenmaintenance.com" className="hover:text-brand-600 transition-colors">hello@mursenmaintenance.com</a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-gray-500">
-                <MapPin className="w-4 h-4 text-brand-500 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-brand-600 flex-shrink-0" />
                 Covington, KY 41011
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-6 border-t border-gray-900 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-600">
+        <div className="pt-6 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Mursen Maintenance. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs text-gray-600">
+          <div className="flex items-center gap-5 text-xs text-gray-400">
             <span>Fully Insured</span>
             <span>Bonded</span>
             <span>Serving Covington &amp; Cincinnati Metro</span>
@@ -230,7 +230,7 @@ function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-[#0a0a0a]">
+        <div className="min-h-screen flex flex-col bg-white">
           <ScrollToTop />
           <Header />
           <main className="flex-grow">

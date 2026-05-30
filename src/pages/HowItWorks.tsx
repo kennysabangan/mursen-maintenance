@@ -94,13 +94,13 @@ export default function HowItWorks() {
         <meta name="twitter:description" content={seoDescription} />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0a0a0a]">
+      <div className="min-h-screen bg-white">
 
         {/* Header */}
-        <section className="py-20 md:py-24 px-6 bg-[#0a0a0a]">
+        <section className="py-20 md:py-24 px-6 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block text-brand-400 text-xs font-bold uppercase tracking-widest mb-4">How It Works</span>
-            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 uppercase">
+            <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">How It Works</span>
+            <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 uppercase">
               Three Steps. Zero Complexity.
             </h1>
             <p className="text-lg text-gray-500 max-w-lg mx-auto">
@@ -110,24 +110,24 @@ export default function HowItWorks() {
         </section>
 
         {/* Steps */}
-        <section className="py-16 md:py-24 px-6 bg-[#111827]">
+        <section className="py-16 md:py-24 px-6 bg-gray-50">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8">
               {steps.map((step, i) => {
                 const StepIcon = step.icon;
                 return (
-                  <div key={i} className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 hover:border-brand-500/20 transition-colors">
-                    <div className="w-12 h-12 bg-brand-600/10 rounded-xl flex items-center justify-center mb-5">
-                      <StepIcon className="w-6 h-6 text-brand-400" />
+                  <div key={i} className="bg-white border border-gray-200 rounded-2xl p-8 hover:border-brand-200 hover:shadow-md transition-all">
+                    <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-5">
+                      <StepIcon className="w-6 h-6 text-brand-600" />
                     </div>
-                    <span className="inline-block bg-brand-600/10 text-brand-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+                    <span className="inline-block bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
                       {step.subtitle}
                     </span>
-                    <h3 className="font-display text-xl font-bold text-white mb-2 uppercase tracking-wide">{step.title}</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed mb-5">{step.description}</p>
+                    <h3 className="font-display text-xl font-bold text-gray-900 mb-2 uppercase tracking-wide">{step.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed mb-5">{step.description}</p>
                     <ul className="space-y-2.5">
                       {step.details.map((d, j) => (
-                        <li key={j} className="flex items-start gap-2.5 text-sm text-gray-400">
+                        <li key={j} className="flex items-start gap-2.5 text-sm text-gray-600">
                           <Check className="w-4 h-4 text-brand-500 flex-shrink-0 mt-0.5" />
                           {d}
                         </li>
@@ -141,11 +141,11 @@ export default function HowItWorks() {
         </section>
 
         {/* Pricing Plans */}
-        <section className="py-16 md:py-24 px-6 bg-[#0a0a0a]">
+        <section className="py-16 md:py-24 px-6 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block text-brand-400 text-xs font-bold uppercase tracking-widest mb-4">Pricing</span>
-              <h2 className="font-display text-3xl font-bold text-white mb-3 uppercase">Choose Your Plan</h2>
+              <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Pricing</span>
+              <h2 className="font-display text-3xl font-bold text-gray-900 mb-3 uppercase">Choose Your Plan</h2>
               <p className="text-lg text-gray-500 max-w-md mx-auto">
                 All plans are month-to-month. Cancel anytime.
               </p>
@@ -155,12 +155,11 @@ export default function HowItWorks() {
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`rounded-2xl p-6 relative transition-all duration-200 ${
+                  className={`rounded-2xl p-6 relative transition-all duration-200 bg-white ${
                     plan.popular
-                      ? 'border-2 border-brand-500 bg-gray-900/80 scale-[1.02]'
-                      : 'bg-gray-900/40 border border-gray-800'
+                      ? 'border-2 border-brand-500 shadow-lg shadow-brand-100 scale-[1.02]'
+                      : 'border border-gray-200 hover:border-gray-300 hover:shadow-sm'
                   }`}
-                  style={{ boxShadow: plan.popular ? '0 4px 24px rgba(5,150,105,0.15)' : 'none' }}
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-semibold px-5 py-1.5 rounded-full whitespace-nowrap">
@@ -168,23 +167,23 @@ export default function HowItWorks() {
                     </div>
                   )}
 
-                  <h3 className="font-display text-base font-bold mb-1 text-white uppercase tracking-wide">{plan.name}</h3>
+                  <h3 className="font-display text-base font-bold mb-1 text-gray-900 uppercase tracking-wide">{plan.name}</h3>
                   <p className="text-xs text-gray-500 mb-5">
                     {plan.popular ? 'The full package' : plan.name === 'Property Manager' ? 'For landlords & investors' : plan.name === 'Lawn Plus' ? 'Weekly lawn maintenance' : plan.name === 'Handyman Plus' ? 'Monthly handyman' : 'Essential coverage'}
                   </p>
 
                   <div className="mb-6">
-                    <span className={`text-3xl font-extrabold tracking-tight ${plan.popular ? 'text-brand-400' : 'text-white'}`}>
+                    <span className={`text-3xl font-extrabold tracking-tight ${plan.popular ? 'text-brand-600' : 'text-gray-900'}`}>
                       ${plan.price}
                     </span>
-                    <span className={`text-xs ml-1 ${plan.popular ? 'text-brand-500' : 'text-gray-500'}`}>{plan.note || '/mo'}</span>
+                    <span className={`text-xs ml-1 ${plan.popular ? 'text-brand-600' : 'text-gray-500'}`}>{plan.note || '/mo'}</span>
                   </div>
 
                   <ul className="space-y-2.5 mb-6">
                     {plan.features.map(f => (
                       <li key={f} className="flex items-start gap-2.5">
-                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-brand-400' : 'text-gray-600'}`} />
-                        <span className="text-xs text-gray-400">{f}</span>
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-brand-500' : 'text-gray-400'}`} />
+                        <span className="text-xs text-gray-600">{f}</span>
                       </li>
                     ))}
                   </ul>
@@ -193,8 +192,8 @@ export default function HowItWorks() {
                     to="/assessment"
                     className={`block w-full text-center py-3 rounded-xl font-bold text-sm transition-all duration-200 min-h-[44px] ${
                       plan.popular
-                        ? 'bg-brand-600 hover:bg-brand-500 text-white'
-                        : 'bg-white hover:bg-brand-600 text-gray-900 hover:text-white'
+                        ? 'bg-brand-600 hover:bg-brand-700 text-white'
+                        : 'bg-gray-900 hover:bg-brand-600 text-white'
                     }`}
                   >
                     Get Started
@@ -206,22 +205,22 @@ export default function HowItWorks() {
         </section>
 
         {/* Promise */}
-        <section className="py-16 md:py-24 px-6 bg-[#111827]">
+        <section className="py-16 md:py-24 px-6 bg-gray-50">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-900/50 border-2 border-amber-500/20 rounded-2xl p-8 md:p-12">
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-8 md:p-12">
               <div className="flex items-start gap-5">
-                <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-6 h-6 text-amber-400" />
+                <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-6 h-6 text-amber-600" />
                 </div>
                 <div>
-                  <h3 className="font-display text-xl font-bold text-white mb-2 uppercase tracking-wide">30-Day Satisfaction Promise</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-5">
+                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2 uppercase tracking-wide">30-Day Satisfaction Promise</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-5">
                     Try any plan for 30 days. Not satisfied? Full refund. No questions asked.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <span className="flex items-center gap-1.5 text-amber-400 font-semibold"><Check className="w-4 h-4" /> Cancel any time</span>
-                    <span className="flex items-center gap-1.5 text-amber-400 font-semibold"><Check className="w-4 h-4" /> No lock-in contracts</span>
-                    <span className="flex items-center gap-1.5 text-amber-400 font-semibold"><Check className="w-4 h-4" /> Money-back guarantee</span>
+                    <span className="flex items-center gap-1.5 text-amber-700 font-bold"><Check className="w-4 h-4" /> Cancel any time</span>
+                    <span className="flex items-center gap-1.5 text-amber-700 font-bold"><Check className="w-4 h-4" /> No lock-in contracts</span>
+                    <span className="flex items-center gap-1.5 text-amber-700 font-bold"><Check className="w-4 h-4" /> Money-back guarantee</span>
                   </div>
                 </div>
               </div>
@@ -230,9 +229,9 @@ export default function HowItWorks() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 px-6 bg-[#0a0a0a]">
+        <section className="py-16 md:py-24 px-6 bg-white">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-3xl font-bold text-white mb-4 uppercase">Ready to Stop Juggling Contractors?</h2>
+            <h2 className="font-display text-3xl font-bold text-gray-900 mb-4 uppercase">Ready to Stop Juggling Contractors?</h2>
             <p className="text-lg text-gray-500 mb-8 max-w-lg mx-auto">
               Start with a free assessment or book a single service today.
             </p>
