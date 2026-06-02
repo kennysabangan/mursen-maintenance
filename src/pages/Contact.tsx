@@ -202,7 +202,27 @@ export default function Contact() {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => { e.preventDefault(); setFormSubmitted(true); }}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const data = {
+                      name: (form.elements.namedItem('name') as HTMLInputElement).value,
+                      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+                      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+                      source: 'contact',
+                    };
+                    try {
+                      const res = await fetch('/api/leads', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data),
+                      });
+                      if (!res.ok) throw new Error('Failed');
+                      setFormSubmitted(true);
+                    } catch {
+                      alert('Something went wrong. Please try again or call us directly.');
+                    }
+                  }}
                   className="space-y-4"
                 >
                   <div>

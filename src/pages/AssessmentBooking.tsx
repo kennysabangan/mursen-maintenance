@@ -32,9 +32,30 @@ export default function AssessmentBooking() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          property_type: formData.propertyType,
+          units: formData.units || null,
+          how_heard: formData.howHeard || null,
+          preferred_date: formData.dateTime || null,
+          plan_interest: 'complete',
+          source: 'assessment',
+        }),
+      });
+      if (!res.ok) throw new Error('Failed');
+      setSubmitted(true);
+    } catch {
+      alert('Something went wrong. Please try again or call us directly.');
+    }
   };
 
   const siteUrl = 'https://mursenmaintenance.com';

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { Menu, X, ArrowRight, Phone, Mail, MapPin, Home } from 'lucide-react';
+import { Menu, X, ArrowRight, Phone, Mail, MapPin, Home, Leaf } from 'lucide-react';
 import Homepage from './pages/Homepage';
 import AssessmentBooking from './pages/AssessmentBooking';
 import Portfolio from './pages/Portfolio';
@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminPosts from './pages/AdminPosts';
+import InstantQuote from './pages/InstantQuote';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -66,6 +67,13 @@ function Header() {
 
           <div className="flex items-center gap-3">
             <Link
+              to="/estimate"
+              className="hidden md:inline-flex items-center gap-2 border-2 border-brand-200 text-brand-700 hover:bg-brand-50 font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]"
+            >
+              <Leaf className="w-4 h-4" />
+              Get Quote
+            </Link>
+            <Link
               to="/assessment"
               className="hidden md:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]"
             >
@@ -120,9 +128,16 @@ function Header() {
               </Link>
             ))}
             <Link
+              to="/estimate"
+              onClick={() => setMobileOpen(false)}
+              className="block w-full text-center border-2 border-brand-200 text-brand-700 font-bold py-4 px-6 rounded-xl hover:bg-brand-50 transition-colors min-h-[48px]"
+            >
+              Get Quote
+            </Link>
+            <Link
               to="/assessment"
               onClick={() => setMobileOpen(false)}
-              className="block w-full text-center bg-brand-600 text-white font-bold py-4 px-6 rounded-xl mt-6 hover:bg-brand-700 transition-colors min-h-[48px]"
+              className="block w-full text-center bg-brand-600 text-white font-bold py-4 px-6 rounded-xl mt-3 hover:bg-brand-700 transition-colors min-h-[48px]"
             >
               Free Assessment
             </Link>
@@ -243,6 +258,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/posts" element={<AdminPosts />} />
+              <Route path="/estimate" element={<InstantQuote />} />
             </Routes>
           </main>
           <Footer />

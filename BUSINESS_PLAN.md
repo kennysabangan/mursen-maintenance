@@ -153,13 +153,13 @@ These standalone rates are displayed on the website to make the subscription the
 | Service | Standalone Rate | With Subscription |
 |---------|---------------|-------------------|
 | Lawn mowing (per cut) | $52 | Included |
-| Window cleaning (full house) | $260 | Included |
-| Power wash (house + driveway) | $280 | Included |
+| Window cleaning (full house, 2x/yr) | $520/yr | Included |
+| Power wash (house + driveway, 1x/yr) | $280/yr | Included |
 | Plumber call (clogged toilet) | $150-250 | Included |
 | Deadbolt install | $125 | Included |
 | Gutter cleaning | $150 | Included |
 
-**The math story:** One clogged toilet ($200) + one lawn cut ($52) + quarterly windows ($260) = ~$512. Your $179/month subscription handles it all.
+**The math story:** One clogged toilet ($200) + one lawn cut ($52) + window cleaning 2x/year ($520) + power wash ($280) = ~$1,052/year. Your $179/month subscription handles it all.
 
 ---
 

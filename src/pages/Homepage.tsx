@@ -33,9 +33,9 @@ const painPoints = [
 
 const valueComparison = [
   { service: 'Lawn care (biweekly)', standalone: '$180/mo', withMursen: 'Included' },
-  { service: 'Window cleaning (monthly)', standalone: '$120/mo', withMursen: 'Included' },
+  { service: 'Window cleaning (2x/yr)', standalone: '$520/yr', withMursen: 'Included' },
   { service: 'Handyman visit (4 hrs)', standalone: '$300/mo', withMursen: 'Included' },
-  { service: 'Power wash (annual ÷ 12)', standalone: '$20/mo', withMursen: 'Included' },
+  { service: 'Power wash (1x/yr)', standalone: '$280/yr', withMursen: 'Included' },
   { service: 'Priority scheduling', standalone: '$50/mo', withMursen: 'Included' },
 ];
 
@@ -84,7 +84,7 @@ const valueStacks = [
       { item: 'Weekly lawn mowing & edging', worth: '$180/mo' },
       { item: 'Monthly window cleaning — exterior', worth: '$120/mo' },
       { item: '4 hours handyman work', worth: '$300/mo' },
-      { item: '1 annual power wash — driveway & walkways', worth: '$200/yr' },
+      { item: '1 annual power wash — driveway & walkways', worth: '$280/yr' },
       { item: 'Priority scheduling (48hr SLA)', worth: '$50/mo' },
       { item: 'Photo report after every visit', worth: 'Priceless' },
     ],
