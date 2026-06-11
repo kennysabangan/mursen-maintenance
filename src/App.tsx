@@ -41,6 +41,7 @@ function Header() {
       { to: '/services/window-cleaning', label: 'Window Cleaning' },
       { to: '/services/handyman', label: 'Handyman' },
     ]},
+    { to: '/estimate', label: 'Free Estimate' },
     { to: '/plans', label: 'Plans' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/blog', label: 'Blog' },
