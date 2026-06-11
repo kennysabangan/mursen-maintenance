@@ -158,15 +158,15 @@ export default function Homepage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'Home Maintenance Subscription | Lawn, Windows, Power Wash, Handyman | Mursen';
-  const seoDescription = 'One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman services in Covington KY and Cincinnati metro. Plans from $109/mo.';
+  const seoTitle = 'Professional Home Services | Lawn Care, Windows, Power Washing, Handyman | Covington & Cincinnati';
+  const seoDescription = 'Professional lawn care, window cleaning, power washing, and handyman services in Covington KY and Cincinnati metro. Book individual services starting at $45. Fully insured, bonded, owner-operated.';
 
   return (
     <>
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content="home maintenance subscription, lawn care Covington KY, window cleaning Cincinnati, power washing Northern KY, handyman Covington, home maintenance plan" />
+        <meta name="keywords" content="lawn care Covington KY, window cleaning Cincinnati, power washing Northern Kentucky, handyman Covington, home maintenance Covington, lawn mowing service, professional window cleaning, driveway power washing, home repair services, property maintenance Cincinnati" />
         <link rel="canonical" href={`${siteUrl}/`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
@@ -184,12 +184,13 @@ export default function Homepage() {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             'name': 'Mursen Maintenance',
+            'alternateName': 'Mursen',
             'description': seoDescription,
             'url': siteUrl,
             'telephone': '+18595550123',
+            'email': 'hello@mursenmaintenance.com',
             'address': {
               '@type': 'PostalAddress',
-              'streetAddress': '123 Main Street',
               'addressLocality': 'Covington',
               'addressRegion': 'KY',
               'postalCode': '41011',
@@ -207,7 +208,68 @@ export default function Homepage() {
               'latitude': 39.0837,
               'longitude': -84.5083
             },
-            'image': `${siteUrl}/favicon.svg`,
+            'areaServed': [
+              'Covington, KY',
+              'Newport, KY',
+              'Florence, KY',
+              'Fort Mitchell, KY',
+              'Independence, KY',
+              'Erlanger, KY',
+              'Cincinnati, OH'
+            ],
+            'hasOfferCatalog': {
+              '@type': 'OfferCatalog',
+              'name': 'Home Maintenance Services',
+              'itemListElement': [
+                {
+                  '@type': 'Offer',
+                  'itemOffered': {
+                    '@type': 'Service',
+                    'name': 'Lawn Care',
+                    'description': 'Professional lawn mowing, edging, and blowing services'
+                  },
+                  'price': '45',
+                  'priceCurrency': 'USD'
+                },
+                {
+                  '@type': 'Offer',
+                  'itemOffered': {
+                    '@type': 'Service',
+                    'name': 'Power Washing',
+                    'description': 'Driveway, walkway, and exterior power washing'
+                  },
+                  'price': '280',
+                  'priceCurrency': 'USD'
+                },
+                {
+                  '@type': 'Offer',
+                  'itemOffered': {
+                    '@type': 'Service',
+                    'name': 'Window Cleaning',
+                    'description': 'Professional interior and exterior window cleaning'
+                  },
+                  'price': '120',
+                  'priceCurrency': 'USD'
+                },
+                {
+                  '@type': 'Offer',
+                  'itemOffered': {
+                    '@type': 'Service',
+                    'name': 'Handyman Services',
+                    'description': 'Professional handyman and home repair services'
+                  },
+                  'price': '500',
+                  'priceCurrency': 'USD'
+                }
+              ]
+            },
+            'image': `${siteUrl}/og-image.jpg`,
+            'logo': `${siteUrl}/favicon.svg`,
+            'aggregateRating': {
+              '@type': 'AggregateRating',
+              'ratingValue': '5',
+              'reviewCount': '20'
+            },
             'sameAs': []
           })}
         </script>
