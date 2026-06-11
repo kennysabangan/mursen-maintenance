@@ -240,7 +240,7 @@ export default function Homepage() {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-white/85 leading-relaxed mb-10 max-w-2xl opacity-0 animate-fade-up" style={{ animationDelay: '0.16s' }}>
-            Lawn care, window cleaning, power washing, handyman — one monthly fee, one team, zero chasing contractors.
+            Lawn care, window cleaning, power washing, handyman — one company, one team, book what you need when you need it.
           </p>
 
           {/* CTA */}
