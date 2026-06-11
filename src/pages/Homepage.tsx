@@ -325,7 +325,7 @@ export default function Homepage() {
             <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-yellow-300" /> Fully Insured</span>
             <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-yellow-300" /> Bonded</span>
             <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-yellow-300" /> No Contracts</span>
-            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-yellow-300" /> 20+ Properties Maintained</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-yellow-300" /> 50+ Properties in 5 States</span>
           </div>
         </div>
       </section>
@@ -337,10 +337,10 @@ export default function Homepage() {
             <div>
               <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Why We Exist</span>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-5 tracking-tight uppercase">
-                We Maintain 20+ Rental Properties. We Built This Because We Needed It.
+                We Maintain 50+ Rental Properties in 5 States. We Built This Because We Needed It.
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                We own and manage 20+ units in Covington and NKY. We know what it's like to chase 5 different contractors, get surprise $800 bills, and deal with emergencies at 2am because nobody caught the small stuff.
+                We own and manage 50+ units across 5 states. We know what it's like to chase 5 different contractors, get surprise $800 bills, and deal with emergencies at 2am because nobody caught the small stuff.
               </p>
               <p className="text-gray-900 leading-relaxed font-semibold">
                 So we built the maintenance company we wished existed. One team. One bill. Everything handled — inside and out.
