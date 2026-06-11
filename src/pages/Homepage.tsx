@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import {
   ArrowRight, Check, Shield, ShieldCheck, ChevronDown, ChevronUp,
   Phone, Clock, Droplets, AlertTriangle, Star, Play, Zap, TrendingUp, DollarSign, X,
+  Leaf, Sparkles, Wrench,
 } from 'lucide-react';
 
 /* ──────────────── DATA ──────────────── */
@@ -245,10 +246,10 @@ export default function Homepage() {
           {/* CTA */}
           <div className="opacity-0 animate-fade-up flex flex-col sm:flex-row gap-4 items-center" style={{ animationDelay: '0.24s' }}>
             <Link
-              to="/assessment"
+              to="/book"
               className="inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-brand-700 font-bold text-lg md:text-xl px-10 py-5 rounded-xl transition-all duration-200 shadow-xl min-h-[56px]"
             >
-              Get My Free Quote
+              Book A Service
               <ArrowRight className="w-6 h-6" />
             </Link>
             <a href="tel:+18595550123" className="flex items-center gap-2 text-white/80 hover:text-white transition-colors font-medium">
@@ -375,16 +376,96 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* ═══════════════ 5. THE OFFER — VALUE STACK ═══════════════ */}
+      {/* ═══════════════ 5. SERVICES GRID ═══════════════ */}
+      <section className="section bg-white" id="services">
+        <div className="container-app">
+          <div className="text-center mb-12">
+            <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Our Services</span>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight uppercase">
+              Book Individual Services
+            </h2>
+            <p className="text-lg text-gray-500 max-w-xl mx-auto">
+              Need one service? Book à la carte. Simple pricing, no commitments.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {[
+              {
+                to: '/services/lawn-care',
+                icon: Leaf,
+                name: 'Lawn Care',
+                price: '$45',
+                note: '/visit',
+                color: 'text-green-600',
+                bg: 'bg-green-50',
+              },
+              {
+                to: '/services/power-washing',
+                icon: Droplets,
+                name: 'Power Washing',
+                price: '$280',
+                note: 'driveway',
+                color: 'text-blue-600',
+                bg: 'bg-blue-50',
+              },
+              {
+                to: '/services/window-cleaning',
+                icon: Sparkles,
+                name: 'Window Cleaning',
+                price: '$120',
+                note: 'exterior',
+                color: 'text-cyan-600',
+                bg: 'bg-cyan-50',
+              },
+              {
+                to: '/services/handyman',
+                icon: Wrench,
+                name: 'Handyman',
+                price: '$500',
+                note: '4 hours',
+                color: 'text-orange-600',
+                bg: 'bg-orange-50',
+              },
+            ].map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.to}
+                  to={service.to}
+                  className="bg-white border-2 border-gray-200 hover:border-brand-400 rounded-2xl p-6 transition-all hover:shadow-lg cursor-pointer"
+                >
+                  <div className={`w-14 h-14 ${service.bg} rounded-xl flex items-center justify-center mb-4`}>
+                    <Icon className={`w-7 h-7 ${service.color}`} />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-gray-900 mb-2 uppercase tracking-wide">
+                    {service.name}
+                  </h3>
+                  <div className="mb-4">
+                    <span className="text-2xl font-extrabold text-gray-900">{service.price}</span>
+                    <span className="text-sm text-gray-500 ml-1">{service.note}</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-brand-600 text-sm font-bold">
+                    Book Now
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ 6. THE OFFER — VALUE STACK (SUBSCRIPTIONS) ═══════════════ */}
       <section className="section bg-gray-50" id="plans">
         <div className="container-app">
           <div className="text-center mb-6">
-            <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Our Plans</span>
+            <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Subscriptions</span>
             <h2 className="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight uppercase">
-              Pick Your Level of "Done For You"
+              Use Us Often? Save With A Plan
             </h2>
             <p className="text-lg text-gray-500 max-w-xl mx-auto">
-              All plans month-to-month. Cancel anytime. Stack so much value, you'd feel stupid saying no.
+              Bundle services and save 30%+. Month-to-month, cancel anytime.
             </p>
           </div>
 

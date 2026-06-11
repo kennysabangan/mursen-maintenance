@@ -11,6 +11,12 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminPosts from './pages/AdminPosts';
 import InstantQuote from './pages/InstantQuote';
+import ServiceLawnCare from './pages/ServiceLawnCare';
+import ServicePowerWashing from './pages/ServicePowerWashing';
+import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
+import ServiceHandyman from './pages/ServiceHandyman';
+import BookService from './pages/BookService';
+import Plans from './pages/Plans';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,7 +34,13 @@ function Header() {
   }, [location.pathname]);
 
   const navLinks = [
-    { to: '/portfolio', label: 'Services' },
+    { to: '/services', label: 'Services', dropdown: [
+      { to: '/services/lawn-care', label: 'Lawn Care' },
+      { to: '/services/power-washing', label: 'Power Washing' },
+      { to: '/services/window-cleaning', label: 'Window Cleaning' },
+      { to: '/services/handyman', label: 'Handyman' },
+    ]},
+    { to: '/plans', label: 'Plans' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
@@ -51,33 +63,51 @@ function Header() {
 
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer ${
-                  isActive(link.to)
-                    ? 'text-brand-700 bg-brand-50'
-                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
-                }`}
-              >
-                {link.label}
-              </Link>
+              link.dropdown ? (
+                <div key={link.to} className="relative group">
+                  <button
+                    className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer ${
+                      location.pathname.startsWith('/services')
+                        ? 'text-brand-700 bg-brand-50'
+                        : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                  <div className="absolute left-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-[200px]">
+                    {link.dropdown.map(item => (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-700 transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer ${
+                    isActive(link.to)
+                      ? 'text-brand-700 bg-brand-50'
+                      : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </nav>
 
           <div className="flex items-center gap-3">
             <Link
-              to="/estimate"
-              className="hidden md:inline-flex items-center gap-2 border-2 border-brand-200 text-brand-700 hover:bg-brand-50 font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]"
-            >
-              <Leaf className="w-4 h-4" />
-              Get Quote
-            </Link>
-            <Link
-              to="/assessment"
+              to="/book"
               className="hidden md:inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm py-2.5 px-5 rounded-xl transition-all duration-200 cursor-pointer min-h-[44px]"
             >
-              Free Assessment
+              Book A Service
               <ArrowRight className="w-4 h-4" />
             </Link>
 
@@ -114,32 +144,47 @@ function Header() {
           </div>
           <nav className="px-6 py-8 space-y-2">
             {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileOpen(false)}
-                className={`block px-5 py-4 rounded-xl font-medium text-base cursor-pointer transition-colors ${
-                  isActive(link.to)
-                    ? 'bg-brand-50 text-brand-700'
-                    : 'text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {link.label}
-              </Link>
+              link.dropdown ? (
+                <div key={link.to}>
+                  <div className="px-5 py-3 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    {link.label}
+                  </div>
+                  {link.dropdown.map(item => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block px-5 py-3 rounded-xl font-medium text-base cursor-pointer transition-colors ml-3 ${
+                        isActive(item.to)
+                          ? 'bg-brand-50 text-brand-700'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-5 py-4 rounded-xl font-medium text-base cursor-pointer transition-colors ${
+                    isActive(link.to)
+                      ? 'bg-brand-50 text-brand-700'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
             <Link
-              to="/estimate"
-              onClick={() => setMobileOpen(false)}
-              className="block w-full text-center border-2 border-brand-200 text-brand-700 font-bold py-4 px-6 rounded-xl hover:bg-brand-50 transition-colors min-h-[48px]"
-            >
-              Get Quote
-            </Link>
-            <Link
-              to="/assessment"
+              to="/book"
               onClick={() => setMobileOpen(false)}
               className="block w-full text-center bg-brand-600 text-white font-bold py-4 px-6 rounded-xl mt-3 hover:bg-brand-700 transition-colors min-h-[48px]"
             >
-              Free Assessment
+              Book A Service
             </Link>
           </nav>
         </div>
@@ -259,6 +304,12 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/posts" element={<AdminPosts />} />
               <Route path="/estimate" element={<InstantQuote />} />
+              <Route path="/services/lawn-care" element={<ServiceLawnCare />} />
+              <Route path="/services/power-washing" element={<ServicePowerWashing />} />
+              <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
+              <Route path="/services/handyman" element={<ServiceHandyman />} />
+              <Route path="/book" element={<BookService />} />
+              <Route path="/plans" element={<Plans />} />
             </Routes>
           </main>
           <Footer />
