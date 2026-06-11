@@ -212,7 +212,7 @@ function Footer() {
               One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
             </p>
             <p className="text-xs text-gray-400 mt-2">
-              Owner-operated. We maintain 20+ rental units.
+              Owner-operated. We maintain 50+ rental units in 5 states.
             </p>
           </div>
 

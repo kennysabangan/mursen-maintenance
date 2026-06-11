@@ -39,9 +39,18 @@
 }
 
 @layer components {
+  /* Hide scrollbar for horizontal scroll areas */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Layout containers */
   .container-app {
-    @apply max-w-6xl mx-auto px-6;
+    @apply max-w-6xl mx-auto px-4 sm:px-6;
   }
   
   /* Sections with consistent vertical rhythm */
