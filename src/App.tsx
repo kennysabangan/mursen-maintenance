@@ -16,6 +16,7 @@ import ServicePowerWashing from './pages/ServicePowerWashing';
 import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
 import ServiceHandyman from './pages/ServiceHandyman';
 import BookService from './pages/BookService';
+import EstimatePage from './pages/EstimatePage';
 import Plans from './pages/Plans';
 
 function Header() {
@@ -303,7 +304,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/posts" element={<AdminPosts />} />
-              <Route path="/estimate" element={<InstantQuote />} />
+              <Route path="/estimate" element={<EstimatePage />} />
               <Route path="/services/lawn-care" element={<ServiceLawnCare />} />
               <Route path="/services/power-washing" element={<ServicePowerWashing />} />
               <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
