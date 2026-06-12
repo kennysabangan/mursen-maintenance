@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   MapPin, Droplets, Leaf, Sparkles, Wrench,
@@ -69,6 +69,21 @@ async function geocodeAddress(address: string): Promise<{ lat: number; lng: numb
   return null;
 }
 
+async function fetchSuggestions(query: string): Promise<Suggestion[]> {
+  if (!MAPBOX_TOKEN || query.length < 3) return [];
+  try {
+    const res = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json?access_token=${MAPBOX_TOKEN}&country=us&types=address&limit=5`
+    );
+    const data = await res.json();
+    return (data.features || []).map((f: any) => ({
+      id: f.id,
+      place_name: f.place_name,
+      center: f.center,
+    }));
+  } catch { return []; }
+}
+
 function getSatelliteUrl(lat: number, lng: number, zoom = 18, width = 800, height = 600): string {
   if (MAPBOX_TOKEN) {
     return `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${lng},${lat},${zoom},0/${width}x${height}@2x?access_token=${MAPBOX_TOKEN}`;
@@ -86,6 +101,9 @@ export default function EstimatePage() {
   const [selectedService, setSelectedService] = useState<string>('');
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showMetrics, setShowMetrics] = useState(false);
   const [estimate, setEstimate] = useState<any>(null);
   const [generatingQuote, setGeneratingQuote] = useState(false);
@@ -117,10 +135,65 @@ export default function EstimatePage() {
     if (!address.trim()) return;
     setGeocoding(true);
     setSatelliteLoaded(false);
+    setShowDropdown(false);
     const result = await geocodeAddress(address);
     if (result) setCoords(result);
     setGeocoding(false);
   }, [address]);
+
+  const handleAddressChange = useCallback((value: string) => {
+    setAddress(value);
+    setHighlightedIndex(-1);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (value.length < 3) {
+      setSuggestions([]);
+      setShowDropdown(false);
+      return;
+    }
+    debounceRef.current = setTimeout(async () => {
+      const results = await fetchSuggestions(value);
+      setSuggestions(results);
+      setShowDropdown(results.length > 0);
+    }, 300);
+  }, []);
+
+  const selectSuggestion = useCallback((suggestion: Suggestion) => {
+    setAddress(suggestion.place_name);
+    setShowDropdown(false);
+    setHighlightedIndex(-1);
+    setGeocoding(true);
+    setSatelliteLoaded(false);
+    setCoords({ lat: suggestion.center[1], lng: suggestion.center[0] });
+    setGeocoding(false);
+  }, []);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!showDropdown) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHighlightedIndex(i => (i < suggestions.length - 1 ? i + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlightedIndex(i => (i > 0 ? i - 1 : suggestions.length - 1));
+    } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+      e.preventDefault();
+      selectSuggestion(suggestions[highlightedIndex]);
+    } else if (e.key === 'Escape') {
+      setShowDropdown(false);
+      setHighlightedIndex(-1);
+    }
+  }, [showDropdown, suggestions, highlightedIndex, selectSuggestion]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node) &&
+          inputRef.current && !inputRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const toggleArea = (id: string) => {
     setSelectedAreas(prev => prev.includes(id) ? prev.filter(a => a !== id) : [...prev, id]);
@@ -221,14 +294,51 @@ export default function EstimatePage() {
             Step 1: Enter Address
           </h2>
           <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="text"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleGeocode()}
-              placeholder="123 Main St, Covington, KY 41011"
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-base sm:text-lg min-h-[48px]"
-            />
+            <div className="relative flex-1">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                <MapPin className="w-5 h-5 text-gray-400" />
+              </div>
+              <input
+                ref={inputRef}
+                type="text"
+                value={address}
+                onChange={e => handleAddressChange(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && highlightedIndex < 0) handleGeocode();
+                  else handleKeyDown(e);
+                }}
+                onFocus={() => { if (suggestions.length > 0 && address.length >= 3) setShowDropdown(true); }}
+                placeholder="123 Main St, Covington, KY 41011"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition text-base sm:text-lg min-h-[48px]"
+                autoComplete="off"
+                role="combobox"
+                aria-expanded={showDropdown}
+                aria-haspopup="listbox"
+              />
+              {showDropdown && suggestions.length > 0 && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden max-h-60 overflow-y-auto"
+                  role="listbox"
+                >
+                  {suggestions.map((s, i) => (
+                    <button
+                      key={s.id}
+                      onMouseDown={() => selectSuggestion(s)}
+                      onMouseEnter={() => setHighlightedIndex(i)}
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm transition min-h-[48px] ${
+                        i === highlightedIndex ? 'bg-brand-50 text-brand-700' : 'hover:bg-gray-50 text-gray-700'
+                      }`}
+                      role="option"
+                      aria-selected={i === highlightedIndex}
+                    >
+                      <MapPin className="w-4 h-4 text-brand-500 flex-shrink-0" />
+                      <span className="truncate">{s.place_name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               onClick={handleGeocode}
               disabled={geocoding || !address.trim()}
