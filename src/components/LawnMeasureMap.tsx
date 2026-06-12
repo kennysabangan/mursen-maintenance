@@ -324,7 +324,6 @@ export default function LawnMeasureMap({ center, parcelRing, onAreaChange }: Pro
     } else {
       map.flyTo({ center: [center.lng, center.lat], zoom: 19, duration: 400 });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [center.lat, center.lng, parcelRing]);
 
   /* ── Toolbar actions ── */
