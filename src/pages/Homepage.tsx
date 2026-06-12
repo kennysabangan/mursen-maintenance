@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BeforeAfterSection from '../components/BeforeAfterSection';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -462,46 +463,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {[
-              {
-                label: 'Lawn Care',
-                before: '/images/before-after/lawn-before.jpg',
-                after: '/images/before-after/lawn-after.jpg',
-              },
-              {
-                label: 'Power Washing',
-                before: '/images/before-after/powerwash-before.jpg',
-                after: '/images/before-after/powerwash-after.jpg',
-              },
-              {
-                label: 'Window Cleaning',
-                before: '/images/before-after/windows-before.jpg',
-                after: '/images/before-after/windows-after.jpg',
-              },
-              {
-                label: 'Handyman Repairs',
-                before: '/images/before-after/handyman-before.jpg',
-                after: '/images/before-after/handyman-after.jpg',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="grid grid-cols-2 gap-px bg-gray-100">
-                  <div className="relative">
-                    <img src={item.before} alt={`${item.label} before`} className="w-full h-36 object-cover" />
-                    <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">Before</span>
-                  </div>
-                  <div className="relative">
-                    <img src={item.after} alt={`${item.label} after`} className="w-full h-36 object-cover" />
-                    <span className="absolute top-2 left-2 bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">After</span>
-                  </div>
-                </div>
-                <div className="p-4 text-center">
-                  <p className="text-sm font-bold text-gray-900 uppercase tracking-wide font-display">{item.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <BeforeAfterSection />
         </div>
       </section>
 
