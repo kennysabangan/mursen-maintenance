@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Menu, X, ArrowRight, Phone, Mail, MapPin, Home, Leaf } from 'lucide-react';
@@ -10,14 +10,15 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminPosts from './pages/AdminPosts';
-import InstantQuote from './pages/InstantQuote';
 import ServiceLawnCare from './pages/ServiceLawnCare';
 import ServicePowerWashing from './pages/ServicePowerWashing';
 import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
 import ServiceHandyman from './pages/ServiceHandyman';
 import BookService from './pages/BookService';
-import EstimatePage from './pages/EstimatePage';
 import Plans from './pages/Plans';
+
+// Lazy-loaded: pulls in the MapLibre mapping library only when visited.
+const EstimatePage = lazy(() => import('./pages/EstimatePage'));
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -305,7 +306,14 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/posts" element={<AdminPosts />} />
-              <Route path="/estimate" element={<EstimatePage />} />
+              <Route
+                path="/estimate"
+                element={
+                  <Suspense fallback={<div className="py-24 text-center text-gray-400">Loading estimator…</div>}>
+                    <EstimatePage />
+                  </Suspense>
+                }
+              />
               <Route path="/services/lawn-care" element={<ServiceLawnCare />} />
               <Route path="/services/power-washing" element={<ServicePowerWashing />} />
               <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
