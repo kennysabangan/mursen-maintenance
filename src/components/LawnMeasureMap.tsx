@@ -153,6 +153,11 @@ export default function LawnMeasureMap({ center, parcelRing, onAreaChange }: Pro
             type: 'raster',
             tiles: [ESRI_IMAGERY],
             tileSize: 256,
+            // World_Imagery's cached tiles only reliably reach ~z19 in most
+            // areas; requesting deeper tiles returns a "Map data not yet
+            // available" placeholder. Cap the source so MapLibre overzooms
+            // (scales) the real z19 imagery instead of fetching missing tiles.
+            maxzoom: 19,
             attribution:
               'Imagery © Esri, Maxar, Earthstar Geographics, and the GIS User Community',
           },

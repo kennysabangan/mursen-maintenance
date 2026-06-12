@@ -1,22 +1,13 @@
 import { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
-  MapPin, Leaf, Satellite, Loader2, CalendarClock, Ruler, Info, ArrowRight, Check,
+  MapPin, Leaf, Satellite, Loader2, Ruler, Info, ArrowRight, Check,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LawnMeasureMap from '../components/LawnMeasureMap';
 import { geocodeAddress } from '../utils/geocode';
 import { lookupParcel } from '../utils/parcels';
 import { calculateLawnCare } from '../../lib/pricing';
-
-type Frequency = 'weekly' | 'biweekly' | 'monthly' | 'onetime';
-
-const FREQUENCIES: { id: Frequency; label: string; note?: string }[] = [
-  { id: 'weekly', label: 'Weekly', note: 'Best curb appeal' },
-  { id: 'biweekly', label: 'Every 2 weeks', note: 'Most popular' },
-  { id: 'monthly', label: 'Monthly' },
-  { id: 'onetime', label: 'One-time' },
-];
 
 export default function EstimatePage() {
   const [address, setAddress] = useState('');
@@ -29,7 +20,6 @@ export default function EstimatePage() {
   const [parcelLoading, setParcelLoading] = useState(false);
 
   const [measuredSqft, setMeasuredSqft] = useState(0);
-  const [frequency, setFrequency] = useState<Frequency>('biweekly');
 
   const handleAnalyze = useCallback(async () => {
     if (!address.trim()) return;
@@ -63,7 +53,7 @@ export default function EstimatePage() {
   }, [address]);
 
   const pricing = measuredSqft > 0
-    ? calculateLawnCare({ sqft_lawn: measuredSqft, frequency })
+    ? calculateLawnCare({ sqft_lawn: measuredSqft })
     : null;
 
   return (
@@ -157,32 +147,6 @@ export default function EstimatePage() {
           </div>
         )}
 
-        {/* Step 3: Frequency */}
-        {coords && (
-          <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-sm">
-            <h2 className="font-display text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-              <CalendarClock className="w-5 h-5 text-brand-600" /> Step 3: How Often?
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-              {FREQUENCIES.map(f => {
-                const active = frequency === f.id;
-                return (
-                  <button
-                    key={f.id}
-                    onClick={() => setFrequency(f.id)}
-                    className={`px-3 py-3 rounded-xl border-2 text-left transition-all min-h-[60px] ${
-                      active ? 'border-brand-500 bg-brand-50' : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <div className={`text-sm font-bold ${active ? 'text-brand-700' : 'text-gray-800'}`}>{f.label}</div>
-                    {f.note && <div className="text-[10px] text-gray-500 mt-0.5">{f.note}</div>}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         {/* Results */}
         {pricing && (
           <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-8 shadow-sm">
@@ -192,28 +156,13 @@ export default function EstimatePage() {
               {address && <> · 📍 {address}</>}
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-4 mb-5">
-              <div className="bg-brand-50 rounded-xl p-5 border border-brand-200">
-                <div className="text-xs sm:text-sm font-medium text-brand-700 mb-1">Per visit</div>
-                <div className="text-3xl sm:text-4xl font-bold text-brand-800">${pricing.perVisit.mid.toFixed(0)}</div>
-                <div className="text-xs text-brand-600 mt-1">
-                  Range ${pricing.perVisit.low.toFixed(0)}–${pricing.perVisit.high.toFixed(0)} · mow + edge
-                </div>
+            <div className="bg-brand-50 rounded-xl p-6 sm:p-7 border border-brand-200 mb-5 text-center">
+              <div className="text-xs sm:text-sm font-medium text-brand-700 mb-1 uppercase tracking-wide">
+                Per visit · mow + edge
               </div>
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
-                <div className="text-xs sm:text-sm font-medium text-gray-600 mb-1">
-                  {frequency === 'onetime' ? 'One-time service' : 'Estimated monthly'}
-                </div>
-                <div className="text-3xl sm:text-4xl font-bold text-gray-900">
-                  {frequency === 'onetime'
-                    ? `$${pricing.perVisit.mid.toFixed(0)}`
-                    : `$${pricing.monthly.mid.toFixed(0)}`}
-                </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {frequency === 'onetime'
-                    ? 'Single visit'
-                    : `≈ ${pricing.visitsPerMonth} visits / mo`}
-                </div>
+              <div className="text-5xl sm:text-6xl font-bold text-brand-800">${pricing.perVisit.mid.toFixed(0)}</div>
+              <div className="text-sm text-brand-600 mt-2">
+                Typically ${pricing.perVisit.low.toFixed(0)}–${pricing.perVisit.high.toFixed(0)} per visit
               </div>
             </div>
 
