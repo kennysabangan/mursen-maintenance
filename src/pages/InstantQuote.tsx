@@ -17,10 +17,11 @@ interface LeadFormData {
 }
 
 const PRICING_TIERS = [
-  { maxSqFt: 3000, label: 'Small Lawn', price: 79, note: 'up to 3,000 sq ft' },
-  { maxSqFt: 6000, label: 'Medium Lawn', price: 109, note: '3,000–6,000 sq ft' },
-  { maxSqFt: 10000, label: 'Large Lawn', price: 149, note: '6,000–10,000 sq ft' },
-  { maxSqFt: Infinity, label: 'Estate', price: 199, note: '10,000+ sq ft' },
+  { maxSqFt: 3000, label: 'Small Lawn', price: 199, note: 'up to 3,000 sq ft' },
+  { maxSqFt: 5000, label: 'Medium Lawn', price: 269, note: '3,000–5,000 sq ft' },
+  { maxSqFt: 8000, label: 'Large Lawn', price: 349, note: '5,000–8,000 sq ft' },
+  { maxSqFt: 12000, label: 'XL Lawn', price: 449, note: '8,000–12,000 sq ft' },
+  { maxSqFt: Infinity, label: 'Estate', price: 599, note: '12,000+ sq ft' },
 ];
 
 function getPricing(sqFt: number) {
@@ -280,14 +281,14 @@ export default function InstantQuote() {
 
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-4xl font-extrabold text-brand-600">${pricing.price}</span>
-                  <span className="text-gray-500">/month</span>
+                  <span className="text-gray-500">/visit</span>
                 </div>
-                <p className="text-sm text-gray-500 mb-6">{pricing.label} plan — {pricing.note}</p>
+                <p className="text-sm text-gray-500 mb-6">{pricing.label} — {pricing.note}</p>
 
                 <div className="bg-brand-50 rounded-xl p-5 mb-6 border border-brand-100">
                   <h3 className="font-bold text-sm text-brand-800 mb-3 flex items-center gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Subscription Savings
+                    Weekly Service Pricing
                   </h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between text-gray-600">
@@ -295,7 +296,7 @@ export default function InstantQuote() {
                       <span className="line-through">${savings.monthly}/yr</span>
                     </div>
                     <div className="flex justify-between text-gray-600">
-                      <span>Mursen subscription (12 months)</span>
+                      <span>Mursen weekly service (12 months)</span>
                       <span className="font-semibold">${savings.withMursen}/yr</span>
                     </div>
                     <div className="border-t border-brand-200 pt-2 flex justify-between font-bold text-brand-700">

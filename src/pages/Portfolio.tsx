@@ -145,7 +145,7 @@ export default function Portfolio() {
           </h1>
 
           <p className="text-lg md:text-xl text-ink-700 max-w-2xl leading-relaxed mb-10">
-            Below is the full price list for every service we offer — book individually as a one-time job, or bundle several into a monthly subscription and save up to 22%.
+            Below is the full price list for every service we offer. Book per service — no contracts, no subscriptions.
           </p>
 
           {/* 6-service jump grid */}
@@ -180,24 +180,7 @@ export default function Portfolio() {
             <span className="pill-outline">Free Quotes</span>
           </div>
 
-          {/* Bundle band */}
-          <div id="bundle" className="bg-ink-900 text-cream-50 rounded-md p-6 md:p-8 grid md:grid-cols-[1.6fr_1fr] gap-6 md:gap-10 items-center scroll-mt-24">
-            <div>
-              <p className="eyebrow-light mb-3">Save with a Subscription</p>
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-[-0.02em] leading-[1.05]">
-                Bundle 4 services. <span className="accent-serif font-normal text-rust-300">Save up to $1,587/yr.</span>
-              </h2>
-            </div>
-            <div className="text-sm text-cream-100/85 leading-relaxed md:border-l md:border-cream-100/15 md:pl-8">
-              <p className="mb-4">
-                Ask about <strong className="text-cream-50">Home Care</strong> for $479/mo — includes weekly lawn, monthly windows, 4 hrs handyman, plus seasonal cleanups.
-              </p>
-              <Link to="/how-it-works" className="inline-flex items-center gap-2 bg-rust-500 hover:bg-rust-600 text-cream-50 font-bold text-xs uppercase tracking-[0.10em] py-2.5 px-4 rounded-md transition-colors">
-                See All Plans
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
+
 
           <div className="flex items-center justify-between text-xs text-ink-500 mt-8 pt-4 border-t border-ink-900/10">
             <span>Mursen Home Services · Covington, KY 41011 · mursen.com</span>

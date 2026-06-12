@@ -17,7 +17,6 @@ import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
 import ServiceHandyman from './pages/ServiceHandyman';
 import BookService from './pages/BookService';
 import EstimatePage from './pages/EstimatePage';
-import Plans from './pages/Plans';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -42,7 +41,6 @@ function Header() {
       { to: '/services/handyman', label: 'Handyman' },
     ]},
     { to: '/estimate', label: 'Free Estimate' },
-    { to: '/plans', label: 'Plans' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
@@ -210,10 +208,10 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-gray-500">
-              One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
+              Professional lawn care, window cleaning, power washing, and handyman services. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
             </p>
             <p className="text-xs text-gray-400 mt-2">
-              Owner-operated. We maintain 50+ rental units in 5 states.
+              Owner-operated. We maintain 20+ rental units.
             </p>
           </div>
 
@@ -311,7 +309,6 @@ function App() {
               <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
               <Route path="/services/handyman" element={<ServiceHandyman />} />
               <Route path="/book" element={<BookService />} />
-              <Route path="/plans" element={<Plans />} />
             </Routes>
           </main>
           <Footer />
