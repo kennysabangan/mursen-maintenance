@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Menu, X, ArrowRight, Phone, Mail, MapPin, Home, Leaf } from 'lucide-react';
@@ -10,15 +10,13 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminPosts from './pages/AdminPosts';
+import InstantQuote from './pages/InstantQuote';
 import ServiceLawnCare from './pages/ServiceLawnCare';
 import ServicePowerWashing from './pages/ServicePowerWashing';
 import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
 import ServiceHandyman from './pages/ServiceHandyman';
 import BookService from './pages/BookService';
-import Plans from './pages/Plans';
-
-// Lazy-loaded: pulls in the MapLibre mapping library only when visited.
-const EstimatePage = lazy(() => import('./pages/EstimatePage'));
+import EstimatePage from './pages/EstimatePage';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,7 +41,6 @@ function Header() {
       { to: '/services/handyman', label: 'Handyman' },
     ]},
     { to: '/estimate', label: 'Free Estimate' },
-    { to: '/plans', label: 'Plans' },
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
@@ -211,10 +208,10 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-gray-500">
-              One subscription for everything around your house. Lawn care, window cleaning, power washing, and handyman. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
+              Professional lawn care, window cleaning, power washing, and handyman services. Serving Covington, Newport, Florence, Fort Mitchell, Independence, Erlanger, and Cincinnati.
             </p>
             <p className="text-xs text-gray-400 mt-2">
-              Owner-operated. We maintain 50+ rental units in 5 states.
+              Owner-operated. We maintain 20+ rental units.
             </p>
           </div>
 
@@ -306,20 +303,12 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/admin/posts" element={<AdminPosts />} />
-              <Route
-                path="/estimate"
-                element={
-                  <Suspense fallback={<div className="py-24 text-center text-gray-400">Loading estimator…</div>}>
-                    <EstimatePage />
-                  </Suspense>
-                }
-              />
+              <Route path="/estimate" element={<EstimatePage />} />
               <Route path="/services/lawn-care" element={<ServiceLawnCare />} />
               <Route path="/services/power-washing" element={<ServicePowerWashing />} />
               <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
               <Route path="/services/handyman" element={<ServiceHandyman />} />
               <Route path="/book" element={<BookService />} />
-              <Route path="/plans" element={<Plans />} />
             </Routes>
           </main>
           <Footer />

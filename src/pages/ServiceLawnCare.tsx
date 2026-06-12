@@ -216,16 +216,16 @@ export default function ServiceLawnCare() {
           {/* Upgrade CTA */}
           <div className="mt-10 bg-brand-50 border-2 border-brand-200 rounded-2xl p-8 text-center">
             <h3 className="font-display text-2xl font-bold text-gray-900 mb-3 uppercase">
-              Save 30% with Home Care Plan
+              Get a Free Estimate
             </h3>
             <p className="text-gray-600 mb-5 max-w-xl mx-auto">
-              Get lawn care plus window cleaning, power washing, and handyman visits — all included. One monthly bill, massive savings.
+              Lawn care per service — no contracts. Window cleaning, power washing, and handyman also available.
             </p>
             <Link
-              to="/plans"
+              to="/estimate"
               className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-6 rounded-xl transition-all"
             >
-              View Subscription Plans
+              Get Your Estimate
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

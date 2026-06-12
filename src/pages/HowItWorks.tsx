@@ -2,35 +2,11 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Check, Search, Clock, Shield, Users, Home } from 'lucide-react';
 
-const plans = [
-  {
-    name: 'Lawn Plus',
-    price: 109,
-    note: '/mo (Apr–Oct) · $59/mo (Nov–Mar)',
-    features: ['Weekly mow + edge + blow', 'Seasonal cleanups included', 'Gutter check each visit'],
-  },
-  {
-    name: 'Handyman Plus',
-    price: 149,
-    features: ['1 visit/month (2 hrs)', '5-day scheduling window', 'Same technician every visit'],
-  },
-  {
-    name: 'Starter',
-    price: 199,
-    features: ['1 handyman visit/mo (2 hrs)', 'Biweekly lawn mowing', 'Same technician every visit', 'Monthly property summary'],
-  },
-  {
-    name: 'Home Care',
-    price: 479,
-    popular: true,
-    features: ['1 visit (4 hrs handyman)', 'Weekly lawn mowing + edging', 'Monthly window cleaning (exterior)', 'Annual power wash', 'Priority scheduling (48hr SLA)', '24/7 hotline for urgent issues'],
-  },
-  {
-    name: 'Property Manager',
-    price: 279,
-    note: '/unit/mo',
-    features: ['Rental-unit optimized', 'Priority scheduling', 'Tenant turnover support', '3+ units: $249 · 5+: $229'],
-  },
+const services = [
+  { name: 'Lawn Care', price: 'From $199/mo', description: 'Weekly mowing, edging, trimming. Steep & complex terrain included.', route: '/services/lawn-care' },
+  { name: 'Power Washing', price: 'From $175', description: 'Driveways, walkways, siding, roofs. Per visit.', route: '/services/power-washing' },
+  { name: 'Window Cleaning', price: 'From $120', description: 'Interior & exterior. Per visit.', route: '/services/window-cleaning' },
+  { name: 'Handyman', price: 'From $110/hr', description: 'Repairs, installs, general tasks. 2-hour minimum.', route: '/services/handyman' },
 ];
 
 const steps = [
@@ -41,7 +17,7 @@ const steps = [
     description: 'Browse lawn, windows, power wash, handyman. Book online or call us.',
     details: [
       'View transparent pricing online',
-      'Book à la carte or subscribe',
+      'Book any service',
       'Free assessment available',
       'Same-day or next-day scheduling',
     ],
@@ -62,11 +38,11 @@ const steps = [
     icon: Clock,
     title: 'Subscribe & Save',
     subtitle: 'Step 3',
-    description: 'Love the work? Switch to a monthly plan. One flat fee, everything handled.',
+    description: 'Love the work? Set up recurring service. Same crew every visit.',
     details: [
-      'Plans from $109/mo',
-      'Cancel anytime, no contracts',
-      '30-day money-back guarantee',
+      'Weekly, biweekly, or monthly',
+      'No contracts, ever',
+      'Same crew every visit',
       'Volume discounts for investors',
     ],
   },
@@ -74,8 +50,8 @@ const steps = [
 
 export default function HowItWorks() {
   const siteUrl = 'https://mursenmaintenance.com';
-  const seoTitle = 'How It Works | Mursen Maintenance - Home Maintenance Subscription';
-  const seoDescription = 'How Mursen works: 1) Pick your service, 2) We show up, 3) Subscribe. Lawn care, window cleaning, power washing, handyman. Serving Covington KY and Cincinnati metro.';
+  const seoTitle = 'How It Works | Mursen Maintenance';
+  const seoDescription = 'How Mursen works: 1) Pick your service, 2) We show up, 3) Get it done. Lawn care, window cleaning, power washing, handyman. Serving Covington KY and Cincinnati metro.';
 
   return (
     <>
@@ -144,61 +120,25 @@ export default function HowItWorks() {
         <section className="py-16 md:py-24 px-6 bg-white">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
-              <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Pricing</span>
-              <h2 className="font-display text-3xl font-bold text-gray-900 mb-3 uppercase">Choose Your Plan</h2>
+              <span className="inline-block text-brand-600 text-xs font-bold uppercase tracking-widest mb-4">Services</span>
+              <h2 className="font-display text-3xl font-bold text-gray-900 mb-3 uppercase">Per-Service Pricing</h2>
               <p className="text-lg text-gray-500 max-w-md mx-auto">
-                All plans are month-to-month. Cancel anytime.
+                No contracts. No subscriptions. Pay per service.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-5">
-              {plans.map((plan) => (
-                <div
-                  key={plan.name}
-                  className={`rounded-2xl p-6 relative transition-all duration-200 bg-white ${
-                    plan.popular
-                      ? 'border-2 border-brand-500 shadow-lg shadow-brand-100 scale-[1.02]'
-                      : 'border border-gray-200 hover:border-gray-300 hover:shadow-sm'
-                  }`}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+              {services.map((svc) => (
+                <Link
+                  key={svc.name}
+                  to={svc.route}
+                  className="rounded-2xl p-6 border border-gray-200 hover:border-brand-300 hover:shadow-md transition-all duration-200 bg-white"
                 >
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-semibold px-5 py-1.5 rounded-full whitespace-nowrap">
-                      Most Popular
-                    </div>
-                  )}
-
-                  <h3 className="font-display text-base font-bold mb-1 text-gray-900 uppercase tracking-wide">{plan.name}</h3>
-                  <p className="text-xs text-gray-500 mb-5">
-                    {plan.popular ? 'The full package' : plan.name === 'Property Manager' ? 'For landlords & investors' : plan.name === 'Lawn Plus' ? 'Weekly lawn maintenance' : plan.name === 'Handyman Plus' ? 'Monthly handyman' : 'Essential coverage'}
-                  </p>
-
-                  <div className="mb-6">
-                    <span className={`text-3xl font-extrabold tracking-tight ${plan.popular ? 'text-brand-600' : 'text-gray-900'}`}>
-                      ${plan.price}
-                    </span>
-                    <span className={`text-xs ml-1 ${plan.popular ? 'text-brand-600' : 'text-gray-500'}`}>{plan.note || '/mo'}</span>
-                  </div>
-
-                  <ul className="space-y-2.5 mb-6">
-                    {plan.features.map(f => (
-                      <li key={f} className="flex items-start gap-2.5">
-                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-brand-500' : 'text-gray-400'}`} />
-                        <span className="text-xs text-gray-600">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    to="/assessment"
-                    className={`block w-full text-center py-3 rounded-xl font-bold text-sm transition-all duration-200 min-h-[44px] ${
-                      plan.popular
-                        ? 'bg-brand-600 hover:bg-brand-700 text-white'
-                        : 'bg-gray-900 hover:bg-brand-600 text-white'
-                    }`}
-                  >
-                    Get Started
-                  </Link>
-                </div>
+                  <h3 className="font-display text-base font-bold mb-1 text-gray-900 uppercase tracking-wide">{svc.name}</h3>
+                  <p className="text-2xl font-extrabold text-brand-600 mb-2">{svc.price}</p>
+                  <p className="text-xs text-gray-500 mb-5">{svc.description}</p>
+                  <span className="text-sm font-bold text-brand-600 hover:text-brand-700">Get Estimate →</span>
+                </Link>
               ))}
             </div>
           </div>

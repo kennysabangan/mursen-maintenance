@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BeforeAfterSection from '../components/BeforeAfterSection';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -32,76 +33,11 @@ const painPoints = [
   },
 ];
 
-const valueComparison = [
-  { service: 'Lawn care (biweekly)', standalone: '$180/mo', withMursen: 'Included' },
-  { service: 'Window cleaning (2x/yr)', standalone: '$520/yr', withMursen: 'Included' },
-  { service: 'Handyman visit (4 hrs)', standalone: '$300/mo', withMursen: 'Included' },
-  { service: 'Power wash (1x/yr)', standalone: '$280/yr', withMursen: 'Included' },
-  { service: 'Priority scheduling', standalone: '$50/mo', withMursen: 'Included' },
-];
-
-const valueStacks = [
-  {
-    name: 'Lawn Plus',
-    price: '109',
-    note: '/mo (Apr–Oct)',
-    totalValue: '$280+',
-    features: [
-      { item: 'Weekly mow + edge + blow', worth: '$180/mo' },
-      { item: 'Seasonal cleanups included', worth: '$60/yr' },
-      { item: 'Gutter check each visit', worth: '$40/mo' },
-    ],
-  },
-  {
-    name: 'Handyman Plus',
-    price: '149',
-    note: '/mo',
-    totalValue: '$350+',
-    features: [
-      { item: '1 visit/month (2 hrs)', worth: '$200/mo' },
-      { item: '5-day scheduling window', worth: '$50/mo' },
-      { item: 'Same technician every visit', worth: '$100/mo' },
-    ],
-  },
-  {
-    name: 'Starter',
-    price: '199',
-    note: '/mo',
-    totalValue: '$500+',
-    features: [
-      { item: '1 handyman visit/mo (2 hrs)', worth: '$200/mo' },
-      { item: 'Biweekly lawn mowing', worth: '$180/mo' },
-      { item: 'Same technician every visit', worth: '$70/mo' },
-      { item: 'Monthly property summary', worth: '$50/mo' },
-    ],
-  },
-  {
-    name: 'Home Care',
-    price: '479',
-    note: '/mo',
-    totalValue: '$850+',
-    highlight: true,
-    features: [
-      { item: 'Weekly lawn mowing & edging', worth: '$180/mo' },
-      { item: 'Monthly window cleaning — exterior', worth: '$120/mo' },
-      { item: '4 hours handyman work', worth: '$300/mo' },
-      { item: '1 annual power wash — driveway & walkways', worth: '$280/yr' },
-      { item: 'Priority scheduling (48hr SLA)', worth: '$50/mo' },
-      { item: 'Photo report after every visit', worth: 'Priceless' },
-    ],
-  },
-  {
-    name: 'Property Manager',
-    price: '279',
-    note: '/unit/mo',
-    totalValue: '$600+',
-    features: [
-      { item: 'Rental-unit optimized service', worth: '$200/mo' },
-      { item: 'Priority scheduling', worth: '$100/mo' },
-      { item: 'Tenant turnover support', worth: '$150/mo' },
-      { item: '3+ units: $249 · 5+: $229', worth: 'Volume savings' },
-    ],
-  },
+const services = [
+  { name: 'Lawn Care', price: 'From $199/mo', description: 'Weekly mowing, edging, trimming, blow-off. Steep & complex terrain included.', route: '/services/lawn-care' },
+  { name: 'Power Washing', price: 'From $175', description: 'Driveways, walkways, siding, roofs. Per visit pricing.', route: '/services/power-washing' },
+  { name: 'Window Cleaning', price: 'From $120', description: 'Interior & exterior. Per visit pricing.', route: '/services/window-cleaning' },
+  { name: 'Handyman', price: 'From $110/hr', description: 'Repairs, installs, general tasks. 2-hour minimum.', route: '/services/handyman' },
 ];
 
 const testimonials = [
@@ -128,11 +64,11 @@ const testimonials = [
 const faqs = [
   {
     q: 'What if I need more handyman hours?',
-    a: 'Easy — we bill additional hours at $75/hr for subscribers (vs. $95/hr one-off). Just let us know and we\'ll schedule the extra time.',
+    a: 'Easy — we bill additional hours at $75/hr for regular customers (vs. $95/hr one-off). Just let us know and we\'ll schedule the extra time.',
   },
   {
-    q: 'Can I cancel anytime?',
-    a: 'Yes. All plans are month-to-month. No contracts, no cancellation fees. We earn your business every single month.',
+    q: 'Do I need a contract?',
+    a: 'No contracts, ever. Pay per service. We earn your business every single visit.'
   },
   {
     q: 'What happens in winter when there\'s no lawn to mow?',
@@ -414,26 +350,20 @@ export default function Homepage() {
               <span className="text-sm font-bold text-gray-500 uppercase tracking-wide text-right">Separately</span>
               <span className="text-sm font-bold text-brand-600 uppercase tracking-wide text-right">With Mursen</span>
             </div>
-            {/* Rows */}
-            {valueComparison.map((row, i) => (
-              <div key={i} className={`grid grid-cols-3 gap-4 px-6 py-4 ${i !== valueComparison.length - 1 ? 'border-b border-gray-100' : ''}`}>
-                <span className="text-sm text-gray-700 font-medium">{row.service}</span>
-                <span className="text-sm text-gray-400 text-right line-through">{row.standalone}</span>
-                <span className="text-sm text-brand-600 text-right font-bold">{row.withMursen}</span>
-              </div>
+            {/* Service cards */}
+            {services.map((svc, i) => (
+              <Link key={i} to={svc.route} className={`grid grid-cols-3 gap-4 px-6 py-5 hover:bg-brand-50 transition-colors cursor-pointer ${i !== services.length - 1 ? 'border-b border-gray-100' : ''}`}>
+                <span className="text-sm text-gray-900 font-bold">{svc.name}</span>
+                <span className="text-sm text-gray-600 text-right col-span-2">{svc.price}</span>
+              </Link>
             ))}
-            {/* Totals */}
-            <div className="grid grid-cols-3 gap-4 px-6 py-5 bg-brand-50 border-t-2 border-brand-200">
-              <span className="text-base font-bold text-gray-900">Total</span>
-              <span className="text-base text-red-500 text-right font-bold line-through">$670/mo</span>
-              <span className="text-base text-brand-700 text-right font-extrabold">$479/mo</span>
-            </div>
           </div>
 
-          <div className="text-center mt-6 bg-orange-50 border border-orange-200 rounded-xl p-5">
-            <p className="text-orange-800 font-bold">
-              That's <span className="text-orange-900">$191/mo saved</span> — or <span className="text-orange-900">$2,292/year</span> back in your pocket. And you get one team, one bill, and zero headaches.
-            </p>
+          <div className="text-center mt-6">
+            <Link to="/estimate" className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 px-8 rounded-xl transition-colors">
+              Get Your Free Estimate
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -533,46 +463,7 @@ export default function Homepage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-            {[
-              {
-                label: 'Lawn Care',
-                before: '/images/before-after/lawn-before.jpg',
-                after: '/images/before-after/lawn-after.jpg',
-              },
-              {
-                label: 'Power Washing',
-                before: '/images/before-after/powerwash-before.jpg',
-                after: '/images/before-after/powerwash-after.jpg',
-              },
-              {
-                label: 'Window Cleaning',
-                before: '/images/before-after/windows-before.jpg',
-                after: '/images/before-after/windows-after.jpg',
-              },
-              {
-                label: 'Handyman Repairs',
-                before: '/images/before-after/handyman-before.jpg',
-                after: '/images/before-after/handyman-after.jpg',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <div className="grid grid-cols-2 gap-px bg-gray-100">
-                  <div className="relative">
-                    <img src={item.before} alt={`${item.label} before`} className="w-full h-36 object-cover" />
-                    <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">Before</span>
-                  </div>
-                  <div className="relative">
-                    <img src={item.after} alt={`${item.label} after`} className="w-full h-36 object-cover" />
-                    <span className="absolute top-2 left-2 bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">After</span>
-                  </div>
-                </div>
-                <div className="p-4 text-center">
-                  <p className="text-sm font-bold text-gray-900 uppercase tracking-wide font-display">{item.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <BeforeAfterSection />
         </div>
       </section>
 
@@ -650,7 +541,7 @@ export default function Homepage() {
             We Only Take 10 New Clients Per Month
           </h2>
           <p className="text-lg text-gray-500 mb-8 max-w-lg mx-auto">
-            To maintain quality, we cap new Home Care subscriptions at 10 per month. Once they're filled, you're on the waitlist.
+            To maintain quality, we cap new weekly lawn care clients at 10 per month. Once they're filled, you're on the waitlist.
           </p>
 
           {/* Spots counter */}
@@ -714,7 +605,7 @@ export default function Homepage() {
             Ready to Stop Managing Five Vendors?
           </h2>
           <p className="text-lg text-gray-400 mb-8 max-w-md mx-auto">
-            One company. One subscription. One bill. <span className="text-white font-semibold">Everything handled.</span>
+            One company. Lawn care + power washing + windows + handyman. <span className="text-white font-semibold">Everything handled.</span>
           </p>
 
           <Link
