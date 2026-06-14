@@ -13,6 +13,14 @@ import {
   calculateHandyman
 } from '../../lib/pricing';
 
+/* ──────────────── TYPES ──────────────── */
+
+type Suggestion = {
+  id: string;
+  place_name: string;
+  center: [number, number];
+};
+
 /* ──────────────── CONSTANTS ──────────────── */
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
@@ -101,6 +109,9 @@ export default function EstimatePage() {
   const [selectedService, setSelectedService] = useState<string>('');
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
