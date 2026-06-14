@@ -103,7 +103,7 @@ const faqs = [
   },
   {
     q: 'Are you licensed and insured?',
-    a: 'Yes. We\'re fully insured and bonded. We also maintain 50+ rental units, so we understand property-owner needs.',
+    a: 'Yes. We\'re fully insured and bonded. We also maintain 50+ properties, so we understand property-owner needs.',
   },
   {
     q: 'What areas do you serve?',

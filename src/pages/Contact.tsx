@@ -24,7 +24,7 @@ export default function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const siteUrl = 'https://mursen.com';
   const seoTitle = 'About Mursen | Built by landlords for the Cincinnati metro';
-  const seoDescription = 'Mursen Home Services started managing 20+ rental units of our own. Reach us at (859) MURSEN-1 or hi@mursen.com. Covington, KY · Cincinnati metro.';
+  const seoDescription = 'Mursen Home Services started managing 50+ properties of our own. Reach us at (859) MURSEN-1 or hi@mursen.com. Covington, KY · Cincinnati metro.';
 
   return (
     <>
