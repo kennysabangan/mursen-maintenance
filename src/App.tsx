@@ -17,6 +17,7 @@ import ServiceWindowCleaning from './pages/ServiceWindowCleaning';
 import ServiceHandyman from './pages/ServiceHandyman';
 import BookService from './pages/BookService';
 import EstimatePage from './pages/EstimatePage';
+import PricingGuide from './pages/PricingGuide';
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -309,6 +310,7 @@ function App() {
               <Route path="/services/window-cleaning" element={<ServiceWindowCleaning />} />
               <Route path="/services/handyman" element={<ServiceHandyman />} />
               <Route path="/book" element={<BookService />} />
+              <Route path="/pricing" element={<PricingGuide />} />
             </Routes>
           </main>
           <Footer />
