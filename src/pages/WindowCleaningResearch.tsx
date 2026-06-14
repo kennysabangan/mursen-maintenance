@@ -4,6 +4,7 @@ import {
   ArrowRight, Check, Phone, Home, DollarSign, Target,
   BarChart3, TrendingUp, ShieldCheck, Clock, Users, BookOpen,
   Lightbulb, Wrench, Package, Star, AlertTriangle, ChevronRight,
+  MapPin, Calculator,
 } from 'lucide-react';
 
 /* ─────────── SECTION HEADER ─────────── */
@@ -478,5 +479,3 @@ export default function WindowCleaningResearch() {
   );
 }
 
-/* MapPin is used inline in the hero, importing from lucide */
-import { MapPin, Calculator } from 'lucide-react';
