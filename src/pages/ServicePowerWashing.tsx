@@ -90,7 +90,7 @@ export default function ServicePowerWashing() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8 max-w-2xl mx-auto">
-            Years of grime, mold, and stains gone. Hot water + commercial equipment + eco-friendly detergents = surfaces that look brand new.
+            Years of grime, mold, and stains gone. Commercial equipment + eco-friendly detergents = surfaces that look brand new.
           </p>
 
           <Link
@@ -102,7 +102,7 @@ export default function ServicePowerWashing() {
           </Link>
 
           <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/80">
-            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-cyan-300" /> Hot Water Equipment</span>
+            <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-cyan-300" /> Commercial Equipment</span>
             <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-cyan-300" /> Eco-Friendly Detergents</span>
             <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-cyan-300" /> Before/After Photos</span>
           </div>
@@ -153,7 +153,7 @@ export default function ServicePowerWashing() {
                   'Driveway (standard 2-car)',
                   'Front & side walkways',
                   'Patio or deck (up to 300 sq ft)',
-                  'Pre-treatment + hot water wash + rinse',
+                  'Pre-treatment + pressure wash + rinse',
                   'Before/after photos',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
@@ -186,7 +186,7 @@ export default function ServicePowerWashing() {
                   'Full home exterior (siding + trim)',
                   'Garage door',
                   'Front porch + steps',
-                  'Pre-treatment + hot water + rinse',
+                  'Pre-treatment + pressure wash + rinse',
                   'Before/after photos',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
@@ -259,7 +259,7 @@ export default function ServicePowerWashing() {
           <div className="grid sm:grid-cols-2 gap-5">
             {[
               { title: 'Pre-Treatment', desc: 'Eco-friendly detergent applied to break down grime, mold, and stains' },
-              { title: 'Hot Water Wash', desc: 'Commercial-grade hot water pressure washing (not just cold rinse)' },
+              { title: 'Professional Equipment', desc: 'Commercial-grade pressure washing equipment for deep cleaning' },
               { title: 'Post-Rinse', desc: 'Thorough rinse to remove all detergent and loosened grime' },
               { title: 'Before/After Photos', desc: 'Texted to you so you can see the transformation' },
               { title: 'Plant & Grass Protection', desc: 'Pre-wet and cover sensitive areas when needed' },
