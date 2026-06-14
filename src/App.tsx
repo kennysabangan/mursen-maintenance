@@ -197,7 +197,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-100">
+    <footer className="bg-gray-50 border-t border-gray-100 flex-shrink-0">
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid md:grid-cols-4 gap-10 mb-10">
           <div className="md:col-span-1">
