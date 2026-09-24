@@ -15,6 +15,27 @@ The production Supabase project **Mursen Maintenance** (ref
 - The old URL and keys no longer work. Anything that still uses them
   (`.env.local`, Vercel env vars) will fail until they're updated.
 
+### What's broken while the DB is gone
+
+The deletion was confirmed on 2026-09-24: the project is no longer listed in
+the Supabase org. Until a new DB is set up, these will return errors:
+
+- **Lead capture:** `/api/leads`, which is called by the Contact page, the
+  Instant Quote page and the Assessment Booking page. Form submissions are
+  **not saved**.
+- **Bookings:** `/api/bookings`
+- **Stripe webhook:** `/api/stripe-webhook` can't record customers or
+  subscriptions. Checkout itself (`/api/create-checkout`) only talks to
+  Stripe, so people can still pay, but those payments **won't show up in
+  the DB**. Leave live Stripe prices switched off while the project is paused.
+
+Static pages, the blog (`/api/posts`) and the pricing calculators don't use
+Supabase and keep working.
+
+**Developers:** don't create a new Supabase project or point env vars at
+another project without talking to the team first. Follow
+"Resuming" below when the project restarts.
+
 ## What's in the database
 
 | Table           | Purpose                                 | Written by                          |
