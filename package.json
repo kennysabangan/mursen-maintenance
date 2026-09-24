@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "db:link": "npx -y supabase link",
+    "db:push": "npx -y supabase db push",
+    "db:diff": "npx -y supabase db diff",
+    "db:new": "npx -y supabase migration new"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^6.5.0",

@@ -1,4 +1,18 @@
 -- ============================================
+-- DRAFT — NOT APPLIED
+-- ============================================
+-- This file used to live in supabase/migrations/ but was never applied to the
+-- production database. It is parked here so `supabase db push` does not run
+-- it. If you want estimates/quotes when the project resumes:
+--   1. Fix the quotes.estimate_id FK: it is NOT NULL but uses ON DELETE SET
+--      NULL, so deleting an estimate with a quote will error. Drop NOT NULL
+--      or change to ON DELETE CASCADE.
+--   2. Decide on RLS: these policies allow any *authenticated* user full
+--      access, which is only OK if the only auth users are admins.
+--   3. Move it into supabase/migrations/ with a new timestamped name
+--      (e.g. `npx supabase migration new estimates`).
+
+-- ============================================
 -- Mursen Maintenance: Estimates & Quotes
 -- ============================================
 

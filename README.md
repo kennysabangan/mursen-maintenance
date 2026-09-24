@@ -1,3 +1,9 @@
+# Mursen Maintenance website
+
+> **Database is currently deleted (project paused).** To bring it back, see
+> [docs/DATABASE.md](docs/DATABASE.md). The full schema lives in
+> `supabase/migrations/`, and setup takes about 10 minutes.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
