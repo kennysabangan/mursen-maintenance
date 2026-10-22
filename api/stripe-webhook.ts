@@ -51,7 +51,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         // Find or create customer in our DB
         const { data: existingCustomer } = await supabase
-          .from('customers')
+          .from('mursen_customers')
           .select('id')
           .eq('email', customer_email)
           .maybeSingle();
@@ -60,7 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         if (!customerId) {
           const { data: newCustomer } = await supabase
-            .from('customers')
+            .from('mursen_customers')
             .insert({
               lead_id: lead_id || null,
               name: session.customer_details?.name || customer_email,
@@ -75,7 +75,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         // Create subscription record
         if (customerId) {
-          await supabase.from('subscriptions').insert({
+          await supabase.from('mursen_subscriptions').insert({
             customer_id: customerId,
             plan: plan || 'complete',
             amount_cents: session.amount_total || 0,
@@ -87,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // Update lead status
         if (lead_id) {
           await supabase
-            .from('leads')
+            .from('mursen_leads')
             .update({ status: 'converted', updated_at: new Date().toISOString() })
             .eq('id', lead_id);
         }
@@ -99,7 +99,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const { plan } = subscription.metadata;
 
         await supabase
-          .from('subscriptions')
+          .from('mursen_subscriptions')
           .update({
             status: subscription.status === 'active' ? 'active' : subscription.status,
             current_period_start: new Date((subscription as any).current_period_start * 1000).toISOString(),
@@ -113,7 +113,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription;
         await supabase
-          .from('subscriptions')
+          .from('mursen_subscriptions')
           .update({ status: 'cancelled' })
           .eq('stripe_subscription_id', subscription.id);
         break;

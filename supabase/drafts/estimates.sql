@@ -8,8 +8,12 @@
 --      NULL, so deleting an estimate with a quote will error. Drop NOT NULL
 --      or change to ON DELETE CASCADE.
 --   2. Decide on RLS: these policies allow any *authenticated* user full
---      access, which is only OK if the only auth users are admins.
---   3. Move it into supabase/migrations/ with a new timestamped name
+--      access. In the shared DB that includes users signed up to OTHER
+--      projects, so these policies must not be applied as written.
+--   3. Rename every object with the `mursen_` prefix (mursen_estimates,
+--      mursen_quotes, idx_mursen_..., mursen_set_updated_at, ...). The DB is
+--      shared with other projects; see docs/DATABASE.md.
+--   4. Move it into supabase/migrations/ with a new timestamped name
 --      (e.g. `npx supabase migration new estimates`).
 
 -- ============================================

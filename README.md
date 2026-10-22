@@ -1,12 +1,9 @@
 # Mursen Maintenance website
 
-> **⚠️ Project paused: the Supabase database was deleted on 2026-09-24.**
-> No data was lost (every table was empty). Until a new DB is set up, the
-> contact, quote and booking forms **will fail**, and Stripe payments won't be
-> recorded.
-> See [docs/DATABASE.md](docs/DATABASE.md) for what's affected and how to set
-> it back up. The full schema is in `supabase/migrations/`, and setup takes
-> about 10 minutes.
+> **Database:** Mursen's tables live in the shared **ScaleSolving Projects**
+> Supabase DB, all prefixed `mursen_` so they don't collide with other
+> projects. See [docs/DATABASE.md](docs/DATABASE.md) for the naming rule,
+> env vars, and how to make schema changes.
 
 # React + TypeScript + Vite
 

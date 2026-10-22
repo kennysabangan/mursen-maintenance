@@ -1,162 +1,167 @@
 # Database (Supabase)
 
-## Status: paused (September 2026)
+## Where it lives: the shared "ScaleSolving Projects" DB
 
-The production Supabase project **Mursen Maintenance** (ref
-`zynaxtxujsesenacifde`, region `us-east-2`, Postgres 17) was deleted on
-2026-09-24 while the project is paused.
+Mursen doesn't have its own Supabase project right now. Its tables live in
+the shared **ScaleSolving Projects** project (ref `vnepcyensnlapkdwaslb`,
+region `us-west-1`, Postgres 15), alongside other projects' tables. When
+Mursen gets big enough it will move to its own project (see "Moving to a
+dedicated project" below).
 
-- **No data was lost.** Every table had 0 rows, and there were no auth users,
-  storage buckets, edge functions, or custom Postgres functions/triggers.
-- **The full schema is in the repo** at
-  `supabase/migrations/20260602000000_initial_schema.sql`. It was rebuilt from
-  the live database and checked against it: 6 tables, 17 indexes,
-  19 constraints and 6 RLS policies all match.
-- The old URL and keys no longer work. Anything that still uses them
-  (`.env.local`, Vercel env vars) will fail until they're updated.
+History: Mursen had its own project (ref `zynaxtxujsesenacifde`). It was
+deleted on 2026-09-24 while every table was empty, so no data was lost. The
+schema was moved into the shared DB on 2026-10-22.
 
-### What's broken while the DB is gone
+### Naming rule: everything is prefixed `mursen_`
 
-The deletion was confirmed on 2026-09-24: the project is no longer listed in
-the Supabase org. Until a new DB is set up, these will return errors:
+The shared DB's `public` schema already has tables from other projects,
+including a generic `subscriptions` table, so Mursen's objects can't use
+plain names. **Every** Mursen object starts with `mursen_`:
 
-- **Lead capture:** `/api/leads`, which is called by the Contact page, the
-  Instant Quote page and the Assessment Booking page. Form submissions are
-  **not saved**.
-- **Bookings:** `/api/bookings`
-- **Stripe webhook:** `/api/stripe-webhook` can't record customers or
-  subscriptions. Checkout itself (`/api/create-checkout`) only talks to
-  Stripe, so people can still pay, but those payments **won't show up in
-  the DB**. Leave live Stripe prices switched off while the project is paused.
+| Object      | Pattern                              | Example                          |
+| ----------- | ------------------------------------ | -------------------------------- |
+| Table       | `mursen_<name>`                      | `mursen_leads`                   |
+| Index       | `idx_mursen_<table>_<column>`        | `idx_mursen_leads_status`        |
+| Constraint  | `mursen_<table>_<column>_<check/fkey>` | `mursen_leads_status_check`    |
+| Policy      | `mursen_<role>_<action>_<table>`     | `mursen_service_all_leads`       |
+| Function / trigger (if added) | `mursen_<name>`    | `mursen_set_updated_at`          |
+| Storage bucket (if added) | `mursen-<name>`        | `mursen-job-photos`              |
 
-Static pages, the blog (`/api/posts`) and the pricing calculators don't use
-Supabase and keep working.
-
-**Developers:** don't create a new Supabase project or point env vars at
-another project without talking to the team first. Follow
-"Resuming" below when the project restarts.
+Never create, alter or drop anything without the prefix. Other projects'
+tables (`el3vn_*`, `reducetax_*`, `orders`, `subscriptions`, ...) are not
+ours to touch.
 
 ## What's in the database
 
-| Table           | Purpose                                 | Written by                          |
-| --------------- | --------------------------------------- | ----------------------------------- |
-| `leads`         | Contact / quote form submissions        | `api/leads.ts`, `api/stripe-webhook.ts` |
-| `customers`     | Paying customers                        | `api/stripe-webhook.ts`             |
-| `subscriptions` | Maintenance plans (Stripe subscriptions)| `api/stripe-webhook.ts`             |
-| `bookings`      | Assessments / service appointments      | `api/bookings.ts`                   |
-| `jobs`          | Scheduled / completed maintenance work  | (not used by code yet)              |
-| `email_log`     | Outbound email audit trail              | (not used by code yet)              |
+| Table                  | Purpose                                  | Written by                          |
+| ---------------------- | ---------------------------------------- | ----------------------------------- |
+| `mursen_leads`         | Contact / quote form submissions         | `api/leads.ts`, `api/stripe-webhook.ts` |
+| `mursen_customers`     | Paying customers                         | `api/stripe-webhook.ts`             |
+| `mursen_subscriptions` | Maintenance plans (Stripe subscriptions) | `api/stripe-webhook.ts`             |
+| `mursen_bookings`      | Assessments / service appointments       | `api/bookings.ts`                   |
+| `mursen_jobs`          | Scheduled / completed maintenance work   | (not used by code yet)              |
+| `mursen_email_log`     | Outbound email audit trail               | (not used by code yet)              |
 
-Relationships: `customers.lead_id → leads`, `subscriptions.customer_id →
-customers`, `jobs.customer_id → customers`, `jobs.subscription_id →
-subscriptions`, `bookings.lead_id → leads`, `bookings.customer_id → customers`.
+Relationships: `mursen_customers.lead_id → mursen_leads`,
+`mursen_subscriptions.customer_id → mursen_customers`,
+`mursen_jobs.customer_id → mursen_customers`,
+`mursen_jobs.subscription_id → mursen_subscriptions`,
+`mursen_bookings.lead_id → mursen_leads`,
+`mursen_bookings.customer_id → mursen_customers`.
+
+The schema is in
+`supabase/migrations/20261022113607_mursen_initial_schema.sql` (6 tables,
+17 indexes, 19 constraints, 6 RLS policies). The version number matches the
+entry in the shared DB's migration history.
 
 **Access model:** the API routes in `api/` use the **service role key**, which
 can do everything. The public **anon key** (shipped to the browser) can only
-`INSERT` into `leads`. Every table has RLS enabled.
+`INSERT` into `mursen_leads`. Every Mursen table has RLS enabled.
+`mursen_email_log` has RLS on with no policies on purpose: only the service
+role touches it (the Supabase advisor flags this as INFO; that's expected).
+
+Because the DB is shared, the service role key used here can also read and
+write **other projects' tables**. Only use it in server-side code (`api/`),
+and only against `mursen_*` tables.
 
 `supabase/drafts/estimates.sql` holds an estimates/quotes schema that was
-**never applied** to production. It isn't in `migrations/`, so it won't be
-applied automatically. Its header lists what to fix before using it.
+**never applied**. It still uses unprefixed names (`estimates`, `quotes`,
+...); rename everything to `mursen_*` before applying it. Its header lists
+what else to fix.
 
-## Resuming: set up a new database (~10 minutes)
+## Environment variables
 
-### 1. Create the Supabase project
+Get the values from the **ScaleSolving Projects** dashboard → **Project
+Settings → API**.
 
-1. Go to https://supabase.com/dashboard, click **New project**, and name it
-   `Mursen Maintenance`. Region `us-east-2` (Ohio) matches the old one.
-2. Save the database password in your password manager.
-3. When it finishes provisioning, note the **project ref**. It's the
-   `xxxx` in `https://xxxx.supabase.co`, and it also appears in the dashboard URL.
+| Variable                 | Where it's used                  | Value                                      |
+| ------------------------ | -------------------------------- | ------------------------------------------ |
+| `VITE_SUPABASE_URL`      | browser (`src/lib/supabase.ts`)  | `https://vnepcyensnlapkdwaslb.supabase.co` |
+| `VITE_SUPABASE_ANON_KEY` | browser                          | anon / publishable key                     |
+| `SUPABASE_URL`           | `api/*` serverless routes        | same URL                                   |
+| `SUPABASE_SERVICE_KEY`   | `api/*` serverless routes        | service_role / secret key (**never** prefix with `VITE_`) |
 
-### 2. Apply the schema
+Set them in:
 
-**Option A: Supabase CLI (recommended).** This keeps migration history in
-sync, so later `db push` / `db diff` calls work.
-
-```bash
-npm run db:link -- --project-ref <project-ref>   # asks for the DB password
-npm run db:push                                   # applies supabase/migrations/*
-```
-
-`npx` downloads the CLI on first use; nothing needs to be installed globally.
-The CLI asks for a login the first time (`npx supabase login`).
-
-**Option B: SQL editor (no CLI).** Open **SQL Editor** in the dashboard, then
-paste and run the contents of
-`supabase/migrations/20260602000000_initial_schema.sql`. If you do this, the
-CLI won't know the migration already ran. If you switch to the CLI later,
-run `npx supabase migration repair --status applied 20260602000000` once.
-
-### 3. Verify
-
-Run this in the SQL editor:
-
-```sql
-select tablename, rowsecurity from pg_tables where schemaname = 'public';
--- expect 6 rows: leads, customers, subscriptions, jobs, bookings, email_log,
--- all with rowsecurity = true
-
-select tablename, policyname, roles, cmd from pg_policies where schemaname = 'public';
--- expect 6 policies: service_all_* on 5 tables + anon_insert_leads
-```
-
-### 4. Update environment variables
-
-Get the values from **Project Settings → API** (URL, `anon` public key,
-`service_role` secret key).
-
-| Variable                 | Where it's used          | Value                         |
-| ------------------------ | ------------------------ | ----------------------------- |
-| `VITE_SUPABASE_URL`      | browser (`src/lib/supabase.ts`) | `https://<project-ref>.supabase.co` |
-| `VITE_SUPABASE_ANON_KEY` | browser                  | anon / publishable key        |
-| `SUPABASE_URL`           | `api/*` serverless routes | same URL                     |
-| `SUPABASE_SERVICE_KEY`   | `api/*` serverless routes | service_role / secret key (**never** prefix with `VITE_`) |
-
-Update them in:
-
-- **Local:** copy `.env.example` to `.env.local` and fill in the values. `.env.local` is
-  gitignored.
+- **Local:** copy `.env.example` to `.env.local` and fill in the keys.
+  `.env.local` is gitignored.
 - **Vercel:** Project → Settings → Environment Variables (Production +
   Preview), then **redeploy**. `VITE_*` values are baked in at build time.
 
 Never commit real keys. `.env.example` should only ever contain placeholders.
 
-### 5. Re-check the other integrations
-
-These don't live in Supabase, but they write into it, so check them when you resume:
+Also check the integrations that write into the DB:
 
 - **Stripe webhook** → `https://mursenmaintenance.com/api/stripe-webhook`,
   events `checkout.session.completed`, `customer.subscription.updated`,
   `customer.subscription.deleted`. `STRIPE_WEBHOOK_SECRET` must match.
 - **Resend** (`RESEND_API_KEY`, `NOTIFY_EMAIL`) for lead notifications.
 
-### 6. Smoke test
+**Smoke test:** submit the contact form on the site (or `POST /api/leads`
+with a `name` and `email`). A row should show up in `mursen_leads`.
 
-Submit the contact form on the site (or `POST /api/leads` with a `name` and
-`email`). A row should show up in `leads`.
+## Making schema changes
 
-## Making schema changes later
+Write each change as a new file in `supabase/migrations/` so the repo stays
+the source of truth, and keep the `mursen_` prefix on every object.
 
-Always change the schema through a migration file so the repo stays the
-source of truth:
+**Don't run `npm run db:push` / `db:link` against the shared DB.** Its
+migration history contains other projects' migrations, so the Supabase CLI
+will see it as out of sync with this repo and refuse to push (or, worse,
+tempt someone to "repair" it). Instead:
 
-```bash
-npm run db:new -- <short_name>    # creates supabase/migrations/<timestamp>_<short_name>.sql
-# edit the file, then
-npm run db:push
+1. Write the SQL in a new file, e.g.
+   `supabase/migrations/<YYYYMMDDHHMMSS>_mursen_<short_name>.sql`.
+2. Apply it in the ScaleSolving Projects dashboard → **SQL Editor**, or with
+   the Supabase MCP `apply_migration` tool using the name
+   `mursen_<short_name>`.
+3. If the tool assigned a different version, rename the file to match it:
+   ```sql
+   select version, name from supabase_migrations.schema_migrations
+   where name like 'mursen_%' order by version;
+   ```
+
+Verify Mursen's objects at any time:
+
+```sql
+select tablename, rowsecurity from pg_tables
+where schemaname = 'public' and tablename like 'mursen\_%';
+-- expect 6 rows, all rowsecurity = true
+
+select tablename, policyname, roles, cmd from pg_policies
+where tablename like 'mursen\_%';
+-- expect 6 policies: mursen_service_all_* on 5 tables + mursen_anon_insert_leads
 ```
 
-If you changed something in the dashboard by hand, run `npm run db:diff -- -f
-<short_name>` to capture it as a migration.
+## Moving to a dedicated project
 
-## If you ever need to delete a DB that has data
+When Mursen outgrows the shared DB:
 
-Take a backup first (needs the DB password from Project Settings → Database):
+1. Create a new Supabase project (e.g. **Mursen Maintenance**).
+2. Apply `supabase/migrations/*` to it. Here the CLI works, because the new
+   project's history is only Mursen's:
+   ```bash
+   npm run db:link -- --project-ref <new-project-ref>
+   npm run db:push
+   ```
+3. Copy the data. Dump only Mursen's tables from the shared DB, then restore
+   the file into the new project with `psql`:
+   ```bash
+   pg_dump "$SHARED_DB_URL" --data-only -t 'public.mursen_*' \
+     -f supabase/backups/mursen_data.sql
+   ```
+4. Point the four env vars above at the new project and redeploy.
+5. Once the new project is confirmed working, drop the `mursen_*` tables from
+   the shared DB.
 
-```bash
-npx supabase db dump --db-url "$DB_URL" -f supabase/backups/schema.sql
-npx supabase db dump --db-url "$DB_URL" --data-only -f supabase/backups/data.sql
-```
+Keeping the `mursen_` prefix in the new project is fine (no code changes
+needed). Dropping it means renaming the tables in a migration and updating
+the `.from('mursen_...')` calls in `api/`.
 
-Store data dumps **outside git** (they contain customer PII).
+## Backups
+
+Take a backup before deleting anything that has data (needs the DB password
+from Project Settings → Database). Use the `pg_dump -t 'public.mursen_*'`
+command above so the dump contains only Mursen's tables. Store data dumps
+**outside git** (they contain customer PII). `supabase/backups/` is
+gitignored.

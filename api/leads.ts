@@ -24,7 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const { data, error } = await supabase
-      .from('leads')
+      .from('mursen_leads')
       .insert({
         source: source || 'contact',
         name,
