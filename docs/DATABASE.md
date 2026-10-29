@@ -95,10 +95,17 @@ Also check the integrations that write into the DB:
 - **Stripe webhook** → `https://mursenmaintenance.com/api/stripe-webhook`,
   events `checkout.session.completed`, `customer.subscription.updated`,
   `customer.subscription.deleted`. `STRIPE_WEBHOOK_SECRET` must match.
-- **Resend** (`RESEND_API_KEY`, `NOTIFY_EMAIL`) for lead notifications.
+- **Resend** (`RESEND_API_KEY`, `NOTIFY_EMAIL`, optional `LEAD_EMAIL_BCC`)
+  for lead emails. `api/leads.ts` emails every lead to `NOTIFY_EMAIL` and
+  saves it to `mursen_leads` when `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`
+  are set; either one succeeding counts, so the forms keep working without
+  the database. mursenmaintenance.com isn't verified with Resend, so the
+  emails come from website@scalesolving.com (`LEAD_EMAIL_FROM`) with
+  Reply-To set to the customer.
 
 **Smoke test:** submit the contact form on the site (or `POST /api/leads`
-with a `name` and `email`). A row should show up in `mursen_leads`.
+with a `name` and `email`). The lead email should arrive, and once the
+service key is set, a row should show up in `mursen_leads`.
 
 ## Making schema changes
 
